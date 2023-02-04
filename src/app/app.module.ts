@@ -8,6 +8,8 @@ import { LoginComponent } from './views/login/login.component';
 import { OrdersComponent } from './views/orders/orders.component';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,12 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     NavBarComponent,
     DashboardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
