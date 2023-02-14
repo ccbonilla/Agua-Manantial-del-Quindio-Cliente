@@ -10,6 +10,7 @@ import { QuienesSomosComponent } from './views/quienes-somos/quienes-somos.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './views/home/home.component';
+import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HomeComponent } from './views/home/home.component';
     NavBarComponent,
     QuienesSomosComponent,
     HomeComponent,
+    HistorialClienteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule,BrowserAnimationsModule ],
   providers: [],
