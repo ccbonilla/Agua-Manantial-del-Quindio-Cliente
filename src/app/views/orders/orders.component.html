@@ -1,10 +1,9 @@
 &nbsp;
-<div class="col-sm-12 text-justify">
-  <h1 class="collection-hero__title">
-    productos
-  </h1>
-</div>
 
+<div >
+  <h1 align="center"> Nuestros Productos </h1>
+</div>
+&nbsp;
 <ngb-carousel
 	*ngIf="images"
   [showNavigationArrows]=true
@@ -15,56 +14,36 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 d-none d-lg-block">
             <div class="card">
-              <img [src]="image" alt="Random slide" 
-              />
-              <div class="card-body">
-                <h5 class="card-title">Botella agua 600ml
-                </h5>
-                <p class="card-text">
-                  <strong>$1000</strong>
-                </p>
-                <p class="card-text">
-                  Descripcion agua 600ml.
-                </p>
-                <a href="#exampleModalLong" class="btn btn-primary">Realizar Pedido</a>
-              </div>
+              <img [src]="image" alt="Random slide"  style="width:100%">
+              <h2>Botella Agua</h2>
+              <p class="price">$19.99</p>
+              <p>Descripcion botella agua.</p>
+              <p><button>Añadir al carrito</button></p>
+              <p><button>Realizar Pedido</button></p>
             </div>
           </div>
 
           <div class="col-lg-4 d-none d-lg-block">
             <div class="card">
-              <img [src]="image" alt="Random slide" 
-              />
-              <div class="card-body">
-                <h5 class="card-title">Soporte botellon</h5>
-                <p class="card-text">
-                  <strong>$2000</strong>
-                </p>
-                <p class="card-text">
-                  Descripcion soporte botellon.
-                </p>
-                <a href="#exampleModalLong" class="btn btn-primary">Realizar Pedido</a>
-              </div>
+              <img [src]="image" alt="Random slide"  style="width:100%">
+              <h2>Botella Agua</h2>
+              <p class="price">$19.99</p>
+              <p>Descripcion botella agua.</p>
+              <p><button>Añadir al carrito</button></p>
+              <p><button>Realizar Pedido</button></p>
             </div>
           </div>
 
           <div class="col-lg-4 d-none d-lg-block">
             <div class="card">
-              <img [src]="image" alt="Random slide" 
-              />
-              <div class="card-body">
-                <h5 class="card-title">Botellon 20 Lts </h5>
-                <p class="card-text">
-                  <strong>$3000</strong>
-                </p>
-                <p class="card-text">
-
-                  Descripcion botellon.
-                </p>
-                <a href="#exampleModalLong" class="btn btn-primary">Realizar Pedido</a>
-              </div>
+              <img [src]="image" alt="Random slide"  style="width:100%">
+              <h2>Botella Agua</h2>
+              <p class="price">$19.99</p>
+              <p>Descripcion botella agua.</p>
+              <p><button>Añadir al carrito</button></p>
+              <p><button>Realizar Pedido</button></p>
             </div>
           </div>
         </div>
@@ -72,6 +51,19 @@
     </div>
 	</ng-template>
 </ngb-carousel>
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>Hello, World!</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+	</div>
+</ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
 

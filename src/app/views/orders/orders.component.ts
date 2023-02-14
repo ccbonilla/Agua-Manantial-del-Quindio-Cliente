@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-orders',
@@ -8,9 +8,10 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 })
 export class OrdersComponent implements OnInit {
 
-  images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  images = [102,91,93,193,110].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   open() {
+    //this.modalService.open(content, { size: 'xl' });
 		const modalRef = this.modalService.open(OrdersComponent);
 		modalRef.componentInstance.name = 'World';
 	}
