@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  
+  /* Header/Blog Title */
+  .header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  /* Left column */
+  .leftcolumn {
+    float: left;
+    width: 75%;
+  }
+  
+  /* Right column */
+  .rightcolumn {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+  }
+  
+  /* Fake image */
+  .fakeimg {
+    background-color: #aaa;//#0d6efd
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Add a card effect for articles */
+  .card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  @media (min-width: 1400px){
+    .container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+      width: 100%;
+      //max-width: 1348px;
+    }
+  }
+  
+
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color:#0d6efd;// #9ab3d7; 
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .div-block-48 {
+    position: fixed;
+    left: auto;
+    top: 235px;
+    right: 0%;
+    bottom: 0%;
+    z-index: 10;
+    width: 100px;
+    opacity: 1;
+}
+
+.grid-38 {
+  position: static;
+  left: auto;
+  top: auto;
+  right: 0%;
+  bottom: 43%;
+  z-index: 10;
+  width: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  grid-row-gap: 9px;
+  -ms-grid-columns: 0.75fr;
+  grid-template-columns: 0.75fr;
+  -ms-grid-rows: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+.div-block-49 {
+  padding: 10px;
+  border-radius: 11px;
+  background-color:#0d6efd;
+  opacity: 0.36;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.w-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
+
+.blank-section {
+  --bg-overlay-color: transparent;
+  --bg-gradient: none;
+  height: 100%;
+  width: 100%;
+  //min-width: 980px;
+}

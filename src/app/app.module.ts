@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './views/home/home.component';
 import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
+import { CarritoComponent } from './views/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HistorialClienteComponent } from './views/historial-cliente/historial-c
     QuienesSomosComponent,
     HomeComponent,
     HistorialClienteComponent,
+    CarritoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule,BrowserAnimationsModule ],
   providers: [],
