@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CarritoComponent implements OnInit {
 
   
-  beers = [
+  productos = [
     {
       name: 'Tambo Filandia',
       quantity: 'Un lugar especial para disfrutar de un buen café',
@@ -16,10 +16,10 @@ export class CarritoComponent implements OnInit {
     },
     {
       name: 'Valle de Cócora',
-      quantity: 'Hogar del Loro Orejiamarillo y de la emblemática palma de cera',
-      price: '/assets/fondo-2.jpeg',
+      quantity: 'Description',
+      price: 'price2',
     },
-    { name: 'Salento', quantity: 'Pueblo mágico', price: '/assets/fondo-3.jpeg' },
+    { name: 'Salento', quantity: 'Pueblo mágico', price: 'price2' },
   ];
 
   constructor() { }
