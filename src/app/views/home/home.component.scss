@@ -146,3 +146,40 @@
   //min-width: 980px;
 }
 
+.bgimg-1 {
+  background-image: url(https://3.bp.blogspot.com/-40TK5LMSn0w/WsTrAXGu0yI/AAAAAAAADBY/YuG1NKgCpCEu0G09bUQSNq2KsPLA_0LZgCLcBGAs/s1600/manantial.jpg);
+  min-height: 100%;
+}
+.bgimg-2 {
+  background-image: url(https://www.65ymas.com/uploads/s1/15/22/65/tipos-de-agua-embotellada1.jpeg);
+  min-height: 100%;
+}
+.bgimg-3 {
+  background-image: url(https://3.bp.blogspot.com/-40TK5LMSn0w/WsTrAXGu0yI/AAAAAAAADBY/YuG1NKgCpCEu0G09bUQSNq2KsPLA_0LZgCLcBGAs/s1600/manantial.jpg);
+  min-height: 100%;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
