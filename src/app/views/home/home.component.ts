@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
     { title: 'Salento', short: 'Pueblo mágico', src: '/assets/fondo-3.jpeg' },
   ];
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 

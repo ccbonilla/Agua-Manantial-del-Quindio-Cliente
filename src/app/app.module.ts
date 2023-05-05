@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { UserService } from './services/users/users.service';
+import { ProductService } from './services/products/product.service';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { OrdersComponent } from './views/orders/orders.component';
@@ -24,8 +28,14 @@ import { CarritoComponent } from './views/carrito/carrito.component';
     HistorialClienteComponent,
     CarritoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule,BrowserAnimationsModule ],
-  providers: [],
+  imports: [
+    BrowserModule, 
+    AppRoutingModule, 
+    NgbModule,
+    BrowserAnimationsModule,
+    HttpClientModule, 
+  ],
+  providers: [UserService,ProductService,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
