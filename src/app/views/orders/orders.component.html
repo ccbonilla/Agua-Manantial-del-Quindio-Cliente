@@ -5,6 +5,16 @@
 </div>
 &nbsp;
 
+<div class="parte1">
+  <p *ngFor="let valor of parte1">{{ valor.value }} {{ valor.name }}</p>
+</div>
+<div class="parte2">
+  <p *ngFor="let valor of parte2">{{valor.value}} {{ valor.name }}</p>
+</div>
+<div class="parte3">
+  <p *ngFor="let valor of parte3">{{valor.value}} {{ valor.name }}</p>
+</div>
+
 <div class="div-block-48">
   <div class="w-layout-grid grid-38">
     <div class="div-block-49">
@@ -49,15 +59,16 @@
   [showNavigationArrows]=true
 	[showNavigationIndicators]=false
 >
-	<ng-template ngbSlide *ngFor="let image of images">
+	<ng-template ngbSlide *ngFor="let image of images"> 
     <div class="carousel-item active">
 
       <div class="container">
         <div class="row">
+
           <div class="col-lg-4 d-none d-lg-block">
             <div class="card">
               <img [src]="image" alt="Random slide"  style="width:100%">
-              <h2>Botella Agua</h2>
+              <h2>Botella Agua 300ml </h2>
               <p class="price">$19.99</p>
               <p>Descripcion botella agua.</p>
               <p><button>Añadir al carrito</button></p>
@@ -67,7 +78,7 @@
           <div class="col-lg-4 d-none d-lg-block">
             <div class="card">
               <img [src]="image" alt="Random slide"  style="width:100%">
-              <h2>Botella Agua</h2>
+              <h2>Botellon 20Lts</h2>
               <p class="price">$19.99</p>
               <p>Descripcion botella agua.</p>
               <p><button>Añadir al carrito</button></p>
