@@ -5,100 +5,77 @@
 </div>
 &nbsp;
 
-<div class="parte1">
-  <p *ngFor="let valor of parte1">{{ valor.value }} {{ valor.name }}</p>
-</div>
-<div class="parte2">
-  <p *ngFor="let valor of parte2">{{valor.value}} {{ valor.name }}</p>
-</div>
-<div class="parte3">
-  <p *ngFor="let valor of parte3">{{valor.value}} {{ valor.name }}</p>
-</div>
+<button (click)="toggleCart()" [class.active]="isCartOpen">
+  <i class="bi bi-cart"></i>
+  <span class="badge">{{ cartItemsCount }}</span>
+</button>
 
-<div class="div-block-48">
-  <div class="w-layout-grid grid-38">
-    <div class="div-block-49">
-      <div class="w-inline-block">
-        <div class="col-25">
-          <div class="container-element">
-            <button class="bi bi-caret-left boton-carrito"></button>
-            <h4 align="center"> Carrito <span class="price" style="color:black"><i class="bi bi-cart"></i> <b>3</b></span></h4>
-            <div class="container-product">
-              <button class="bi bi-trash3-fill boton-trash"></button>
-              <img src="/assets/agua600ml.jpg" alt="Avatar" style="width:130px" class="container-img">
-              <p>botellon20lt</p>
-              <span class="price">$5</span>
-              <p class="green-text">Envío gratis</p>
+<div class="cart-items" [class.open]="isCartOpen">
+  <!-- Aquí puedes mostrar los elementos del carrito -->
+  <div class="div-block-48">
+    <div class="w-layout-grid grid-38">
+      <div class="div-block-49">
+        <div class="w-inline-block">
+          <div class="col-25" style="height: 100%;">
+            <div class="container-element">
+              <button class="bi bi-caret-left boton-carrito"></button>
+              <h4 align="center"> Carrito <span class="price" style="color:black"><i class="bi bi-cart"></i> <b>3</b></span></h4>
+              <div class="container-product">
+                <button class="bi bi-trash3-fill boton-trash"></button>
+                <img src="/assets/agua600ml.jpg" alt="Avatar" style="width:130px" class="container-img">
+                <p>botellon20lt</p>
+                <span class="price">$5</span>
+                <p class="green-text">Envío gratis</p>
+              </div>
+              <div class="container-product">
+                <button class="bi bi-trash3-fill boton-trash"></button>
+                <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
+                <p> Botella Agua</p>
+                <span class="price">$5</span>
+                <p class="green-text">Envío gratis</p>
+              </div>
+              <div class="container-product">
+                <button class="bi bi-trash3-fill boton-trash"></button>
+                <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
+                <p> Botella Agua</p>
+                <span class="price">$5</span>
+                <p class="green-text">Envío gratis</p>
+              </div>
+              <hr>
+              <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
             </div>
-            <div class="container-product">
-              <button class="bi bi-trash3-fill boton-trash"></button>
-              <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
-              <p> Botella Agua</p>
-              <span class="price">$5</span>
-              <p class="green-text">Envío gratis</p>
-            </div>
-            <div class="container-product">
-              <button class="bi bi-trash3-fill boton-trash"></button>
-              <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
-              <p> Botella Agua</p>
-              <span class="price">$5</span>
-              <p class="green-text">Envío gratis</p>
-            </div>
-            <hr>
-            <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
           </div>
         </div>
+        
       </div>
-      
     </div>
   </div>
 </div>
 
-<ngb-carousel
-	*ngIf="images"
-  [showNavigationArrows]=true
-	[showNavigationIndicators]=false
->
-	<ng-template ngbSlide *ngFor="let image of images"> 
-    <div class="carousel-item active">
-
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <div class="card">
-              <img [src]="image" alt="Random slide"  style="width:100%">
-              <h2>Botella Agua 300ml </h2>
-              <p class="price">$19.99</p>
-              <p>Descripcion botella agua.</p>
-              <p><button>Añadir al carrito</button></p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <div class="card">
-              <img [src]="image" alt="Random slide"  style="width:100%">
-              <h2>Botellon 20Lts</h2>
-              <p class="price">$19.99</p>
-              <p>Descripcion botella agua.</p>
-              <p><button>Añadir al carrito</button></p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <div class="card">
-              <img [src]="image" alt="Random slide"  style="width:100%">
-              <h2>Botella Agua</h2>
-              <p class="price">$19.99</p>
-              <p>Descripcion botella agua.</p>
-              <p><button>Añadir al carrito</button></p>
-            </div>
+<div *ngFor="let subArray of dividedArray">
+  <div class="carrusel">
+    <div class="container" style="column-count: 3; column-gap: 20px;">
+      <div class="row">
+        <div *ngFor="let item of subArray">
+          <div class="card">
+            <img [src]=images[0] alt="Random slide"  style="width:100%">
+            <h2>{{ item.name }} </h2>
+            <p class="price">$ {{ item.value }}</p>
+            <p>{{ item.description }}</p>
+            <p><button>Añadir al carrito</button></p>
           </div>
         </div>
+        
       </div>
+      
     </div>
-	</ng-template>
-</ngb-carousel>
+      
+  </div>
+  
+</div>
+
+
+
 
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">

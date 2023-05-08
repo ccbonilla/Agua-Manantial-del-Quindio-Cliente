@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
 
@@ -13,13 +14,11 @@ import { Product } from '../../models/product';
 export class OrdersComponent implements OnInit {
 
   products: Product[] = [];
-
-  parte1: Product[] = [];
-  parte2: Product[] = [];
-  parte3: Product[] = [];
+  dividedArray: any[][] = [];
   
   productSize: number = 0;
-  currentItem = 0;
+  cartItemsCount = 0;
+  isCartOpen = false;
 
   images = [102,91,93,193,110].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
@@ -27,12 +26,12 @@ export class OrdersComponent implements OnInit {
     private productService: ProductService
   ) {}
 
+  toggleCart() {
+    this.isCartOpen = !this.isCartOpen;
+  }
 
   ngOnInit(): void {
     console.log("El componente se ha inicializado");
-    setInterval(() => {
-      this.currentItem = (this.currentItem + 1) % 3;
-    }, 5000);
     this.getProducts();
   }
 
@@ -43,9 +42,13 @@ export class OrdersComponent implements OnInit {
     this.productSize = Object.keys(prods).length;
     console.log("Result size: "+this.productSize);
 
-    this.parte1 = prods.slice(0, Math.ceil(prods.length / 3));
-    this.parte2 = prods.slice(Object.keys(this.parte1).length, Math.ceil(prods.length / 3) * 2);
-    this.parte3 = prods.slice(Object.keys(this.parte1).length + Object.keys(this.parte2).length);
+    console.log("before: size "+this.productSize+" productos "+this.products);
+    for (let i = 0; i < this.productSize; i += 3) {
+      const subArray = this.products.slice(i, i + 3);
+      this.dividedArray.push(subArray);
+    }
+    console.log("PRODUCTOS: "+this.dividedArray);
     });
+    
   }
 }
