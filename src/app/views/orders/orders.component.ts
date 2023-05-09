@@ -38,16 +38,12 @@ export class OrdersComponent implements OnInit {
   getProducts() {
     this.productService.get('list').subscribe((prods) => {
     this.products = prods;
-    console.log("Result productos: "+prods);
     this.productSize = Object.keys(prods).length;
-    console.log("Result size: "+this.productSize);
 
-    console.log("before: size "+this.productSize+" productos "+this.products);
     for (let i = 0; i < this.productSize; i += 3) {
       const subArray = this.products.slice(i, i + 3);
       this.dividedArray.push(subArray);
     }
-    console.log("PRODUCTOS: "+this.dividedArray);
     });
     
   }
