@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/users/users.service';
 import { ProductService } from './services/products/product.service';
+import { InfoService } from './services/infoService/info.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
@@ -35,7 +36,8 @@ import { CarritoComponent } from './views/carrito/carrito.component';
     BrowserAnimationsModule,
     HttpClientModule, 
   ],
-  providers: [UserService,ProductService,],
+  providers: [UserService,ProductService,InfoService,],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
