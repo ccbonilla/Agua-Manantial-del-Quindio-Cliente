@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
+import { LoginUserComponent } from './modal/login-user/login-user.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-historial-cliente',
@@ -9,26 +11,35 @@ import { UserService } from '../../services/users/users.service';
 })
 export class HistorialClienteComponent implements OnInit {
 
-  customers: User[] = [];
-
+  modalRef: any;
+  isModalOpen = false;
   cliente: User = new User();
+  closeResult = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUser();
+    //this.openModal();
   }
 
-  getUsers() {
-    this.userService.get('find-by-id/1').subscribe((users) => {
-      this.customers = users;
-      //this.cliente = users;
+  //openModal() {
+  //  this.modalService.open(contentModal, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+  //    (result) => {
+  //      this.closeResult = `Cerrado con: ${result}`;
+  //    },
+  //    (reason) => {
+  //    }
+  //  );
+  //}
 
+  getUser() {
+    this.userService.getById('find-by-id/1').subscribe((user) => {
+      this.cliente = user;
+      console.log('Lista** '+this.cliente);
+      console.log('method** '+JSON.stringify(user) );
+      console.log('method1** '+user.name);
       
-      
-      //console.log('SERVICIO GET USER 1: '+this.customers);
-      //console.log('SERVICIO GET USER 2: '+Object.keys(users).length);
-      //console.log('SERVICIO GET USER 3: '+JSON.stringify(users));
     });
   }
 }

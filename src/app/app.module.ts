@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './views/home/home.component';
 import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
+//import { LoginUser } from './views/historial-cliente/modal/login-user/login-user.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CarritoComponent } from './views/carrito/carrito.component';
     QuienesSomosComponent,
     HomeComponent,
     HistorialClienteComponent,
+    //LoginUser,
     CarritoComponent,
   ],
   imports: [
