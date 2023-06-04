@@ -19,7 +19,7 @@ export class HistorialClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    //this.openModal();
+    this.openDialog();
   }
 
   openDialog() {

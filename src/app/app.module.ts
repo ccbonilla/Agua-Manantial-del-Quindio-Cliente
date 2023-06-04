@@ -17,7 +17,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './views/home/home.component';
 import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
+
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 //import { LoginUser } from './views/historial-cliente/modal/login-user/login-user.component';
 
 @NgModule({
@@ -39,6 +54,20 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbModule,
     BrowserAnimationsModule,
     HttpClientModule, 
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatSelectModule,
+    FormsModule,
+    MatStepperModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatButtonToggleModule,
   ],
   providers: [UserService,ProductService,InfoService],
   bootstrap: [AppComponent],
