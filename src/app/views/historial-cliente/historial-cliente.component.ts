@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { LoginUserComponent } from './modal/login-user/login-user.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-historial-cliente',
@@ -11,27 +11,31 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HistorialClienteComponent implements OnInit {
 
-  modalRef: any;
   isModalOpen = false;
   cliente: User = new User();
   closeResult = '';
 
-  constructor(private userService: UserService, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getUser();
     //this.openModal();
   }
 
-  //openModal() {
-  //  this.modalService.open(contentModal, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-  //    (result) => {
-  //      this.closeResult = `Cerrado con: ${result}`;
-  //    },
-  //    (reason) => {
-  //    }
-  //  );
-  //}
+  openDialog() {
+    const position: DialogPosition = {
+      left: '30%',
+      top: '-220px',
+    };
+    const dialogRef = this.dialog.open(LoginUserComponent, {
+      height: '400px',
+      width: '630px',
+      position: position,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      //this.getProducts();
+    });
+  }
 
   getUser() {
     this.userService.getById('find-by-id/1').subscribe((user) => {

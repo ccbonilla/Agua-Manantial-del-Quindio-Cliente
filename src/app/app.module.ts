@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './views/home/home.component';
 import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
+import { MatDialogModule } from '@angular/material/dialog';
 //import { LoginUser } from './views/historial-cliente/modal/login-user/login-user.component';
 
 @NgModule({
@@ -33,12 +34,13 @@ import { CarritoComponent } from './views/carrito/carrito.component';
   ],
   imports: [
     BrowserModule, 
+    MatDialogModule,
     AppRoutingModule, 
     NgbModule,
     BrowserAnimationsModule,
     HttpClientModule, 
   ],
-  providers: [UserService,ProductService,InfoService,],
+  providers: [UserService,ProductService,InfoService],
   bootstrap: [AppComponent],
   
 })
