@@ -14,6 +14,7 @@ export class HistorialClienteComponent implements OnInit {
   isModalOpen = true;
   cliente: User = new User();
   closeResult = '';
+  datosUsuarioCargados = false;
 
   constructor(private userService: UserService, private dialog: MatDialog) { }
 
@@ -32,9 +33,11 @@ export class HistorialClienteComponent implements OnInit {
       position: position,
     });
     dialogRef.afterClosed().subscribe((res) => {
+      this.cliente = res;
       console.log('Lista** '+res);
       console.log('method** '+JSON.stringify(res) );
       console.log('method1** '+res.name);
+      this.datosUsuarioCargados = true;
       //this.getUser();
     });
   }
