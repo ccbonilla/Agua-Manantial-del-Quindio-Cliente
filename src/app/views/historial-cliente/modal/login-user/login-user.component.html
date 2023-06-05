@@ -1,3 +1,22 @@
 <p>login-user works!</p>
 
 <h2 mat-dialog-title>Ingresar Información</h2>
+<mat-dialog-content>
+    <div class="form-row">
+        <form [formGroup]="dialogForm">
+            <mat-form-field class="form-field">
+              <input matInput formControlName="campo1" placeholder="Campo 1">
+              <mat-error *ngIf="dialogForm.controls['campo1'].hasError('required')">Campo requerido</mat-error>
+            </mat-form-field>
+        
+            <mat-form-field class="form-field">
+              <input matInput formControlName="campo2" placeholder="Campo 2">
+              <mat-error *ngIf="dialogForm.controls['campo2'].hasError('required')">Campo requerido</mat-error>
+            </mat-form-field>
+          </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button color="primary" [disabled]="dialogForm.invalid" (click)="aceptar()">Aceptar</button>
+</mat-dialog-actions>

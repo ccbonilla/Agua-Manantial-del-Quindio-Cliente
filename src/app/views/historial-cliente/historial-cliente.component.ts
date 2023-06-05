@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { LoginUserComponent } from './modal/login-user/login-user.component';
-import { MatDialog, DialogPosition } from '@angular/material/dialog';
+import { MatDialog, DialogPosition  } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-historial-cliente',
@@ -11,30 +11,35 @@ import { MatDialog, DialogPosition } from '@angular/material/dialog';
 })
 export class HistorialClienteComponent implements OnInit {
 
-  isModalOpen = false;
+  isModalOpen = true;
   cliente: User = new User();
   closeResult = '';
 
   constructor(private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getUser();
     this.openDialog();
   }
 
   openDialog() {
     const position: DialogPosition = {
       left: '30%',
-      top: '-220px',
+      top: '10%',
     };
     const dialogRef = this.dialog.open(LoginUserComponent, {
-      height: '400px',
-      width: '630px',
+      height: '500px',
+      width: '730px',
       position: position,
     });
     dialogRef.afterClosed().subscribe((res) => {
-      //this.getProducts();
+      console.log('Lista** '+res);
+      console.log('method** '+JSON.stringify(res) );
+      console.log('method1** '+res.name);
+      //this.getUser();
     });
+  }
+
+  cancelar(): void {
   }
 
   getUser() {
