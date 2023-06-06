@@ -34,9 +34,6 @@ export class HistorialClienteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       this.cliente = res;
-      console.log('Lista** '+res);
-      console.log('method** '+JSON.stringify(res) );
-      console.log('method1** '+res.name);
       this.datosUsuarioCargados = true;
       //this.getUser();
     });
@@ -48,9 +45,6 @@ export class HistorialClienteComponent implements OnInit {
   getUser() {
     this.userService.getById('find-by-id/1').subscribe((user) => {
       this.cliente = user;
-      console.log('Lista** '+this.cliente);
-      console.log('method** '+JSON.stringify(user) );
-      console.log('method1** '+user.name);
       
     });
   }

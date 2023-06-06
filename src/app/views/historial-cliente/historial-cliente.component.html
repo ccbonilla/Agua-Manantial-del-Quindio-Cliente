@@ -1,7 +1,7 @@
 &nbsp;
 <!-- test usuario cargado
 <div *ngIf="datosUsuarioCargados">
-  <h4>nombre {{cliente.name}}</h4>
+  <h4>{{cliente.name}}</h4>
 </div> -->
 
 <div>
@@ -18,8 +18,10 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/user-male-circle-blue-512.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>{{cliente.name}}</h4>
-                      <p class="text-secondary mb-1">{{cliente.address}}</p>
+                      <div *ngIf="datosUsuarioCargados">
+                        <h4>{{cliente.name}}</h4>
+                        <p class="text-secondary mb-1">{{cliente.address}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -147,8 +149,10 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Nombre Completo</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.name}} {{cliente.lastname}}
+                    <div *ngIf="datosUsuarioCargados">
+                      <div class="col-sm-9 text-secondary">
+                        {{cliente.name}} {{cliente.lastname}}
+                      </div>
                     </div>
                   </div>
                   <hr>
@@ -156,9 +160,12 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Correo Electronico</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.email}}
+                    <div *ngIf="datosUsuarioCargados">
+                      <div class="col-sm-9 text-secondary">
+                        {{cliente.email}}
+                      </div>
                     </div>
+                    
                   </div>
                   <hr>
                   <div class="row">
@@ -174,18 +181,24 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Número Celular</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.phone}}
+                    <div *ngIf="datosUsuarioCargados">
+                      <div class="col-sm-9 text-secondary">
+                        {{cliente.phone}}
+                      </div>
                     </div>
+                    
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Dirección</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.address}}
+                    <div *ngIf="datosUsuarioCargados">
+                      <div class="col-sm-9 text-secondary">
+                        {{cliente.address}}
+                      </div>
                     </div>
+                    
                   </div>
                   <hr>
                   <div class="row">
