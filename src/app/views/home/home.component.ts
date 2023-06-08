@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  backgroundImage1 = 'url(https://www.65ymas.com/uploads/s1/15/22/65/tipos-de-agua-embotellada1.jpeg)';
+
+  backgroundImage2 = 'url(https://3.bp.blogspot.com/-40TK5LMSn0w/WsTrAXGu0yI/AAAAAAAADBY/YuG1NKgCpCEu0G09bUQSNq2KsPLA_0LZgCLcBGAs/s1600/manantial.jpg)';
+
+  backgroundImage3 = 'url(https://www.65ymas.com/uploads/s1/15/22/65/tipos-de-agua-embotellada1.jpeg)';
+
   images = [
     {
       title: 'Tambo Filandia',
