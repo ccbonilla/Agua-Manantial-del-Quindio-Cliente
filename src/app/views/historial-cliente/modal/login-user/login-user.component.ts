@@ -12,18 +12,30 @@ import { UserService } from 'src/app/services/users/users.service';
 })
 export class LoginUserComponent implements OnInit {
   dialogForm: FormGroup;
+  dialogFormRegistro: FormGroup;
   cliente: User = new User();
+  registrarUsuario = false;
 
   constructor(
     private dialogRef: MatDialogRef<LoginUserComponent>,
     private formBuilder: FormBuilder,
+    private formBuilderRegistro: FormBuilder,
     private router: Router,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dialogForm = this.formBuilder.group({
-      campo1: ['', Validators.required],
-      campo2: ['', Validators.required]
+      cedula: ['', Validators.required],
+      email: ['', Validators.required],
+    });
+
+    this.dialogFormRegistro = this.formBuilderRegistro.group({
+      cedula: ['', Validators.required],
+      email: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      direccion: ['', Validators.required],
+      telefono: [''],
     });
   }
 
@@ -36,9 +48,57 @@ export class LoginUserComponent implements OnInit {
     console.log('Campos validos? ',this.dialogForm.valid);
     
     if (this.dialogForm.valid) {
-      this.validarUsuario();
+      const valorcedula = this.dialogForm.controls['cedula'].value;
+      const valoremail = this.dialogForm.controls['email'].value;
+      this.buscarUsuario(valorcedula,valoremail);
     } else {
       console.log('Campos inválidos');
+    }
+  }
+
+  subscribirse(): void {
+    var nuevoCliente: User = new User();
+    console.log('Campos validos subs? ',this.dialogFormRegistro.valid);
+
+    //nuevoCliente.user_id = 4;
+    //nuevoCliente.name='Cristian';
+    //nuevoCliente.lastname='Admin';
+    //nuevoCliente.email='ccbonilla@gmail.com';
+    //nuevoCliente.phone= '311213123';
+    //nuevoCliente.address= 'Km 7 vía Armenia - El edén';
+    //nuevoCliente.user_type_id= 1;
+    //nuevoCliente.previous_user_type_id = 0;
+    //nuevoCliente.count= 15;
+    //nuevoCliente.user_type_name='Usuario bronce';
+    nuevoCliente.user_id = this.dialogFormRegistro.controls['cedula'].value;
+    nuevoCliente.name= this.dialogFormRegistro.controls['nombre'].value;
+    nuevoCliente.lastname = this.dialogFormRegistro.controls['apellido'].value;
+    nuevoCliente.email = this.dialogFormRegistro.controls['email'].value;
+    nuevoCliente.phone = this.dialogFormRegistro.controls['telefono'].value;
+    nuevoCliente.address= this.dialogFormRegistro.controls['direccion'].value;
+    nuevoCliente.user_type_id=1;
+    nuevoCliente.password="cbonilla";
+    //nuevoCliente.count= 3;
+
+    console.log('validacion sub cliente? ',nuevoCliente);
+    
+    if (this.dialogFormRegistro.valid) {
+      this.userService.create('create', nuevoCliente).subscribe((res) => {
+        console.log('Result Create USER** ', res);
+        const isObject = typeof res === 'object';
+        if (isObject) {
+          console.log('El resultado ES* un objeto', isObject);
+          console.log('ID nuevo cliente', res.user_id);
+          this.buscarUsuario(res.user_id,'');
+          
+          // Aquí puedes realizar las operaciones adicionales con el objeto res 
+        } else {
+          console.log('El resultadon NO* es un objeto', isObject);
+          // Manejar el caso en el que res no sea un objeto
+        }
+      });
+    } else {
+      console.log('Campos inválidos suscripcion');
     }
   }
 
@@ -46,13 +106,11 @@ export class LoginUserComponent implements OnInit {
 
   }
 
-  validarUsuario() {
-    const valorCampo1 = this.dialogForm.controls['campo1'].value;
-    const valorCampo2 = this.dialogForm.controls['campo2'].value;
-    console.log('Campos user cedula ', valorCampo1);
-    this.userService.getById('find-by-id/'+valorCampo1).subscribe((user) => {
+  buscarUsuario(valorcedula: number,valoremail:string) {
+    console.log('Campos user cedula ', valorcedula);
+    this.userService.getById('find-by-id/'+valorcedula).subscribe((user) => {
       if (user === null) {
-        this.crearUsuario(valorCampo1);
+        this.crearUsuario(valorcedula);
       } else {
         this.cliente = user;
         this.dialogRef.close(this.cliente);
@@ -60,8 +118,8 @@ export class LoginUserComponent implements OnInit {
     });
   }
 
-  crearUsuario(valorCampo1: number) {
-
+  crearUsuario(valorcedula: number) {
+    this.registrarUsuario = true;
 
   }
 

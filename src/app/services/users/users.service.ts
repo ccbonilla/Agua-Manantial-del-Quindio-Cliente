@@ -16,6 +16,11 @@ export class UserService {
       .get(`${this.BASE_URL}/${url}`)
       .pipe(map((response) => response as User[]));
   }
+  create(url: string, data: User): Observable<any> {
+    return this.http
+      .post(`${this.BASE_URL}/${url}`, data) 
+      .pipe(map((response) => response));
+  }
   getById(url: string): Observable<User> {
     return this.http
       .get(`${this.BASE_URL}/${url}`)

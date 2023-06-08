@@ -1,22 +1,79 @@
-<p>login-user works!</p>
-
 <h2 mat-dialog-title>Ingresar Información</h2>
-<mat-dialog-content>
+<div *ngIf="!registrarUsuario">
+  <mat-dialog-content class="mat-typography">
     <div class="form-row">
         <form [formGroup]="dialogForm">
             <mat-form-field class="form-field">
-              <input matInput formControlName="campo1" placeholder="Campo 1">
-              <mat-error *ngIf="dialogForm.controls['campo1'].hasError('required')">Campo requerido</mat-error>
+              <input matInput formControlName="cedula" placeholder="Cedula">
+              <mat-error *ngIf="dialogForm.controls['cedula'].hasError('required')">Campo requerido</mat-error>
             </mat-form-field>
-        
             <mat-form-field class="form-field">
-              <input matInput formControlName="campo2" placeholder="Campo 2">
-              <mat-error *ngIf="dialogForm.controls['campo2'].hasError('required')">Campo requerido</mat-error>
+              <input matInput formControlName="email" placeholder="Correo Electronico">
+              <mat-error *ngIf="dialogForm.controls['email'].hasError('required')">Campo requerido</mat-error>
             </mat-form-field>
           </form>
     </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="cancelar()">Cancelar</button>
-  <button mat-button color="primary" [disabled]="dialogForm.invalid" (click)="aceptar()">Aceptar</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="dialogForm.invalid" (click)="aceptar()">Aceptar</button>
+  </mat-dialog-actions>
+</div>
+
+
+
+<div *ngIf="registrarUsuario">
+  <mat-dialog-content>
+    <form [formGroup]="dialogFormRegistro">
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <input matInput formControlName="cedula" placeholder="Cedula">
+          <mat-error *ngIf="dialogFormRegistro.controls['cedula'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <input matInput formControlName="email" placeholder="Correo Electronico">
+          <mat-error *ngIf="dialogFormRegistro.controls['email'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput formControlName="direccion" placeholder="Direccion">
+          <mat-error *ngIf="dialogFormRegistro.controls['direccion'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+
+      </div>
+      
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <input matInput formControlName="nombre" placeholder="Nombre">
+          <mat-error *ngIf="dialogFormRegistro.controls['nombre'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput formControlName="apellido" placeholder="Apellido">
+          <mat-error *ngIf="dialogFormRegistro.controls['apellido'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="form-field">
+          <input matInput formControlName="telefono" placeholder="Telefono">
+          <mat-error *ngIf="dialogFormRegistro.controls['telefono'].hasError('required')">Campo requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      
+    </form>
+    
+    
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="dialogFormRegistro.invalid" (click)="subscribirse()">Subscribirse</button>
+  </mat-dialog-actions>
+</div>
