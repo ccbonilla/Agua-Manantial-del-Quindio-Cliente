@@ -138,7 +138,10 @@
                   </div>
                 </div>
               </div>
-              <!-- Container Promocion -->
+              <!-- 
+              <div *ngIf="datosUsuarioCargados">
+                
+              </div>-->
               &nbsp;
               <div>
                 <h2 align="center"> Información Personal </h2>
@@ -149,10 +152,8 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Nombre Completo</h6>
                     </div>
-                    <div *ngIf="datosUsuarioCargados">
-                      <div class="col-sm-9 text-secondary">
-                        {{cliente.name}} {{cliente.lastname}}
-                      </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{cliente.name}} {{cliente.lastname}}
                     </div>
                   </div>
                   <hr>
@@ -160,12 +161,9 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Correo Electronico</h6>
                     </div>
-                    <div *ngIf="datosUsuarioCargados">
-                      <div class="col-sm-9 text-secondary">
-                        {{cliente.email}}
-                      </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{cliente.email}}
                     </div>
-                    
                   </div>
                   <hr>
                   <div class="row">
@@ -181,24 +179,18 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Número Celular</h6>
                     </div>
-                    <div *ngIf="datosUsuarioCargados">
-                      <div class="col-sm-9 text-secondary">
-                        {{cliente.phone}}
-                      </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{cliente.phone}}
                     </div>
-                    
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Dirección</h6>
                     </div>
-                    <div *ngIf="datosUsuarioCargados">
-                      <div class="col-sm-9 text-secondary">
-                        {{cliente.address}}
-                      </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{cliente.address}}
                     </div>
-                    
                   </div>
                   <hr>
                   <div class="row">
