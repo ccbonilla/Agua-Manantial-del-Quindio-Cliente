@@ -21,10 +21,17 @@
   </button>
   </div>
   
+
+<div class="div-block-principal">
+  <div class="w-layout-grid grid-container">
+    <div class="div-block-49">
+      <button class="bi bi-cart boton-carrito w-inline-block" (click)="toggleCart()" [class.active]="isCartOpen"></button>
+    </div>
+  </div>
+</div>
 </div>-->
 
 &nbsp;
-
 
 
 
@@ -41,9 +48,8 @@
         <div class="w-inline-block">
           <div class="col-25" style="height: 100%;">
             <div class="container-element">
-              
-              <button class="bi bi-backspace boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
-              <h4 align="center"> Carrito <span class="price" style="color:black"><i class="bi bi-cart"></i> <b>3</b></span></h4>
+              <button class="bi bi-x-lg boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
+              <h4 align="center"> Carrito </h4>
               <div class="container-product">
                 <button class="bi bi-trash3-fill boton-trash"></button>
                 <img src="/assets/agua600ml.jpg" alt="Avatar" style="width:130px" class="container-img">
