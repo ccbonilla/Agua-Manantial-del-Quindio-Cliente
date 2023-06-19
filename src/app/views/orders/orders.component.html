@@ -1,6 +1,6 @@
 &nbsp;
 <div class="d-flex">
-  <div class="text-left">
+  <div class="text-left " style="padding-left: 20px;">
     <button class="float-left" (click)="toggleCart()" [class.active]="isCartOpen">
       <i class="bi bi-cart"></i>
       <span class="badge">{{ cartItemsCount }}</span>
@@ -12,16 +12,14 @@
 </div>
 <!-- test 
 <div >
-  
   <div>
     <h1 align="center"> Nuestros Productos </h1> 
     <button (click)="toggleCart()" [class.active]="isCartOpen">
-    <i class="bi bi-cart float-left"></i>
+    <i class="bi bi-cart float-left " ></i>
     <span class="badge">{{ cartItemsCount }}</span>
-  </button>
+    </button>
   </div>
   
-
 <div class="div-block-principal">
   <div class="w-layout-grid grid-container">
     <div class="div-block-49">
@@ -29,15 +27,41 @@
     </div>
   </div>
 </div>
-</div>-->
+</div>
+-->
+
+<div style="width: 20%;">
+  <a href="#" class="table-link text-warning">
+      <span class="fa-stack">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
+      </span>
+  </a>
+  <a href="#" class="table-link text-info">
+      <span class="fa-stack">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
+      </span>
+  </a>
+  <a href="#" class="table-link danger">
+      <span class="fa-stack">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+      </span>
+  </a>
+</div>
+
+
+<div class="incremental-button">
+  <button (click)="decrement()">-</button>
+  <span>{{ value }}</span>
+  <button (click)="increment()">+</button>
+</div>
+
 
 &nbsp;
 
-
-
-  
-<div class="cart-items" [class.open]="isCartOpen">
-  
+<div class="cart-items " [class.open]="isCartOpen">
   <!-- test -->
   <div class="div-block-48">
     <div class="w-layout-grid grid-38">
@@ -50,26 +74,16 @@
             <div class="container-element">
               <button class="bi bi-x-lg boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
               <h4 align="center"> Carrito </h4>
-              <div class="container-product">
-                <button class="bi bi-trash3-fill boton-trash"></button>
-                <img src="/assets/agua600ml.jpg" alt="Avatar" style="width:130px" class="container-img">
-                <p>botellon20lt</p>
-                <span class="price">$5</span>
-                <p class="green-text">Envío gratis</p>
-              </div>
-              <div class="container-product">
-                <button class="bi bi-trash3-fill boton-trash"></button>
-                <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
-                <p> Botella Agua</p>
-                <span class="price">$5</span>
-                <p class="green-text">Envío gratis</p>
-              </div>
-              <div class="container-product">
-                <button class="bi bi-trash3-fill boton-trash"></button>
-                <img src="/assets/botellon20lt.jpg" alt="Avatar" style="width:130px" class="container-img">
-                <p> Botella Agua</p>
-                <span class="price">$5</span>
-                <p class="green-text">Envío gratis</p>
+
+              <div *ngFor="let product of productData">
+                <div class="container-product">
+                  <button class="bi bi-trash3-fill boton-trash"></button>
+                  
+                  <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
+                  <p>{{ product.title }}</p>
+                  <span class="price">{{ product.price }}</span>
+                  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p>
+                </div>
               </div>
               <hr>
               <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
@@ -92,16 +106,12 @@
             <h2>{{ item.name }} </h2>
             <p class="price">$ {{ item.value }}</p>
             <p>{{ item.description }}</p>
-            <p><button>Añadir al carrito</button></p>
+            <p><button (click)="addButtonClicked(item)">Añadir al carrito</button></p>
           </div>
         </div>
-        
       </div>
-      
     </div>
-      
   </div>
-  
 </div>
 
 

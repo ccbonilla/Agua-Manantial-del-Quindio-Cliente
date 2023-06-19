@@ -53,7 +53,7 @@
   left: auto;
   top: 0px;
   //right: 0%;
-  bottom: 0%;
+  bottom: 0%; //100px;
   z-index: 10;
   //width: 450px;
   opacity: 1;
@@ -68,7 +68,7 @@
   height: 100%;
 }
 .div-block-49 {
-  padding: 10px;
+  padding: 5px;
   border-radius: 11px;
   background-color:#5b9dff;
   height: 100%;
@@ -173,16 +173,16 @@ button {
 }
 
 button i {
-  font-size: 20px;
+  font-size: 42px;
 }
 
 .badge {
   position: absolute;
-  top: 5px;
+  top: 10px;
   right: 5px;
   background-color: red;
   color: white;
-  font-size: 12px;
+  font-size: 15px;
   padding: 2px 4px;
   border-radius: 50%;
 }
@@ -195,13 +195,15 @@ button i {
   display: block;
 }
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  background-color: #f2f2f2;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(-100%);
+.incremental-button {
+  display: flex;
+  align-items: center;
 }
+
+.incremental-button button {
+  margin: 0 5px;
+}
+
+
+/* Transición suave de la propiedad width               transition: width 0.3s ease;             */
+/* Transición suave de la propiedad margin-left         transition: margin-left 0.3s ease;               */

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
@@ -13,8 +12,10 @@ import { Product } from '../../models/product';
 })
 export class OrdersComponent implements OnInit {
 
+  productData: any[] = [];
   products: Product[] = [];
   dividedArray: any[][] = [];
+  showFiller = false;
   
   productSize: number = 0;
   cartItemsCount = 0;
@@ -45,6 +46,29 @@ export class OrdersComponent implements OnInit {
       this.dividedArray.push(subArray);
     }
     });
-    
+  }
+
+  addButtonClicked(item: any) {
+    console.log("Item a ingresar *" + JSON.stringify(item) );
+    const newProduct = {
+      imageSrc: "/assets/agua600ml.jpg",
+      title: item.name, 
+      price: item.value,
+      isFreeShipping: true
+    };
+    this.productData.push(newProduct);
+    this.cartItemsCount++;
+  }
+
+  value: number = 0;
+
+  increment() {
+    this.value++;
+  }
+
+  decrement() {
+    if (this.value > 0) {
+      this.value--;
+    }
   }
 }

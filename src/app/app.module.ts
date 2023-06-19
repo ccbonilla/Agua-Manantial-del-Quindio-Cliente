@@ -33,6 +33,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginUserComponent } from './views/historial-cliente/modal/login-user/login-user.component';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { LoginUserComponent } from './views/historial-cliente/modal/login-user/l
     MatExpansionModule,
     MatCardModule,
     MatButtonToggleModule,
+    MatSidenavModule,
     ReactiveFormsModule,
   ],
   providers: [UserService,ProductService,InfoService],
