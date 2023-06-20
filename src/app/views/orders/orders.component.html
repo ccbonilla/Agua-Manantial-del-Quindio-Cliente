@@ -29,40 +29,26 @@
 </div>
 </div>
 -->
-
-<div style="width: 20%;">
-  <a href="#" class="table-link text-warning">
-      <span class="fa-stack">
-          <i class="fa fa-square fa-stack-2x"></i>
-          <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
-      </span>
-  </a>
-  <a href="#" class="table-link text-info">
-      <span class="fa-stack">
-          <i class="fa fa-square fa-stack-2x"></i>
-          <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
-      </span>
-  </a>
-  <a href="#" class="table-link danger">
-      <span class="fa-stack">
-          <i class="fa fa-square fa-stack-2x"></i>
-          <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-      </span>
-  </a>
+<div class="d-flex gap-2 mb-3">
+  <div class="btn-group">
+    <button type="button" class="btn btn-outline-secondary">
+      <i class="bi bi-dash-lg"></i>
+    </button>
+    <button type="button" class="btn btn-outline-secondary">
+      <i class="bi bi-dash-lg"></i>
+    </button>
+    <button type="button" class="btn btn-outline-secondary">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
 </div>
 
 
-<div class="incremental-button">
-  <button (click)="decrement()">-</button>
-  <span>{{ value }}</span>
-  <button (click)="increment()">+</button>
-</div>
 
 
 &nbsp;
 
 <div class="cart-items " [class.open]="isCartOpen">
-  <!-- test -->
   <div class="div-block-48">
     <div class="w-layout-grid grid-38">
       <div class="div-block-49">
@@ -78,11 +64,29 @@
               <div *ngFor="let product of productData">
                 <div class="container-product">
                   <button class="bi bi-trash3-fill boton-trash"></button>
-                  
                   <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
                   <p>{{ product.title }}</p>
                   <span class="price">{{ product.price }}</span>
-                  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p>
+                  <!-- contador cantidad -->
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary" (click)="decrement()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                      </svg>
+                      <span class="visually-hidden">Button</span>
+                    </button>
+                    <div class="btn btn-outline-secondary">
+                      <span>{{ value }}</span>
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                      </svg>
+                      <span class="visually-hidden">Button</span>
+                    </button>
+                  </div>
+                  <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
+                  
                 </div>
               </div>
               <hr>

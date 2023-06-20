@@ -204,6 +204,12 @@ button i {
   margin: 0 5px;
 }
 
+.btn-group {
+  border-radius: var(--bs-border-radius);
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
 
 /* Transición suave de la propiedad width               transition: width 0.3s ease;             */
 /* Transición suave de la propiedad margin-left         transition: margin-left 0.3s ease;               */
