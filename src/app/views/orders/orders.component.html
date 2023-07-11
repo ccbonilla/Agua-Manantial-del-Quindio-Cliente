@@ -61,36 +61,44 @@
               <button class="bi bi-x-lg boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
               <h4 align="center"> Carrito </h4>
 
-              <div *ngFor="let product of productData">
-                <div class="container-product">
-                  <button class="bi bi-trash3-fill boton-trash"></button>
-                  <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
-                  <p>{{ product.title }}</p>
-                  <span class="price">{{ product.price }}</span>
-                  <!-- contador cantidad -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-outline-secondary" (click)="decrement()">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                      </svg>
-                      <span class="visually-hidden">Button</span>
-                    </button>
-                    <div class="btn btn-outline-secondary">
-                      <span>{{ value }}</span>
+              <div class="scroll-bar" >
+                <div *ngFor="let product of productData">
+                  <div class="container-product">
+                    <button class="bi bi-trash3-fill boton-trash"></button>
+                    <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
+                    <p>{{ product.title }}</p>
+                    <span class="price">{{ product.price }}</span>
+                    <!-- contador cantidad -->
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-secondary" (click)="decrement()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                        </svg>
+                        <span class="visually-hidden">Button</span>
+                      </button>
+                      <div class="btn btn-outline-secondary">
+                        <span>{{ value }}</span>
+                      </div>
+                      <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                        </svg>
+                        <span class="visually-hidden">Button</span>
+                      </button>
                     </div>
-                    <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment()">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                      </svg>
-                      <span class="visually-hidden">Button</span>
-                    </button>
+                    <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
+                    
                   </div>
-                  <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
-                  
                 </div>
               </div>
+
+              
               <hr>
-              <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
+              <div class="content-price">
+                <div class="total-price">
+                  <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

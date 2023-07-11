@@ -211,5 +211,18 @@ button i {
   vertical-align: middle;
 }
 
+.content-price {
+  flex-grow: 1;
+}
+
+.total-price {
+  //text-align: center;
+  margin-top: auto;
+}
+
+.scroll-bar {
+  height: 55vh; /* Ajusta la altura máxima deseada */
+  overflow-y: auto;
+}
 /* Transición suave de la propiedad width               transition: width 0.3s ease;             */
 /* Transición suave de la propiedad margin-left         transition: margin-left 0.3s ease;               */
