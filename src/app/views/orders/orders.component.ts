@@ -12,6 +12,7 @@ import { Product } from '../../models/product';
 })
 export class OrdersComponent implements OnInit {
 
+  costoTotalPedido: number = 0;
   productData: any[] = [];
   products: Product[] = [];
   dividedArray: any[][] = [];
@@ -50,25 +51,72 @@ export class OrdersComponent implements OnInit {
 
   addButtonClicked(item: any) {
     console.log("Item a ingresar *" + JSON.stringify(item) );
-    const newProduct = {
+
+    const index = this.productData.findIndex(product => product.product_id === item.product_id);
+    console.log("Index Encontrado *" + index );
+    
+    if (index == -1) {
+      const newProduct = {
       imageSrc: "/assets/agua600ml.jpg",
       title: item.name, 
       price: item.value,
-      isFreeShipping: true
-    };
-    this.productData.push(newProduct);
-    this.cartItemsCount++;
-  }
-
-  value: number = 0;
-
-  increment() {
-    this.value++;
-  }
-
-  decrement() {
-    if (this.value > 0) {
-      this.value--;
+      isFreeShipping: true,
+      product_id: item.product_id,
+      cantidad: 1
+      };
+      this.productData.push(newProduct);
+      this.cartItemsCount++;
+    } else {
+      this.productData[index].cantidad += 1;
     }
+    
+  }
+
+  deleteButtonProduct(item: any) {
+    console.log("Item a eliminar *" + JSON.stringify(item) );
+    console.log("Item a eliminar id**" + JSON.stringify(item.product_id) );
+
+    const index = this.productData.findIndex(product => product.product_id === item.product_id);
+
+    // Verificar si se encontró el producto
+    if (index !== -1) {
+      // Eliminar el producto de la lista
+      console.log("entro eliminar**" );
+      this.productData.splice(index, 1);
+      this.cartItemsCount--;
+    }
+  }
+
+
+  increment(item: any) {
+    console.log("Item a incrementar *" + JSON.stringify(item) );
+
+    const index = this.productData.findIndex(product => product.product_id === item.product_id);
+    console.log("Index Encontrado incrementar *" + index );
+    
+    if (index !== -1) {
+      this.productData[index].cantidad += 1;
+    } else {
+    }
+  }
+
+  decrement(item: any) {
+    console.log("Item a decrementar *" + JSON.stringify(item) );
+
+    const index = this.productData.findIndex(product => product.product_id === item.product_id);
+    console.log("Index Encontrado decrementar *" + index );
+    
+    if (index !== -1 && this.productData[index].cantidad > 1) {
+      this.productData[index].cantidad -= 1;
+    } else {
+    }
+  }
+
+  getTotal(): number {
+    let total = 0;
+    for (let product of this.productData) {
+      total += product.price * product.cantidad;
+    }
+    return total;
   }
 }

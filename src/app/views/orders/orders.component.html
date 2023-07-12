@@ -64,22 +64,22 @@
               <div class="scroll-bar" >
                 <div *ngFor="let product of productData">
                   <div class="container-product">
-                    <button class="bi bi-trash3-fill boton-trash"></button>
+                    <button class="bi bi-trash3-fill boton-trash" (click)="deleteButtonProduct(product)" ></button>
                     <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
                     <p>{{ product.title }}</p>
-                    <span class="price">{{ product.price }}</span>
+                    <span class="price">{{ product.price * product.cantidad }}</span>
                     <!-- contador cantidad -->
                     <div class="btn-group">
-                      <button type="button" class="btn btn-outline-secondary" (click)="decrement()">
+                      <button type="button" class="btn btn-outline-secondary" (click)="decrement(product)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
                         </svg>
                         <span class="visually-hidden">Button</span>
                       </button>
                       <div class="btn btn-outline-secondary">
-                        <span>{{ value }}</span>
+                        <span>{{ product.cantidad }}</span>
                       </div>
-                      <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment()">
+                      <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment(product)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
                         </svg>
@@ -96,7 +96,7 @@
               <hr>
               <div class="content-price">
                 <div class="total-price">
-                  <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
+                  <p>Total <span class="price" style="color:black"><b>${{ getTotal() }}</b></span></p>
                 </div>
               </div>
             </div>
