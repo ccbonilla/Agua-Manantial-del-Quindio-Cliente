@@ -35,6 +35,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginUserComponent } from './views/historial-cliente/modal/login-user/login-user.component';
+import { MatSnackBarModule  } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { LoginUserComponent } from './views/historial-cliente/modal/login-user/l
   ],
   imports: [
     BrowserModule, 
+    MatSnackBarModule,
     MatDialogModule,
     AppRoutingModule, 
     NgbModule,

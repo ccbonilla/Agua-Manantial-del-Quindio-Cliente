@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
@@ -25,7 +26,8 @@ export class OrdersComponent implements OnInit {
   images = [102,91,93,193,110].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private _snackBar: MatSnackBar
   ) {}
 
   toggleCart() {
@@ -69,7 +71,7 @@ export class OrdersComponent implements OnInit {
     } else {
       this.productData[index].cantidad += 1;
     }
-    
+    this.openSnackBar();
   }
 
   deleteButtonProduct(item: any) {
@@ -118,5 +120,14 @@ export class OrdersComponent implements OnInit {
       total += product.price * product.cantidad;
     }
     return total;
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Añadido!!', 'X', {
+      horizontalPosition: "center",
+      verticalPosition: "bottom", //bottom top
+      duration: 1 * 1000,
+      panelClass: ['centered-snackbar']
+    });
   }
 }

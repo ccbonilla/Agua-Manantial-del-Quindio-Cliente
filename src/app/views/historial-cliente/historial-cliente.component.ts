@@ -35,6 +35,7 @@ export class HistorialClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.cliente = res;
       this.datosUsuarioCargados = true;
+      //localStorage.setItem('usuario', res);
       //this.getUser();
     });
   }
