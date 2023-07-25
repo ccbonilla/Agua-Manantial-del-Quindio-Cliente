@@ -4,6 +4,8 @@ import { UserService } from '../../services/users/users.service';
 import { LoginUserComponent } from './modal/login-user/login-user.component';
 import { MatDialog, DialogPosition  } from '@angular/material/dialog';
 import { LocalStorageService } from 'angular-web-storage';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
@@ -18,7 +20,12 @@ export class HistorialClienteComponent implements OnInit {
   closeResult = '';
   datosUsuarioCargados = false;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private localStorage: LocalStorageService,) { }
+  constructor(
+    private userService: UserService, 
+    private dialog: MatDialog, 
+    private localStorage: LocalStorageService, 
+    private _snackBar: MatSnackBar,
+    private router: Router,) { }
 
   ngOnInit(): void {
     console.log("init storage: " + JSON.stringify(this.localStorage)  );
@@ -48,16 +55,25 @@ export class HistorialClienteComponent implements OnInit {
       this.datosUsuarioCargados = true;
       this.localStorage.set('logged', JSON.stringify(res));
       
-      //localStorage.setItem('usuario', res);
-      //this.getUser();
     });
   }
 
   logout(): void {
-    // Elimina la información del usuario almacenada en el localStorage
+
     this.localStorage.remove('logged');
     this.cliente = new User();
     this.datosUsuarioCargados = false;
+
+    this._snackBar.open('¡Gracias por visitarnos! ¡Hasta pronto!', 'Cerrar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 1500 // Duración del mensaje (en milisegundos)
+    });
+  
+    // Redireccionar al home después de 3 segundos
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 1500);
   }
 
   cancelar(): void {
