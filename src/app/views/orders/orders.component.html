@@ -30,8 +30,6 @@
 </div>
 -->
 
-
-
 &nbsp;
 
 <div class="cart-items " [class.open]="isCartOpen">
@@ -73,17 +71,15 @@
                       </button>
                     </div>
                     <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
-                    
                   </div>
                 </div>
               </div>
-
-              
               <hr>
               <div class="content-price">
                 <div class="total-price">
                   <p>Total <span class="price" style="color:black"><b>${{ getTotal() }}</b></span></p>
                   <button class="finalizar-button" >Finalizar Compra</button>
+                  <button class="continue-button" (click)="toggleCart()" [class.active]="isCartOpen">Seguir comprando ></button>
                 </div>
               </div>
             </div>

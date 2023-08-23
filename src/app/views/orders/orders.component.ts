@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { LocalStorageService } from 'angular-web-storage';
 
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
@@ -27,7 +28,8 @@ export class OrdersComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private localStorage: LocalStorageService,
   ) {}
 
   toggleCart() {
@@ -37,8 +39,19 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     console.log("El componente se ha inicializado");
     this.getProducts();
+    const localPedido = this.localStorage.get('pedidoUsuario');
+    if (localPedido) {
+      this.productData = JSON.parse(localPedido);
+      this.cartItemsCount = Object.keys(this.productData).length;
+    } else {
+      
+    }
   }
 
+  actuaizarPedidoUsuario() {
+    this.localStorage.remove('pedidoUsuario');
+    this.localStorage.set('pedidoUsuario', JSON.stringify(this.productData));
+  }
   getProducts() {
     this.productService.get('list').subscribe((prods) => {
     this.products = prods;
@@ -68,9 +81,11 @@ export class OrdersComponent implements OnInit {
       };
       this.productData.push(newProduct);
       this.cartItemsCount++;
+      
     } else {
       this.productData[index].cantidad += 1;
     }
+    this.actuaizarPedidoUsuario();
     this.openSnackBar();
   }
 
@@ -86,6 +101,7 @@ export class OrdersComponent implements OnInit {
       console.log("entro eliminar**" );
       this.productData.splice(index, 1);
       this.cartItemsCount--;
+      this.actuaizarPedidoUsuario();
     }
   }
 
@@ -100,6 +116,7 @@ export class OrdersComponent implements OnInit {
       this.productData[index].cantidad += 1;
     } else {
     }
+    this.actuaizarPedidoUsuario();
   }
 
   decrement(item: any) {
@@ -112,6 +129,7 @@ export class OrdersComponent implements OnInit {
       this.productData[index].cantidad -= 1;
     } else {
     }
+    this.actuaizarPedidoUsuario();
   }
 
   getTotal(): number {
