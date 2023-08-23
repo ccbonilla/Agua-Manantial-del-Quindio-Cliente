@@ -1,3 +1,6 @@
+
+
+
 &nbsp;
 <div class="d-flex">
   <div class="text-left " style="padding-left: 20px;">
@@ -10,25 +13,6 @@
     <h1>Nuestros Productos</h1>
   </div>
 </div>
-<!-- test 
-<div >
-  <div>
-    <h1 align="center"> Nuestros Productos </h1> 
-    <button (click)="toggleCart()" [class.active]="isCartOpen">
-    <i class="bi bi-cart float-left " ></i>
-    <span class="badge">{{ cartItemsCount }}</span>
-    </button>
-  </div>
-  
-<div class="div-block-principal">
-  <div class="w-layout-grid grid-container">
-    <div class="div-block-49">
-      <button class="bi bi-cart boton-carrito w-inline-block" (click)="toggleCart()" [class.active]="isCartOpen"></button>
-    </div>
-  </div>
-</div>
-</div>
--->
 
 &nbsp;
 
@@ -109,76 +93,31 @@
   </div>
 </div>
 
-
-
-
-<ng-template #content let-c="close" let-d="dismiss">
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<p>Hello, World!</p>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-	</div>
-</ng-template>
-
-
-<div class="d-flex justify-content-center mb-4">
+<!-- Carousel wrapper
+<mat-stepper orientation="vertical" animationDuration="2000ms">
+  <mat-step>
+    <ng-template matStepLabel>Step 1</ng-template>
+    <ng-template matStepContent>
+      <p>This content was rendered lazily</p>
+      <button mat-button matStepperNext>Next</button>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Cesta de la compra</ng-template>
+    <ng-template matStepContent>
+      <p>This content was also rendered lazily</p>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </ng-template>
     
-  <button
-    class="carousel-control-prev position-relative"
-    type="button"
-    data-mdb-target="#carouselMultiItemExample"
-    data-mdb-slide="prev"
-    >
-    
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next position-relative"
-    type="button"
-    data-mdb-target="#carouselMultiItemExample"
-    data-mdb-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<!-- Carousel wrapper 
-
-<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
-<div class="d-flex justify-content-center mb-4">
-    
-    <button
-      class="carousel-control-prev position-relative"
-      type="button"
-      data-mdb-target="#carouselMultiItemExample"
-      data-mdb-slide="prev"
-      >
-      
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next position-relative"
-      type="button"
-      data-mdb-target="#carouselMultiItemExample"
-      data-mdb-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>-->
-
-<!-- Button trigger modal 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Launch demo modal
-</button>-->
-
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Step 3</ng-template>
+    <p>This content was rendered eagerly</p>
+    <button mat-button matStepperPrevious>Back</button>
+  </mat-step>
+</mat-stepper>
+-->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -200,7 +139,6 @@
     </div>
   </div>
 </div>
-
 
 <form>
   <div class="form-group">

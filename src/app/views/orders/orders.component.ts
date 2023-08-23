@@ -3,14 +3,15 @@ import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } fro
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
-
+ 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'angular-web-storage';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-carrito',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoComponent implements OnInit {
 
+  productData: any[] = [];
+  cliente: User = new User();
   
   productos = [
     {
@@ -22,7 +26,9 @@ export class CarritoComponent implements OnInit {
     { name: 'Salento', quantity: 'Pueblo mágico', price: 'price2' },
   ];
 
-  constructor() { }
+  constructor(
+    private localStorage: LocalStorageService,
+  ) { }
 
   ngOnInit(): void {
   }
