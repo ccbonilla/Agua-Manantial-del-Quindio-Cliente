@@ -10,4 +10,5 @@ export class User {
   previous_user_type_id: number = 0;
   count: number = 0;
   password: string = '';
+  identification: number = 0;
 }

@@ -31,7 +31,7 @@ export class HistorialClienteComponent implements OnInit {
     console.log("init storage: " + JSON.stringify(this.localStorage)  );
     const loggedUser = this.localStorage.get('logged');
     if (loggedUser) {
-      // Usuario logueado, puedes continuar con las operaciones que requieren el usuario logueado
+      // Usuario logueado
       this.cliente = JSON.parse(loggedUser);
       this.datosUsuarioCargados = true;
     } else {

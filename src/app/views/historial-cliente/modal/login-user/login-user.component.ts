@@ -70,14 +70,14 @@ export class LoginUserComponent implements OnInit {
     //nuevoCliente.previous_user_type_id = 0;
     //nuevoCliente.count= 15;
     //nuevoCliente.user_type_name='Usuario bronce';
-    nuevoCliente.user_id = this.dialogFormRegistro.controls['cedula'].value;
+    nuevoCliente.user_id = 1;
     nuevoCliente.name= this.dialogFormRegistro.controls['nombre'].value;
     nuevoCliente.lastname = this.dialogFormRegistro.controls['apellido'].value;
     nuevoCliente.email = this.dialogFormRegistro.controls['email'].value;
     nuevoCliente.phone = this.dialogFormRegistro.controls['telefono'].value;
     nuevoCliente.address= this.dialogFormRegistro.controls['direccion'].value;
     nuevoCliente.user_type_id=1;
-    nuevoCliente.password="cbonilla";
+    nuevoCliente.identification=this.dialogFormRegistro.controls['cedula'].value;
     //nuevoCliente.count= 3;
 
     console.log('validacion sub cliente? ',nuevoCliente);
@@ -91,10 +91,8 @@ export class LoginUserComponent implements OnInit {
           console.log('ID nuevo cliente', res.user_id);
           this.buscarUsuario(res.user_id,'');
           
-          // Aquí puedes realizar las operaciones adicionales con el objeto res 
         } else {
           console.log('El resultadon NO* es un objeto', isObject);
-          // Manejar el caso en el que res no sea un objeto
         }
       });
     } else {
