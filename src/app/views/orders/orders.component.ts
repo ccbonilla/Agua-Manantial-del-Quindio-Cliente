@@ -5,6 +5,8 @@ import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
 import { trigger, transition, style, animate } from '@angular/animations';
 
+import { Order } from 'src/app/models/order';
+import { OrderService } from '../../services/orders/orders.service';
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
  
@@ -31,6 +33,7 @@ export class OrdersComponent implements OnInit {
     private productService: ProductService,
     private _snackBar: MatSnackBar,
     private localStorage: LocalStorageService,
+    private orderService: OrderService,
   ) {}
 
   toggleCart() {
@@ -109,7 +112,6 @@ export class OrdersComponent implements OnInit {
       this.actuaizarPedidoUsuario();
     }
   }
-
 
   increment(item: any) {
     console.log("Item a incrementar *" + JSON.stringify(item) );

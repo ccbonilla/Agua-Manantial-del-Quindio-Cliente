@@ -2,6 +2,7 @@
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/users/users.service';
 import { ProductService } from './services/products/product.service';
+import { OrderService  } from './services/orders/orders.service';
 import { InfoService } from './services/infoService/info.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
@@ -74,7 +75,7 @@ import { MatSnackBarModule  } from '@angular/material/snack-bar';
     MatSidenavModule,
     ReactiveFormsModule,
   ],
-  providers: [UserService,ProductService,InfoService],
+  providers: [UserService,ProductService,InfoService, OrderService],
   bootstrap: [AppComponent],
   
 })
