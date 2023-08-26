@@ -4,6 +4,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { User } from 'src/app/models/user';
 
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
@@ -22,6 +23,7 @@ export class OrdersComponent implements OnInit {
   products: Product[] = [];
   dividedArray: any[][] = [];
   showFiller = false;
+  cliente: User = new User();
   
   productSize: number = 0;
   cartItemsCount = 0;
@@ -42,6 +44,30 @@ export class OrdersComponent implements OnInit {
 
   toggleFiller() {
     this.showFiller = !this.showFiller;
+  }
+
+  
+  validarUserLogged() {
+    const loggedUser = this.localStorage.get('logged');
+    if (loggedUser) {
+      // Usuario logueado 
+      this.cliente = JSON.parse(loggedUser);
+      console.log("cliente logueado "+this.cliente);
+      this.generateOrder();
+      //this.datosUsuarioCargados = true;
+    } else {
+
+      // Usuario no logueado, abre el diálogo de login para que se loguee
+      //this.openDialog();
+    }
+  }
+
+  generateOrder() {
+    //this.orderService
+    //  .post(`create/${itemSelected.order_id}`, itemSelected)
+    //  .subscribe((res) => {
+    //    this.getOrders();
+    //  });
   }
 
   ngOnInit(): void {

@@ -1,4 +1,3 @@
-
 <button (click)="toggleFiller()" class="toggle-button">Cambiar Sección</button>
 <div class="seccion1" *ngIf="showFiller">
   
@@ -222,7 +221,7 @@
             <div class="card-body">
               <h5 class="card-title">Total: ${{ getTotal() }}</h5>
               <p class="card-text">Total: </p>
-              <button class="btn btn-primary">Finalizar Compra</button>
+              <button (click)="validarUserLogged()" class="btn btn-primary">Finalizar Compra</button>
             </div>
           </div>
         </div>
@@ -230,7 +229,3 @@
     </div>
   </div>
 </div>
-
-
-
-
