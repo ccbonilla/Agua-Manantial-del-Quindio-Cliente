@@ -157,7 +157,7 @@
 <hr>
 <div class="container bootstrap snippets bootdey">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <div class="main-box no-header clearfix">
         <div class="main-box-body clearfix">
           <div class="table-responsive">
@@ -165,8 +165,7 @@
               <thead>
                 <tr>
                 <th class="text-center"><span>Producto</span></th>
-                <th><span>Precio</span></th>
-                <th class="text-center"><span>Cantidad</span></th>
+                <th class="text-center"><span>Precio</span></th>
                 <th ><span>Descripcion</span></th>
                 <th class="text-center"><span>Cantidad</span></th>
                 </tr>
@@ -177,12 +176,12 @@
                   <td class="text-center">
                     <img [src]="item.imageSrc" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
                   </td>
-                  <td>{{ item.price }}</td>
-                  <td class="text-center">
-                    <span class="label label-default">{{ item.cantidad }}</span>
+                  <td>
+                    <p class="grey-text text-center">($ {{ item.price }} por 1 un.)</p>
+                    <span class="unitprice">$ {{ item.price * item.cantidad }} </span>
                   </td>
                   <td>
-                    <span class="user-subhead">{{ item.title }}</span>
+                    <span class="text-center">{{ item.title }}</span>
                   </td>
                   <td class="text-center" style="width: 20%;">
                     <a (click)="decrement(item)" class="table-link text-info">
@@ -214,12 +213,14 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
+      <button (click)="toggleFiller()" class="toggle-button" >&lt; Seguir comprando</button>
+      
       <div class="main-box no-header clearfix">
         <div class="main-box-body clearfix">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total</h5>
+              <h5 class="card-title">Total: ${{ getTotal() }}</h5>
               <p class="card-text">Total: </p>
               <button class="btn btn-primary">Finalizar Compra</button>
             </div>

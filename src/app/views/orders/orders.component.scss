@@ -107,6 +107,12 @@ span.price {
   color: grey;
 }
 
+span.unitprice {
+  color: rgb(60, 58, 197);
+  text-align: center; /* Alinea el texto a la derecha */
+  display: block;
+}
+
 span.minicarrito {
   float: left;
   color: grey;
