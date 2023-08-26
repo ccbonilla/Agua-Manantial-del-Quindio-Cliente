@@ -171,7 +171,7 @@
                             <th><span>Producto</span></th>
                             <th><span>Precio</span></th>
                             <th class="text-center"><span>Cantidad</span></th>
-                            <th><span>Descripcion</span></th>
+                            <th ><span>Descripcion</span></th>
                             <th class="text-center"><span>Cantidad</span></th>
                             </tr>
                           </thead>
@@ -180,7 +180,7 @@
                             <tr *ngFor="let item of productData">
                               
                               <td>
-                                <img [src]="item.imageSrc" alt="Avatar" style="width:130px" class="container-img">
+                                <img [src]="item.imageSrc" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
                                 <span class="user-subhead">{{ item.title }}</span>
                               </td>
                               <td>{{ item.price }}</td>
@@ -212,8 +212,6 @@
                               </td>
                             </tr>
                           </tbody>
-
-                          
                         </table>
                     </div>
                 </div>
