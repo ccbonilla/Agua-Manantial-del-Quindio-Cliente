@@ -37,6 +37,10 @@ export class OrdersComponent implements OnInit {
     this.isCartOpen = !this.isCartOpen;
   }
 
+  toggleFiller() {
+    this.showFiller = !this.showFiller;
+  }
+
   ngOnInit(): void {
     console.log("El componente se ha inicializado");
     this.getProducts();

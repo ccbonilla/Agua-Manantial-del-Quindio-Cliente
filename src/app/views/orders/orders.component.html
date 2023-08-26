@@ -1,158 +1,308 @@
 
-
-
-&nbsp;
-<div class="d-flex">
-  <div class="text-left " style="padding-left: 20px;">
-    <button class="float-left"  (click)="toggleCart()" [class.active]="isCartOpen">
-      <i class="bi bi-cart"></i>
-      <span class="badge">{{ cartItemsCount }}</span>
-    </button>
+<button (click)="toggleFiller()" class="toggle-button">Cambiar Sección</button>
+<div class="seccion1" *ngIf="showFiller">
+  
+  &nbsp;
+  <div class="d-flex">
+    <div class="text-left " style="padding-left: 20px;">
+      <button class="float-left"  (click)="toggleCart()" [class.active]="isCartOpen">
+        <i class="bi bi-cart"></i>
+        <span class="badge">{{ cartItemsCount }}</span>
+      </button>
+    </div>
+    <div class="text-center mx-auto">
+      <h1>Nuestros Productos</h1>
+    </div>
   </div>
-  <div class="text-center mx-auto">
-    <h1>Nuestros Productos</h1>
-  </div>
-</div>
+  &nbsp;
 
-&nbsp;
+  <div class="cart-items " [class.open]="isCartOpen">
+    <div class="div-block-48">
+      <div class="w-layout-grid grid-38">
+        <div class="div-block-49">
+          <div class="navbar navbar-expand-lg bg-primary navbar-dark">
+            <img class="logo" src="/assets/logo_manantial.png" />
+          </div>
+          <div class="w-inline-block">
+            <div class="col-25" style="height: 100%;">
+              <div class="container-element">
+                <button class="bi bi-x-lg boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
+                <h4 align="center"> Carrito </h4>
 
-<div class="cart-items " [class.open]="isCartOpen">
-  <div class="div-block-48">
-    <div class="w-layout-grid grid-38">
-      <div class="div-block-49">
-        <div class="navbar navbar-expand-lg bg-primary navbar-dark">
-          <img class="logo" src="/assets/logo_manantial.png" />
-        </div>
-        <div class="w-inline-block">
-          <div class="col-25" style="height: 100%;">
-            <div class="container-element">
-              <button class="bi bi-x-lg boton-carrito" (click)="toggleCart()" [class.active]="isCartOpen"></button>
-              <h4 align="center"> Carrito </h4>
-
-              <div class="scroll-bar" >
-                <div *ngFor="let product of productData">
-                  <div class="container-product">
-                    <button class="bi bi-trash3-fill boton-trash" (click)="deleteButtonProduct(product)" ></button>
-                    <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
-                    <p>{{ product.title }}</p>
-                    <span class="price">{{ product.price * product.cantidad }}</span>
-                    <!-- contador cantidad -->
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-secondary" (click)="decrement(product)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
-                        </svg>
-                        <span class="visually-hidden">Button</span>
-                      </button>
-                      <div class="btn btn-outline-secondary">
-                        <span>{{ product.cantidad }}</span>
+                <div class="scroll-bar" >
+                  <div *ngFor="let product of productData">
+                    <div class="container-product">
+                      <button class="bi bi-trash3-fill boton-trash" (click)="deleteButtonProduct(product)" ></button>
+                      <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
+                      <p>{{ product.title }}</p>
+                      <span class="price">{{ product.price * product.cantidad }}</span>
+                      <!-- contador cantidad -->
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary" (click)="decrement(product)">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                          </svg>
+                          <span class="visually-hidden">Button</span>
+                        </button>
+                        <div class="btn btn-outline-secondary">
+                          <span>{{ product.cantidad }}</span>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment(product)">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                          </svg>
+                          <span class="visually-hidden">Button</span>
+                        </button>
                       </div>
-                      <button type="button" class="btn btn-outline-secondary" style="color: blue;" (click)="increment(product)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                        </svg>
-                        <span class="visually-hidden">Button</span>
-                      </button>
+                      <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
                     </div>
-                    <!-- contador cantidad  <p class="green-text" *ngIf="product.isFreeShipping">Envío gratis</p> -->
                   </div>
                 </div>
-              </div>
-              <hr>
-              <div class="content-price">
-                <div class="total-price">
-                  <p>Total <span class="price" style="color:black"><b>${{ getTotal() }}</b></span></p>
-                  <button class="finalizar-button" >Finalizar Compra</button>
-                  <button class="continue-button" (click)="toggleCart()" [class.active]="isCartOpen">Seguir comprando ></button>
+                <hr>
+                <div class="content-price">
+                  <div class="total-price">
+                    <p>Total <span class="price" style="color:black"><b>${{ getTotal() }}</b></span></p>
+                    <button class="finalizar-button" >Finalizar Compra</button>
+                    <button class="continue-button" (click)="toggleCart()" [class.active]="isCartOpen">Seguir comprando ></button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
-        
       </div>
     </div>
   </div>
-</div>
 
-<div *ngFor="let subArray of dividedArray">
-  <div class="carrusel">
-    <div class="container" style="column-count: 3; column-gap: 20px;">
-      <div class="row">
-        <div *ngFor="let item of subArray">
-          <div class="card">
-            <img [src]=images[0] alt="Random slide"  style="width:100%">
-            <h2>{{ item.name }} </h2>
-            <p class="price">$ {{ item.value }}</p>
-            <p>{{ item.description }}</p>
-            <p><button (click)="addButtonClicked(item)">Añadir al carrito</button></p>
+  <div *ngFor="let subArray of dividedArray">
+    <div class="carrusel">
+      <div class="container" style="column-count: 3; column-gap: 20px;">
+        <div class="row">
+          <div *ngFor="let item of subArray">
+            <div class="card">
+              <img [src]=images[0] alt="Random slide"  style="width:100%">
+              <h2>{{ item.name }} </h2>
+              <p class="price">$ {{ item.value }}</p>
+              <p>{{ item.description }}</p>
+              <p><button (click)="addButtonClicked(item)">Añadir al carrito</button></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Carousel wrapper
-<mat-stepper orientation="vertical" animationDuration="2000ms">
-  <mat-step>
-    <ng-template matStepLabel>Step 1</ng-template>
-    <ng-template matStepContent>
-      <p>This content was rendered lazily</p>
-      <button mat-button matStepperNext>Next</button>
-    </ng-template>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Cesta de la compra</ng-template>
-    <ng-template matStepContent>
-      <p>This content was also rendered lazily</p>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </ng-template>
-    
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Step 3</ng-template>
-    <p>This content was rendered eagerly</p>
-    <button mat-button matStepperPrevious>Back</button>
-  </mat-step>
-</mat-stepper>
--->
+  <!-- Carousel wrapper
+  -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="seccion2" *ngIf="!showFiller">
+  <!-- Contenido de la Sección 2 -->
+  &nbsp;
+  <div class="d-flex">
+    <div class="text-center mx-auto">
+      <h1>Cesta de la Compra</h1>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  &nbsp;
+
+<!-- Container Promocion
+<p class="text-end">Total {{total() | currency:'ARS'}}</p> -->
+
+<div class="text-end">
+    <button >Comprar</button>
+</div>
+
+<div style="width: 20%;">
+    <a href="#" class="table-link text-warning">
+        <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="#" class="table-link text-info">
+        <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="#" class="table-link danger">
+        <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</div>
+
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<hr>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Producto</span></th>
+                                <th><span>Status</span></th>
+                                <th class="text-center"><span>Cantidad</span></th>
+                                <th><span>Descripcion</span></th>
+                                <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="/assets/agua600ml.jpg" alt="">
+                                        <span class="user-subhead">Botellon</span>
+                                    </td>
+                                    <td>Pendiente Compra</td>
+                                    <td class="text-center">
+                                        <span class="label label-default">pending</span>
+                                    </td>
+                                    <td>
+                                        <a href="#">Botellon descripcion</a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="#" class="table-link text-warning">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                      <img src="/assets/botellon20lt.jpg" alt="">
+                                      <span class="user-subhead">Botellon</span>
+                                  </td>
+                                  <td>Pendiente Compra</td>
+                                  <td class="text-center">
+                                      <span class="label label-default">pending</span>
+                                  </td>
+                                  <td>
+                                      <a href="#">Botellon descripcion</a>
+                                  </td>
+                                  <td style="width: 20%;">
+                                      <a href="#" class="table-link text-warning">
+                                          <span class="fa-stack">
+                                              <i class="fa fa-square fa-stack-2x"></i>
+                                              <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                          </span>
+                                      </a>
+                                      <a href="#" class="table-link text-info">
+                                          <span class="fa-stack">
+                                              <i class="fa fa-square fa-stack-2x"></i>
+                                              <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                          </span>
+                                      </a>
+                                      <a href="#" class="table-link danger">
+                                          <span class="fa-stack">
+                                              <i class="fa fa-square fa-stack-2x"></i>
+                                              <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                          </span>
+                                      </a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                    <img src="/assets/agua600ml.jpg" alt="">
+                                    <span class="user-subhead">Botellon</span>
+                                </td>
+                                <td>Pendiente Compra</td>
+                                <td class="text-center">
+                                    <span class="label label-default">pending</span>
+                                </td>
+                                <td>
+                                    <a href="#">Botellon descripcion</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a href="#" class="table-link text-warning">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="table-link text-info">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="table-link danger">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
