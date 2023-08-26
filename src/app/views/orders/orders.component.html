@@ -62,7 +62,7 @@
                 <div class="content-price">
                   <div class="total-price">
                     <p>Total <span class="price" style="color:black"><b>${{ getTotal() }}</b></span></p>
-                    <button class="finalizar-button" >Finalizar Compra</button>
+                    <button class="finalizar-button" (click)="toggleFiller()">Continuar Compra</button>
                     <button class="continue-button" (click)="toggleCart()" [class.active]="isCartOpen">Seguir comprando ></button>
                   </div>
                 </div>
@@ -130,99 +130,10 @@
   &nbsp;
 
 <!-- Container Promocion
-<p class="text-end">Total {{total() | currency:'ARS'}}</p> -->
-
+<p class="text-end">Total {{total() | currency:'ARS'}}</p>
 <div class="text-end">
     <button >Comprar</button>
-</div>
-
-<div style="width: 20%;">
-  <a href="#" class="table-link text-warning">
-    <span class="fa-stack">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
-    </span>
-  </a>
-  <a href="#" class="table-link text-info">
-    <span class="fa-stack">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
-    </span>
-  </a>
-  <a href="#" class="table-link danger">
-    <span class="fa-stack">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-    </span>
-  </a>
-</div>
-
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<hr>
-<div class="container bootstrap snippets bootdey">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="main-box no-header clearfix">
-                <div class="main-box-body clearfix">
-                    <div class="table-responsive">
-                        <table class="table user-list">
-                          <thead>
-                            <tr>
-                            <th><span>Producto</span></th>
-                            <th><span>Precio</span></th>
-                            <th class="text-center"><span>Cantidad</span></th>
-                            <th ><span>Descripcion</span></th>
-                            <th class="text-center"><span>Cantidad</span></th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            <tr *ngFor="let item of productData">
-                              
-                              <td>
-                                <img [src]="item.imageSrc" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
-                                <span class="user-subhead">{{ item.title }}</span>
-                              </td>
-                              <td>{{ item.price }}</td>
-                              <td class="text-center">
-                                <span class="label label-default">{{ item.cantidad }}</span>
-                              </td>
-                              <td>
-                                <a href="#">Botellon descripcion</a>
-                              </td>
-                              <td class="text-center" style="width: 20%;">
-                                <a href="#" class="table-link text-warning">
-                                  <span class="fa-stack">
-                                    <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
-                                  </span>
-                                </a>
-                                <a href="#" class="table-link text-info">
-                                  <span class="fa-stack">
-                                    <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
-                                  </span>
-                                </a>
-                                <a href="#" class="table-link danger">
-                                  <span class="fa-stack">
-                                    <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                  </span>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
+</div> 
   <form>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
@@ -240,5 +151,85 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+-->
+
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<hr>
+<div class="container bootstrap snippets bootdey">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="main-box no-header clearfix">
+        <div class="main-box-body clearfix">
+          <div class="table-responsive">
+            <table class="table user-list">
+              <thead>
+                <tr>
+                <th class="text-center"><span>Producto</span></th>
+                <th><span>Precio</span></th>
+                <th class="text-center"><span>Cantidad</span></th>
+                <th ><span>Descripcion</span></th>
+                <th class="text-center"><span>Cantidad</span></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of productData">
+                  <td class="text-center">
+                    <img [src]="item.imageSrc" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
+                  </td>
+                  <td>{{ item.price }}</td>
+                  <td class="text-center">
+                    <span class="label label-default">{{ item.cantidad }}</span>
+                  </td>
+                  <td>
+                    <span class="user-subhead">{{ item.title }}</span>
+                  </td>
+                  <td class="text-center" style="width: 20%;">
+                    <a (click)="decrement(item)" class="table-link text-info">
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa bi bi-dash-lg fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                    <span class="label label-default">{{ item.cantidad }}</span>
+                    <a (click)="increment(item)" class="table-link text-warning">
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa bi bi-plus-lg fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </td>
+                  <td class="text-center">
+                    <a (click)="deleteButtonProduct(item)" class="table-link danger">
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="main-box no-header clearfix">
+        <div class="main-box-body clearfix">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total</h5>
+              <p class="card-text">Total: </p>
+              <button class="btn btn-primary">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
