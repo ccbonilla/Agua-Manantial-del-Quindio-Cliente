@@ -24,7 +24,7 @@ export class OrdersComponent implements OnInit {
   dividedArray: any[][] = [];
   showFiller = false;
   cliente: User = new User();
-  
+
   productSize: number = 0;
   cartItemsCount = 0;
   isCartOpen = false;
@@ -63,11 +63,42 @@ export class OrdersComponent implements OnInit {
   }
 
   generateOrder() {
-    //this.orderService
-    //  .post(`create/${itemSelected.order_id}`, itemSelected)
-    //  .subscribe((res) => {
-    //    this.getOrders();
-    //  });
+    console.log("cliente logueado "+this.cliente.user_id);
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    console.log(formattedDate);
+
+    //for (let i = 0; i < this.productData.length; i++) {
+    //  const product = this.productData[i];
+    //  console.log(`Product ID: ${product.product_id}, Quantity: ${product.product_cant}`);
+    //}
+
+    const orderInstance = new Order(
+      this.cliente.user_id, // user_id
+      formattedDate, // order_date
+      0, // discount
+      1, // payment_type_id
+      this.productData // array de productos
+    );
+    console.log(orderInstance);
+    this.orderService
+      .post('create', orderInstance)
+      .subscribe((res) => {
+        if (res.status == '200') {
+          console.log(res);
+          console.log('crear Order '+JSON.stringify(res));
+        } else {
+          console.log(res);
+          console.log('Error crear Order '+JSON.stringify(res));
+        }
+        
+      });
   }
 
   ngOnInit(): void {
@@ -111,13 +142,13 @@ export class OrdersComponent implements OnInit {
       price: item.value,
       isFreeShipping: true,
       product_id: item.product_id,
-      cantidad: 1
+      product_cant: 1
       };
       this.productData.push(newProduct);
       this.cartItemsCount++;
       
     } else {
-      this.productData[index].cantidad += 1;
+      this.productData[index].product_cant += 1;
     }
     this.actuaizarPedidoUsuario();
     this.openSnackBar();
@@ -146,7 +177,7 @@ export class OrdersComponent implements OnInit {
     console.log("Index Encontrado incrementar *" + index );
     
     if (index !== -1) {
-      this.productData[index].cantidad += 1;
+      this.productData[index].product_cant += 1;
     } else {
     }
     this.actuaizarPedidoUsuario();
@@ -158,8 +189,8 @@ export class OrdersComponent implements OnInit {
     const index = this.productData.findIndex(product => product.product_id === item.product_id);
     console.log("Index Encontrado decrementar *" + index );
     
-    if (index !== -1 && this.productData[index].cantidad > 1) {
-      this.productData[index].cantidad -= 1;
+    if (index !== -1 && this.productData[index].product_cant > 1) {
+      this.productData[index].product_cant -= 1;
     } else {
     }
     this.actuaizarPedidoUsuario();
@@ -168,7 +199,7 @@ export class OrdersComponent implements OnInit {
   getTotal(): number {
     let total = 0;
     for (let product of this.productData) {
-      total += product.price * product.cantidad;
+      total += product.price * product.product_cant;
     }
     return total;
   }
