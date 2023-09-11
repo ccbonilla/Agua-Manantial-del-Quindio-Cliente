@@ -74,11 +74,6 @@ export class OrdersComponent implements OnInit {
 
     console.log(formattedDate);
 
-    //for (let i = 0; i < this.productData.length; i++) {
-    //  const product = this.productData[i];
-    //  console.log(`Product ID: ${product.product_id}, Quantity: ${product.product_cant}`);
-    //}
-
     const orderInstance = new Order(
       this.cliente.user_id, // user_id
       formattedDate, // order_date

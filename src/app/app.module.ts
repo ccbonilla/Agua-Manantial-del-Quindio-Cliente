@@ -11,7 +11,6 @@ import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { QuienesSomosComponent } from './views/quienes-somos/quienes-somos.component';
 import { HomeComponent } from './views/home/home.component';
 import { HistorialClienteComponent } from './views/historial-cliente/historial-cliente.component';
-import { CarritoComponent } from './views/carrito/carrito.component';
 
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -47,7 +46,6 @@ import { MatSnackBarModule  } from '@angular/material/snack-bar';
     QuienesSomosComponent,
     HomeComponent,
     HistorialClienteComponent,
-    CarritoComponent,
     LoginUserComponent
   ],
   imports: [
