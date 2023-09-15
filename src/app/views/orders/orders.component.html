@@ -1,4 +1,5 @@
 <button (click)="toggleFiller()" class="toggle-button">Cambiar Sección</button>
+
 <div class="seccion1" *ngIf="showFiller">
   
   &nbsp;
@@ -73,24 +74,29 @@
       </div>
     </div>
   </div>
-
-  <div *ngFor="let subArray of dividedArray">
-    <div class="carrusel">
-      <div class="container" style="column-count: 3; column-gap: 20px;">
-        <div class="row">
-          <div *ngFor="let item of subArray">
-            <div class="card">
-              <img [src]=images[0] alt="Random slide"  style="width:100%">
-              <h2>{{ item.name }} </h2>
-              <p class="price">$ {{ item.value }}</p>
-              <p>{{ item.description }}</p>
-              <p><button (click)="addButtonClicked(item)">Añadir al carrito</button></p>
+  <div *ngIf="loading">
+    <i class="fa fa-spinner fa-spin" style="color: #0d6efd;"></i>
+  </div>
+  <div *ngIf="!loading">
+    <div *ngFor="let subArray of dividedArray">
+      <div class="carrusel">
+        <div class="container" style="column-count: 3; column-gap: 20px;">
+          <div class="row">
+            <div *ngFor="let item of subArray">
+              <div class="card">
+                <img [src]=images[0] alt="Random slide"  style="width:100%">
+                <h2>{{ item.name }} </h2>
+                <p class="price">$ {{ item.value }}</p>
+                <p>{{ item.description }}</p>
+                <p><button (click)="addButtonClicked(item)">Añadir al carrito</button></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 
   <!-- Carousel wrapper
   -->

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbDatepickerModule,NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { User } from 'src/app/models/user';
 
 import { Order } from 'src/app/models/order';
@@ -22,7 +20,8 @@ export class OrdersComponent implements OnInit {
   productData: any[] = [];
   products: Product[] = [];
   dividedArray: any[][] = [];
-  showFiller = false;
+  showFiller = true;
+  loading: boolean = true;
   cliente: User = new User();
 
   productSize: number = 0;
@@ -121,6 +120,7 @@ export class OrdersComponent implements OnInit {
       const subArray = this.products.slice(i, i + 3);
       this.dividedArray.push(subArray);
     }
+    this.loading = false;
     });
   }
 

@@ -344,3 +344,15 @@ a {
 a:hover{
 text-decoration:none;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajusta la altura según tus necesidades */
+  
+}
+
+.fa-spinner {
+  font-size: 76px; /* Ajusta el tamaño del spinner según tus necesidades */
+}
