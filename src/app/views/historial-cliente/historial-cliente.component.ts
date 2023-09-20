@@ -7,6 +7,7 @@ import { MatDialog, DialogPosition  } from '@angular/material/dialog';
 import { LocalStorageService } from 'angular-web-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
@@ -16,18 +17,28 @@ import { Router } from '@angular/router';
 })
 export class HistorialClienteComponent implements OnInit {
 
+  dialogForm: FormGroup;
+  promoRecarga: any[] = [];
   isModalOpen = true;
   cliente: User = new User();
   closeResult = '';
   datosUsuarioCargados = false;
   mostrarX: boolean = true;
+  
+  userTypesList = ['cc', 'id'];
 
   constructor(
     private userService: UserService, 
     private dialog: MatDialog, 
+    private formBuilder: FormBuilder,
     private localStorage: LocalStorageService, 
     private _snackBar: MatSnackBar,
-    private router: Router,) { }
+    private router: Router,) { 
+      this.dialogForm = this.formBuilder.group({
+        cedula: ['', Validators.required],
+        email: ['', Validators.required],
+      });
+    }
 
   ngOnInit(): void {
     console.log("init storage: " + JSON.stringify(this.localStorage)  );
@@ -38,11 +49,26 @@ export class HistorialClienteComponent implements OnInit {
     if (loggedUser) {
       // Usuario logueado
       this.cliente = JSON.parse(loggedUser);
+      this.crearPanelPromoDescuento();
       this.datosUsuarioCargados = true;
+      console.log("Cliente Data**: " + JSON.stringify(this.cliente)  );
     } else {
       // Usuario no logueado, abre el diálogo de login para que se loguee
       this.openDialog();
     }
+  }
+
+  crearPanelPromoDescuento() {
+    console.log("Promo Descu** userType: " + this.cliente.user_type_id );
+    console.log("Promo Descu** userType: " + this.cliente.count );
+    var n;
+    if (this.cliente.user_type_id === 1) {
+      n = 7;
+    } else {
+      n = 6;
+    } 
+    this.promoRecarga = Array.from({ length: this.cliente.count }, () => true).concat(Array.from({ length: n - this.cliente.count }, () => false));
+    console.log(this.promoRecarga);
   }
 
   openDialog() {

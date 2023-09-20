@@ -16,6 +16,8 @@ export class LoginUserComponent implements OnInit {
   cliente: User = new User();
   registrarUsuario = false;
 
+  userTypesList = ['cc', 'id'];
+
   constructor(
     private dialogRef: MatDialogRef<LoginUserComponent>,
     private formBuilder: FormBuilder,
@@ -122,4 +124,3 @@ export class LoginUserComponent implements OnInit {
   }
 
 }
-

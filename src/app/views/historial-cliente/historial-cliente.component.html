@@ -24,7 +24,7 @@
                       </div>
                     </div>
                   </div>
-                  <button mat-button color="primary" *ngIf="datosUsuarioCargados" (click)="logout()">Cerrar sesión</button>
+                  <button class="finalizar-button" *ngIf="datosUsuarioCargados" (click)="logout()">Salir</button>
                 </div>
               </div>
               <div class="card mt-3">
@@ -84,6 +84,145 @@
                   </div>
                 </div>
               </div>
+              <!-- Modificacion pedidos -->
+              &nbsp;
+              <div>
+                <h2 align="center"> Actualizar/Modificar Pedidos Recientes</h2>
+              </div>
+              <div class="row gutters-sm">
+                <mat-dialog-content class="mat-typography">
+                  <div class="container">
+                    <div fxLayout="column">
+                      <br />
+                      <mat-accordion>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            Información del Pedido​👤​ 
+                          </mat-expansion-panel-header>
+                          <form [formGroup]="dialogForm" class="form">
+                            <mat-form-field class="mat-form">
+                              <input
+                                matInput
+                                placeholder="Nombre"
+                                formControlName="cedula"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <input
+                                matInput
+                                placeholder="Apellidos"
+                                formControlName="cedula"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <input
+                                matInput
+                                placeholder="Correo"
+                                formControlName="cedula"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <input
+                                matInput
+                                formControlName="cedula"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <mat-label>Teléfono</mat-label>
+                              <input
+                                matInput
+                                formControlName="cedula"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <mat-label>Tipo de cliente</mat-label>
+                              <mat-select
+                                formControlName="cedula"
+                              >
+                                <mat-option
+                                *ngFor="let item of userTypesList"
+                                [value]="item"
+                              >
+                              {{ item }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </form>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                      <br />
+                      
+                      <!--
+                      <mat-accordion>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            Datos de la Orden ​⚙️​
+                          </mat-expansion-panel-header>
+                          <form [formGroup]="dialogFormRegistro">
+                            <mat-form-field class="mat-form">
+                              <mat-label>Fecha de entrega</mat-label>
+                              <input
+                                matInput
+                                [matDatepicker]="picker1"
+                                formControlName="order_date"
+                              />
+                              <mat-datepicker-toggle
+                                matIconSuffix
+                                [for]="picker1"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <mat-label>Valor del pedido</mat-label>
+                              <input
+                                matInput
+                                formControlName="value"
+                                type="number"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <mat-label>Descuento otorgado</mat-label>
+                              <input
+                                matInput
+                                type="number"
+                                placeholder="Descuento"
+                                formControlName="discount"
+                              />
+                            </mat-form-field>
+                            <mat-form-field class="mat-form">
+                              <mat-label>Status del pedido</mat-label>
+                              <mat-select
+                                formControlName="state"
+                              >
+                                <mat-option
+                                  *ngFor="let item of userTypesList"
+                                  [value]="item"
+                                >
+                                  {{ item }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </form>
+                          
+                        </mat-expansion-panel>
+                      </mat-accordion> 
+                    
+                      <mat-dialog-actions align="end">
+                        <button mat-button mat-dialog-close>Cancelar</button>
+                        <button
+                          mat-button
+                          [mat-dialog-close]="true"
+                          cdkFocusInitial
+                          (click)="cancelar()"
+                        >
+                          Guardar Cambios
+                        </button>
+                      </mat-dialog-actions>-->
+                    </div>
+                  </div>
+                </mat-dialog-content>
+              </div>
+              
               <!-- Resumen Compra -->
 
               <!-- Container Promocion -->
@@ -95,7 +234,7 @@
                 <div class="counter">
                   <div class="row">
                     <div class="cardButton">
-                      <div class="column" style="padding: 5px 18px;" *ngFor="let item of [true, false, false, true, true, false] let i = index">
+                      <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index">
                         <div [ngClass]="item ? 'target-X' : 'target-Y'">
                           <h3>{{ i +1 }}</h3>
                           <p>RECARGA</p>
@@ -107,8 +246,8 @@
               </div>
               <!-- <h3>{{ item }}</h3>
               <div *ngIf="datosUsuarioCargados">
-                
               </div>-->
+
               &nbsp;
               <div>
                 <h2 align="center"> Información Personal </h2>

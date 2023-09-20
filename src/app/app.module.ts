@@ -37,6 +37,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginUserComponent } from './views/historial-cliente/modal/login-user/login-user.component';
 import { MatSnackBarModule  } from '@angular/material/snack-bar';
 
+//import { ModalModule } from 'ngx-bootstrap/modal';
+//import { BsModalService } from 'ngx-bootstrap/modal';
+//import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +58,12 @@ import { MatSnackBarModule  } from '@angular/material/snack-bar';
     LoginUserComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
+    //FlexLayoutModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatDividerModule,
     MatSnackBarModule,
     MatDialogModule,
     AppRoutingModule, 
