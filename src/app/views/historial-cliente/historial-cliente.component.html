@@ -5,7 +5,7 @@
 </div> -->
 
 <div>
-  <h1 align="center"> Bienvenido </h1>
+  <h1 align="center"> Bienvenido {{cliente.name}}</h1>
 </div>
 &nbsp;
 <div>
@@ -95,43 +95,9 @@
                 <div class="counter">
                   <div class="row">
                     <div class="cardButton">
-                      <div class="column">
-                        <div class="card">
-                          <h3>1</h3>
-                          <p>RECARGA</p>
-                        </div>
-                      </div>
-                      <div class="column">
-                        <div class="card">
-                          <h3>2</h3>
-                          <p>RECARGA</p>
-                        </div>
-                      </div>
-                      <div class="column">
-                        <div class="card">
-                          <h3>3</h3>
-                          <p>RECARGA</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="cardButton">
-                      <div class="column">
-                        <div class="card">
-                          <h3>4</h3>
-                          <p>RECARGA</p>
-                        </div>
-                      </div>
-                      <div class="column">
-                        <div class="card">
-                          <h3>5</h3>
-                          <p>RECARGA</p>
-                        </div>
-                      </div>
-                      <div class="column">
-                        <div class="card">
-                          <h3>6</h3>
+                      <div class="column" style="padding: 5px 18px;" *ngFor="let item of [true, false, false, true, true, false] let i = index">
+                        <div [ngClass]="item ? 'target-X' : 'target-Y'">
+                          <h3>{{ i +1 }}</h3>
                           <p>RECARGA</p>
                         </div>
                       </div>
@@ -139,7 +105,7 @@
                   </div>
                 </div>
               </div>
-              <!-- 
+              <!-- <h3>{{ item }}</h3>
               <div *ngIf="datosUsuarioCargados">
                 
               </div>-->
@@ -207,4 +173,3 @@
         </div>
   </div>
 </div>
-

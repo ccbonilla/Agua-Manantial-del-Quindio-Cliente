@@ -1,3 +1,4 @@
+
 .container {
   box-sizing: border-box;
   top: -4rem;
@@ -21,6 +22,50 @@
   //max-width: 300px;
   margin: auto;
   text-align: center;
+}
+
+.target-Y {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  //max-width: 300px;
+  margin: auto;
+  text-align: center;
+  background-color: white; 
+  padding-bottom: 2px;
+}
+
+.target-X {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+  //max-width: 300px;
+  margin: auto;
+  text-align: center;
+  background-color: white; 
+  padding-bottom: 2px;
+}
+
+.target-X::before {
+  content: "X"; /* El contenido del pseudo-elemento */
+  position: absolute; /* Coloca la "X" de forma absoluta dentro de la tarjeta */
+  top: 0; /* Ajusta la posición superior a 0 para que comience desde arriba */
+  left: 0; /* Ajusta la posición izquierda a 0 para que comience desde la izquierda */
+  width: 100%; /* Ancho del pseudo-elemento para cubrir toda la tarjeta */
+  height: 100%; /* Altura del pseudo-elemento para cubrir toda la tarjeta */
+  background-color: rgba(13,110,253,0.5);
+  color: white; /* Color del texto de la "X" */
+  font-size: 3rem; /* Tamaño de fuente de la "X" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Asegura que la "X" esté por encima del contenido de la tarjeta */
+  opacity: 1; /* Inicialmente, la "X" está oculta */
+  transition: opacity 0.3s ease-in-out; /* Agrega una transición suave de opacidad */
+}
+
+.target-X:hover::before {
+  opacity: 1; /* Muestra la "X" cuando se pasa el ratón por encima de la tarjeta */
 }
 
 .title {

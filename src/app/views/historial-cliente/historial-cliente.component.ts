@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
@@ -19,6 +20,7 @@ export class HistorialClienteComponent implements OnInit {
   cliente: User = new User();
   closeResult = '';
   datosUsuarioCargados = false;
+  mostrarX: boolean = true;
 
   constructor(
     private userService: UserService, 
@@ -29,7 +31,10 @@ export class HistorialClienteComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("init storage: " + JSON.stringify(this.localStorage)  );
+    const loggedUserq = this.localStorage.get('usuario');
+    console.log("init storage log: " + JSON.stringify(loggedUserq)  );
     const loggedUser = this.localStorage.get('logged');
+    //localStorage.removeItem('usuario');
     if (loggedUser) {
       // Usuario logueado
       this.cliente = JSON.parse(loggedUser);
