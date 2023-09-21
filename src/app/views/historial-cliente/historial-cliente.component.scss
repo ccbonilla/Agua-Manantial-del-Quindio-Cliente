@@ -120,7 +120,9 @@ button:hover, a:hover {
   z-index: 9999; /* Asegura que el overlay se muestre por encima de otros elementos */
 }
 
-
+.full-width {
+  flex: 0 0 100%;
+}
 /* Float four columns side by side */
 .column {
   float: left;
@@ -129,8 +131,16 @@ button:hover, a:hover {
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {
+  margin: 0 -5px
+  
+}
 
+.rowPromoBox {
+  margin: 0 -5px;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  //background-color: #f1f1f1;
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -140,10 +150,8 @@ button:hover, a:hover {
 
 /* Style the counter cards */
 .cardButton {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
   padding: 16px;
   text-align: center;
-  background-color: #f1f1f1;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }

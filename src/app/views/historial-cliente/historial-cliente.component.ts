@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { LoginUserComponent } from './modal/login-user/login-user.component';
@@ -19,6 +19,7 @@ export class HistorialClienteComponent implements OnInit {
 
   dialogForm: FormGroup;
   promoRecarga: any[] = [];
+  cantPromoRecarga = 0;
   isModalOpen = true;
   cliente: User = new User();
   closeResult = '';
@@ -32,6 +33,7 @@ export class HistorialClienteComponent implements OnInit {
     private dialog: MatDialog, 
     private formBuilder: FormBuilder,
     private localStorage: LocalStorageService, 
+    private cdRef: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private router: Router,) { 
       this.dialogForm = this.formBuilder.group({
@@ -64,11 +66,15 @@ export class HistorialClienteComponent implements OnInit {
     var n;
     if (this.cliente.user_type_id === 1) {
       n = 7;
+      this.cantPromoRecarga = 7;
     } else {
       n = 6;
+      this.cantPromoRecarga = 6;
     } 
     this.promoRecarga = Array.from({ length: this.cliente.count }, () => true).concat(Array.from({ length: n - this.cliente.count }, () => false));
+    //this.loading = true;
     console.log(this.promoRecarga);
+    console.log('lenght para panel '+this.promoRecarga.length);
   }
 
   openDialog() {
@@ -84,8 +90,8 @@ export class HistorialClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       this.cliente = res;
       this.datosUsuarioCargados = true;
+      this.crearPanelPromoDescuento();
       this.localStorage.set('logged', JSON.stringify(res));
-      
     });
   }
 
