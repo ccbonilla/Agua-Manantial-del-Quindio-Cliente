@@ -345,14 +345,27 @@ a:hover{
 text-decoration:none;
 }
 
-.spinner {
+.loading-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100px; /* Ajusta la altura según tus necesidades */
-  
+  justify-content: center;
+  height: 100vh;
+}
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
 }
 
-.fa-spinner {
-  font-size: 76px; /* Ajusta el tamaño del spinner según tus necesidades */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

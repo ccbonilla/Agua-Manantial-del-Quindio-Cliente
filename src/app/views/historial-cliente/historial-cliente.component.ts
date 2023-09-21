@@ -62,7 +62,7 @@ export class HistorialClienteComponent implements OnInit {
 
   crearPanelPromoDescuento() {
     console.log("Promo Descu** userType: " + this.cliente.user_type_id );
-    console.log("Promo Descu** userType: " + this.cliente.count );
+    console.log("Promo Descu** count: " + this.cliente.count );
     var n;
     if (this.cliente.user_type_id === 1) {
       n = 7;

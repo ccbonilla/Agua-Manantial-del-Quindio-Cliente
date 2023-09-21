@@ -1,4 +1,4 @@
-<button (click)="toggleFiller()" class="toggle-button">Cambiar Sección</button>
+
 
 <div class="seccion1" *ngIf="showFiller">
   
@@ -15,7 +15,7 @@
     </div>
   </div>
   &nbsp;
-
+  
   <div class="cart-items " [class.open]="isCartOpen">
     <div class="div-block-48">
       <div class="w-layout-grid grid-38">
@@ -75,7 +75,10 @@
     </div>
   </div>
   <div *ngIf="loading">
-    <i class="fa fa-spinner fa-spin" style="color: #0d6efd;"></i>
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cargando datos...</p>
+    </div>
   </div>
   <div *ngIf="!loading">
     <div *ngFor="let subArray of dividedArray">
