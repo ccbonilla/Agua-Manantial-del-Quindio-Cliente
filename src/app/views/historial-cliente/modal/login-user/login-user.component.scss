@@ -1,34 +1,52 @@
 
-  .dialog-title {
-    margin-top: 0;
-  }
+.dialog-title {
+  margin-top: 0;
+}
+
+.form-row {
+  justify-content: space-between;
+}
+
+.form-field {
+  flex-basis: 45%;
+}
+
+.dialog-form {
+  width: 100%;
+}
+
+.dialog-button {
+  margin-top: 1rem;
+}
   
-  .form-row {
-    justify-content: space-between;
-  }
-  
-  .form-field {
-    flex-basis: 45%;
-  }
-  
-  .dialog-form {
-    width: 100%;
-  }
-  
-  .dialog-button {
-    margin-top: 1rem;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+.mat-form {
+  width: 50%;
+}
+
+.row {
+  justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.alinear-buttons {
+  padding-left: 70px;
+  padding-right: 70px;
+  justify-content: center;
+}
