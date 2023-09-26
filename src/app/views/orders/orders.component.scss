@@ -369,3 +369,17 @@ text-decoration:none;
     transform: rotate(360deg);
   }
 }
+
+.card-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.item {
+  flex: 1; /* Los elementos ocupan un espacio igual en las columnas */
+  margin: 5px; /* Añade un pequeño espacio entre los elementos */
+  padding: 10px; /* Añade espacio dentro de cada elemento */
+  //border: 1px solid #ccc; /* Agrega un borde para resaltar los elementos */
+}

@@ -232,35 +232,38 @@
               <div>
                 <h2 align="center"> Promoción Recarga Gratis </h2>
               </div>
-              <div class="row gutters-sm">
-                <div class="counter">
-                  <div class="rowPromoBox" *ngIf="promoRecarga.length == 7">
-                    <div class="cardButton">
-                      <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
-                        <div *ngIf="!isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
-                          <h3>{{ i +1 }}</h3>
-                          <p>RECARGA</p>
+              <div *ngIf="datosUsuarioCargados">
+                <div class="row gutters-sm">
+                  <div class="counter">
+                    <div class="rowPromoBox" *ngIf="promoRecarga.length == 7">
+                      <div class="cardButton">
+                        <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
+                          <div *ngIf="!isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
+                            <h3>{{ i +1 }}</h3>
+                            <p>RECARGA</p>
+                          </div>
                         </div>
                       </div>
+                      <div *ngIf="cantPromoRecarga == 7" class="column full-width" [ngClass]="promoRecarga[promoRecarga.length - 1] ? 'target-X' : 'target-Y'">
+                        <h3>7</h3>
+                        <p>RECARGA</p>
+                      </div>
                     </div>
-                    <div *ngIf="cantPromoRecarga == 7" class="column full-width" [ngClass]="promoRecarga[promoRecarga.length - 1] ? 'target-X' : 'target-Y'">
-                      <h3>7</h3>
-                      <p>RECARGA</p>
-                    </div>
-                  </div>
-
-                  <div class="rowPromoBox" *ngIf="promoRecarga.length == 6">
-                    <div class="cardButton">
-                      <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
-                        <div [ngClass]="item ? 'target-X' : 'target-Y'">
-                          <h3>{{ i +1 }}</h3>
-                          <p>RECARGA</p>
+  
+                    <div class="rowPromoBox" *ngIf="promoRecarga.length == 6">
+                      <div class="cardButton">
+                        <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
+                          <div [ngClass]="item ? 'target-X' : 'target-Y'">
+                            <h3>{{ i +1 }}</h3>
+                            <p>RECARGA</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
               
               <!-- <h3>{{ item }}</h3>
               <div *ngIf="datosUsuarioCargados">

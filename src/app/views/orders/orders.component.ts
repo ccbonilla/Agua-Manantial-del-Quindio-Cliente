@@ -3,7 +3,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
 import { User } from 'src/app/models/user';
-
+import { ProductOrder } from 'src/app/models/product_order';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { ProductService } from 'src/app/services/products/product.service';
@@ -23,6 +23,7 @@ export class OrdersComponent implements OnInit {
   showFiller = true;
   loading: boolean = true;
   cliente: User = new User();
+  productsModel: ProductOrder[] = [];
 
   productSize: number = 0;
   cartItemsCount = 0;
@@ -55,14 +56,14 @@ export class OrdersComponent implements OnInit {
       this.generateOrder();
       //this.datosUsuarioCargados = true;
     } else {
-
+      console.log("not cliente logueado ");
       // Usuario no logueado, abre el diálogo de login para que se loguee
       //this.openDialog();
     }
   }
 
   generateOrder() {
-    console.log("cliente logueado "+this.cliente.user_id);
+    console.log("array productos "+JSON.stringify(this.productData) );
     const today = new Date();
 
     const year = today.getFullYear();
@@ -73,17 +74,29 @@ export class OrdersComponent implements OnInit {
 
     console.log(formattedDate);
 
-    const orderInstance = new Order(
-      this.cliente.user_id, // user_id
-      formattedDate, // order_date
-      0, // discount
-      1, // payment_type_id
-      this.productData // array de productos
-    );
-    console.log(orderInstance);
-    this.orderService
-      .post('create', orderInstance)
-      .subscribe((res) => {
+    this.productData.forEach((product) => {
+      
+      let newProduct = new ProductOrder();
+      newProduct.product_cant = product.product_cant;
+      newProduct.product_id = product.product_id;
+      newProduct.name = product.title;
+      newProduct.value = product.price;
+      this.productsModel.push(newProduct);
+    });
+    console.log('total list model prod: '+ JSON.stringify(this.productsModel));
+
+    let orderNew = new Order();
+    orderNew.discount = 0;
+    orderNew.order_date = formattedDate;
+    orderNew.order_state = 1;
+    orderNew.user_id = this.cliente.user_id;
+    orderNew.payment_type_id = 1;
+    orderNew.customer = this.cliente;
+    orderNew.products = this.productsModel;
+    
+    console.log('Final order: '+orderNew);
+    this.orderService.post('create', orderNew).subscribe((res) => {
+      console.log('Result crear Order '+JSON.stringify(res));
         if (res.status == '200') {
           console.log(res);
           console.log('crear Order '+JSON.stringify(res));

@@ -1,8 +1,13 @@
 
-<h2 mat-dialog-title>Ingresar Información</h2>
+<h2 mat-dialog-title>Conoce nuestras ofertas</h2>
 <!-- --> 
-
-<div *ngIf="!registrarUsuario">
+<div *ngIf="loadingComponent">
+  <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Cargando por favor espera...</p>
+  </div>
+</div>
+<div *ngIf="loginComponent">
   <div class="row gutters-sm">
     <!-- -->
     <mat-dialog-content class="mat-typography">
@@ -15,6 +20,7 @@
                 matInput
                 placeholder="Cedula"
                 formControlName="cedula"
+                min="0"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
@@ -39,7 +45,7 @@
 
 
 
-<div *ngIf="registrarUsuario">
+<div *ngIf="registrarseComponent">
   <div class="row gutters-sm">
     <!-- -->
     <mat-dialog-content class="mat-typography">

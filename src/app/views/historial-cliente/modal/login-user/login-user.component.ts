@@ -5,6 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/users/users.service';
 
+
+const LOAD_COMPONENT = Object.freeze({
+  load: 1,
+  modalLogin: 2,
+  modalRegistrarse: 3
+})
+
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
@@ -15,6 +22,7 @@ export class LoginUserComponent implements OnInit {
   dialogFormRegistro: FormGroup;
   cliente: User = new User();
   registrarUsuario = false;
+  estadoComponente: number = LOAD_COMPONENT.modalLogin;
 
   userTypesList = ['cc', 'id'];
 
@@ -40,6 +48,16 @@ export class LoginUserComponent implements OnInit {
       telefono: [''],
     });
   }
+  
+  get loadingComponent(){
+    return this.estadoComponente === LOAD_COMPONENT.load;
+  }
+  get loginComponent(){
+    return this.estadoComponente === LOAD_COMPONENT.modalLogin;
+  }
+  get registrarseComponent(){
+    return this.estadoComponente === LOAD_COMPONENT.modalRegistrarse;
+  }
 
   cancelar(): void {
     this.dialogRef.close();
@@ -47,6 +65,7 @@ export class LoginUserComponent implements OnInit {
   }
 
   aceptar(): void {
+    this.estadoComponente = LOAD_COMPONENT.load;
     console.log('Campos validos? ',this.dialogForm.valid);
     
     if (this.dialogForm.valid) {
@@ -110,6 +129,7 @@ export class LoginUserComponent implements OnInit {
     console.log('Campos user cedula ', valorcedula);
     this.userService.getById('find-by-id/'+valorcedula).subscribe((user) => {
       if (user === null) {
+        this.estadoComponente = LOAD_COMPONENT.modalRegistrarse;
         this.crearUsuario(valorcedula);
       } else {
         this.cliente = user;

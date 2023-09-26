@@ -1,22 +1,30 @@
-import { Product } from './product';
+import { User } from './user';
+import { ProductOrder } from './product_order';
 export class Order {
+  order_id: number = 0;
   user_id: number = 0;
   order_date: string = '';
+  order_state: number = 0;
+  value: number = 0;
   discount: number = 0;
   payment_type_id: number = 0;
-  products: Product[] = [];
-
-  constructor(
-    user_id: number,
-    order_date: string,
-    discount: number,
-    payment_type_id: number,
-    products: Product[]
-  ) {
-    this.user_id = user_id;
-    this.order_date = order_date;
-    this.discount = discount;
-    this.payment_type_id = payment_type_id;
-    this.products = products;
-  }
+  customer: User = {
+    user_id: 0,
+    name: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    address: '',
+    user_type_id: 0,
+    previous_user_type_id: 0,
+    count: 0,
+    user_type_name: '',
+    identification: 0,
+    lat: 0,
+    lon: 0,
+    ticket: false,
+  };
+  customer_name: string = '';
+  products: ProductOrder[] = [];
+  details: ProductOrder[] = [];
 }

@@ -137,30 +137,6 @@
   </div>
   &nbsp;
 
-<!-- Container Promocion
-<p class="text-end">Total {{total() | currency:'ARS'}}</p>
-<div class="text-end">
-    <button >Comprar</button>
-</div> 
-  <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
--->
-
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <hr>
 <div class="container bootstrap snippets bootdey">
@@ -227,10 +203,19 @@
       <div class="main-box no-header clearfix">
         <div class="main-box-body clearfix">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Total: ${{ getTotal() }}</h5>
-              <p class="card-text">Total: </p>
-              <button (click)="validarUserLogged()" class="btn btn-primary">Finalizar Compra</button>
+            <div class="card-bodys">
+              <div class="item">
+                <h5 class="card-title">Total: ${{ getTotal() }}</h5>
+              </div>
+              <div class="item">
+                <button (click)="validarUserLogged()" class="btn btn-primary">Finalizar Compra</button>
+              </div>
+              <div class="card-body">
+                <!-- imagen 
+                <i width="40" height="40" class="bi bi-hand-thumbs-up"></i>
+                <i class="bi bi-handbag"></i>-->
+              </div>
+              
             </div>
           </div>
         </div>
