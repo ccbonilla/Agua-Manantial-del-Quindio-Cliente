@@ -8,6 +8,9 @@ import { LocalStorageService } from 'angular-web-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Order } from 'src/app/models/order';
+import { OrderService } from '../../services/orders/orders.service';
+import Swal from 'sweetalert2';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
@@ -25,6 +28,7 @@ export class HistorialClienteComponent implements OnInit {
   closeResult = '';
   datosUsuarioCargados = false;
   mostrarX: boolean = true;
+  orders: Order[] = [];
   
   userTypesList = ['cc', 'id'];
 
@@ -34,6 +38,7 @@ export class HistorialClienteComponent implements OnInit {
     private formBuilder: FormBuilder,
     private localStorage: LocalStorageService, 
     private cdRef: ChangeDetectorRef,
+    private orderService: OrderService,
     private _snackBar: MatSnackBar,
     private router: Router,) { 
       this.dialogForm = this.formBuilder.group({
@@ -52,12 +57,20 @@ export class HistorialClienteComponent implements OnInit {
       // Usuario logueado
       this.cliente = JSON.parse(loggedUser);
       this.crearPanelPromoDescuento();
+      this.obtenerPedidosRecientes();
       this.datosUsuarioCargados = true;
       console.log("Cliente Data**: " + JSON.stringify(this.cliente)  );
     } else {
       // Usuario no logueado, abre el diálogo de login para que se loguee
       this.openDialog();
     }
+  }
+
+  obtenerPedidosRecientes() {
+    this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => {  //`list-by-user/${this.cliente.user_id}`
+      console.log('Result get Order by user '+JSON.stringify(res));
+      this.orders = res;
+    });
   }
 
   crearPanelPromoDescuento() {
@@ -72,8 +85,6 @@ export class HistorialClienteComponent implements OnInit {
       this.cantPromoRecarga = 6;
     } 
     this.promoRecarga = Array.from({ length: this.cliente.count }, () => true).concat(Array.from({ length: n - this.cliente.count }, () => false));
-    //this.loading = true;
-    console.log(this.promoRecarga);
     console.log('lenght para panel '+this.promoRecarga.length);
   }
 

@@ -8,6 +8,8 @@ import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-orders',
@@ -34,6 +36,7 @@ export class OrdersComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private _snackBar: MatSnackBar,
+    private router: Router,
     private localStorage: LocalStorageService,
     private orderService: OrderService,
   ) {}
@@ -95,17 +98,34 @@ export class OrdersComponent implements OnInit {
     orderNew.products = this.productsModel;
     
     console.log('Final order: '+orderNew);
+
     this.orderService.post('create', orderNew).subscribe((res) => {
       console.log('Result crear Order '+JSON.stringify(res));
-        if (res.status == '200') {
-          console.log(res);
-          console.log('crear Order '+JSON.stringify(res));
+      Swal.fire({
+        title: `Pedido guardado correctamente con un descuento de $${res.discount}`,
+        icon: 'success',
+        html:
+          'Recuerda que puedes ver o actualizar los pedidos recientes en Mis Pedidos',
+        showCancelButton: true,
+        focusConfirm: false,
+        cancelButtonText: '<i class="fa fa-thumbs-up"></i> Genial!',
+        cancelButtonAriaLabel: 'Thumbs up, Confirmar!',
+        cancelButtonColor: '#1bb4e1', 
+        confirmButtonText: 'Mis Pedidos',
+        confirmButtonAriaLabel: 'Thumbs up',
+        confirmButtonColor: '#0d6efd',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log("IR a mis pedidos");
+          this.router.navigate(['/historialcliente']);
         } else {
-          console.log(res);
-          console.log('Error crear Order '+JSON.stringify(res));
+          window.location.reload();
         }
-        
       });
+      this.localStorage.set('pedidoUsuario', null);
+      this.productData = [];
+    });
+      
   }
 
   ngOnInit(): void {
