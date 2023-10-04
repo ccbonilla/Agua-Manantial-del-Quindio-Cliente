@@ -88,138 +88,57 @@
               
               &nbsp;
               <div>
-                <h2 align="center"> Actualizar/Modificar Pedidos Recientes</h2>
+                <h2 align="center"> Visualizar/Actualizar Pedidos Recientes</h2>
               </div>
               <div class="row gutters-sm">
                 <!-- -->
+
                 <mat-dialog-content class="mat-typography">
                   <div class="container">
                     <div fxLayout="column">
                       <br />
                       <mat-accordion>
-                        <mat-expansion-panel>
+                        <mat-expansion-panel *ngFor="let order of orders">
                           <mat-expansion-panel-header>
-                            Información del Pedido​👤​ 
+                            <mat-panel-title>
+                              Id de pedido # {{ order.order_id }}
+                            </mat-panel-title>
                           </mat-expansion-panel-header>
-                          <form [formGroup]="dialogForm" class="form">
-                            <mat-form-field class="mat-form">
-                              <input
-                                matInput
-                                placeholder="Nombre"
-                                formControlName="cedula"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <input
-                                matInput
-                                placeholder="Apellidos"
-                                formControlName="cedula"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <input
-                                matInput
-                                placeholder="Correo"
-                                formControlName="cedula"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <input
-                                matInput
-                                formControlName="cedula"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <mat-label>Teléfono</mat-label>
-                              <input
-                                matInput
-                                formControlName="cedula"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <mat-label>Tipo de cliente</mat-label>
-                              <mat-select
-                                formControlName="cedula"
-                              >
-                                <mat-option
-                                *ngFor="let item of userTypesList"
-                                [value]="item"
-                              >
-                              {{ item }}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </form>
+                            <div class="row">
+                              <div class="col-12 col-lg-6">
+                                  <div class="count-data text-center">
+                                      <h6 class="count h2">Fecha del pedido</h6>
+                                      <p class="m-0px font-w-600">{{ order.order_date }}</p>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-lg-6">
+                                  <div class="count-data text-center">
+                                    <p class="count h2">Valor total</p>
+                                    <p class="m-0px font-w-600">{{ order.value }}</p>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-12 col-lg-12">
+                                  <div class="count-data text-center">
+                                      <h6 class="count h2">Productos</h6>
+                                      <div *ngIf="order.products && order.products.length > 0">
+                                
+                                        <ul>
+                                          <li *ngFor="let product of order.products">
+                                            {{ product.product_name }} - Cantidad: {{ product.product_cant }}
+                                          </li>
+                                        </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
                         </mat-expansion-panel>
+                        
                       </mat-accordion>
                       <br />
                       
-                      <!--
-                      <mat-accordion>
-                        <mat-expansion-panel>
-                          <mat-expansion-panel-header>
-                            Datos de la Orden ​⚙️​
-                          </mat-expansion-panel-header>
-                          <form [formGroup]="dialogFormRegistro">
-                            <mat-form-field class="mat-form">
-                              <mat-label>Fecha de entrega</mat-label>
-                              <input
-                                matInput
-                                [matDatepicker]="picker1"
-                                formControlName="order_date"
-                              />
-                              <mat-datepicker-toggle
-                                matIconSuffix
-                                [for]="picker1"
-                              ></mat-datepicker-toggle>
-                              <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <mat-label>Valor del pedido</mat-label>
-                              <input
-                                matInput
-                                formControlName="value"
-                                type="number"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <mat-label>Descuento otorgado</mat-label>
-                              <input
-                                matInput
-                                type="number"
-                                placeholder="Descuento"
-                                formControlName="discount"
-                              />
-                            </mat-form-field>
-                            <mat-form-field class="mat-form">
-                              <mat-label>Status del pedido</mat-label>
-                              <mat-select
-                                formControlName="state"
-                              >
-                                <mat-option
-                                  *ngFor="let item of userTypesList"
-                                  [value]="item"
-                                >
-                                  {{ item }}
-                                </mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                          </form>
-                          
-                        </mat-expansion-panel>
-                      </mat-accordion> 
-                    
-                      <mat-dialog-actions align="end">
-                        <button mat-button mat-dialog-close>Cancelar</button>
-                        <button
-                          mat-button
-                          [mat-dialog-close]="true"
-                          cdkFocusInitial
-                          (click)="cancelar()"
-                        >
-                          Guardar Cambios
-                        </button>
-                      </mat-dialog-actions>-->
                     </div>
                   </div>
                 </mat-dialog-content>
@@ -246,7 +165,7 @@
                       </div>
                       <div *ngIf="cantPromoRecarga == 7" class="column full-width" [ngClass]="promoRecarga[promoRecarga.length - 1] ? 'target-X' : 'target-Y'">
                         <h3>7</h3>
-                        <p>RECARGA</p>
+                        <p>RECARGA GRATIS</p>
                       </div>
                     </div>
   

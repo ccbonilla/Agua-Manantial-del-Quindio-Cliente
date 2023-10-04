@@ -31,6 +31,11 @@ export class HistorialClienteComponent implements OnInit {
   orders: Order[] = [];
   
   userTypesList = ['cc', 'id'];
+  states: string[] = [
+    'Alabama fecha:23',
+    'Alaska fecha:24',
+    'Arizona'
+  ]
 
   constructor(
     private userService: UserService, 
@@ -67,9 +72,18 @@ export class HistorialClienteComponent implements OnInit {
   }
 
   obtenerPedidosRecientes() {
-    this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => {  //`list-by-user/${this.cliente.user_id}`
-      console.log('Result get Order by user '+JSON.stringify(res));
-      this.orders = res;
+    this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => { 
+      
+      res.forEach((order) => {
+        if(order.order_state == 1){
+          this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((resOrder) => {
+            const orderPendiente: Order = resOrder;
+            this.orders.push(orderPendiente);
+            console.log('lista final orders * '+JSON.stringify(this.orders));
+          });
+          
+        }
+      });
     });
   }
 
