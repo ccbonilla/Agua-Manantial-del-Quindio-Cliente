@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
+
 import Swal from 'sweetalert2';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
 
@@ -139,5 +140,18 @@ export class HistorialClienteComponent implements OnInit {
   }
 
   cancelar(): void {
+  }
+
+  editarPedido(order: any) {
+
+    console.log('order before ROUTE '+JSON.stringify(order));
+
+    // Navegar a la ruta del componente de destino y pasar los datos como parámetros
+    this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
+  }
+  cancelarPedido(order: any) {
+    // this.dialog.open(EditarPedidoDialogComponent, {
+    //   data: { order },
+    // });
   }
 }

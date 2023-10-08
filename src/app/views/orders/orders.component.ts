@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { LocalStorageService } from 'angular-web-storage';
 import { User } from 'src/app/models/user';
@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/services/products/product.service';
 import { Product } from '../../models/product';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { OrderState } from 'src/app/models/order_state';
  
 @Component({
   selector: 'app-orders',
@@ -25,6 +26,7 @@ export class OrdersComponent implements OnInit {
   showFiller = true;
   loading: boolean = true;
   cliente: User = new User();
+  OrderUpdate: Order = new Order();
   productsModel: ProductOrder[] = [];
 
   productSize: number = 0;
@@ -39,6 +41,7 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private orderService: OrderService,
+    private route: ActivatedRoute
   ) {}
 
   toggleCart() {
@@ -56,8 +59,60 @@ export class OrdersComponent implements OnInit {
       // Usuario logueado 
       this.cliente = JSON.parse(loggedUser);
       console.log("cliente logueado "+this.cliente);
-      this.generateOrder();
-      //this.datosUsuarioCargados = true;
+      const actualizacionPedido = this.localStorage.get('actualizarPedido');
+        if (actualizacionPedido) {
+          console.log("Es actualizacion true");
+          this.localStorage.set('actualizarPedido', null);
+
+          const productsModel0: any[] = [];
+          this.productData.forEach((product) => {
+
+            const index = this.OrderUpdate.products.findIndex(product0 => product0.product_id === product.product_id);
+
+            console.log("Index Encontrado update order*" + index );
+            if (index != -1) {
+              this.OrderUpdate.products[index].product_cant = product.product_cant;
+            }
+            //let newProduct: any = {};
+            //newProduct.product_order_id = 
+            //newProduct.product_id = product.product_id;
+            //newProduct.product_cant = product.product_cant;
+            //newProduct.name = product.product_name;
+            //newProduct.value = product.price;
+            //productsModel0.push(newProduct);
+          });
+          //console.log("LISt Product Data actu* "+JSON.stringify(productsModel0));
+          this.OrderUpdate.customer = this.cliente;
+
+          //this.OrderUpdate.products[0].product_order_id = 2//productsModel0;
+          console.log("Order newactualizar"+JSON.stringify(this.OrderUpdate));
+          console.log("Order ID newactualizar "+this.OrderUpdate.order_id);
+          
+          this.orderService.put(`update/${this.OrderUpdate.order_id}`, this.OrderUpdate).subscribe((sub) => {
+            Swal.fire({
+              title: `Pedido Actualizado correctamente`,
+              icon: 'success',
+              confirmButtonText: 'Enviar',
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+            }).then((response) => {
+              if (response.isConfirmed) {
+                //this.router.navigate(['orders']);
+              }
+            });
+            console.log('result put'+sub);
+          });
+          this.localStorage.set('pedidoUsuario', null);
+          this.productData = [];
+          //this.orderService.put(`update/${this.OrderUpdate.order_id}`, this.OrderUpdate).subscribe((res) => {
+          //  console.log('REsult Actualizar Order '+res);
+          //});
+          
+        } else {
+          console.log("cliente logueado ");
+          this.generateOrder();
+        }
+      
     } else {
       console.log("not cliente logueado ");
       // Usuario no logueado, abre el diálogo de login para que se loguee
@@ -82,7 +137,7 @@ export class OrdersComponent implements OnInit {
       let newProduct = new ProductOrder();
       newProduct.product_cant = product.product_cant;
       newProduct.product_id = product.product_id;
-      newProduct.name = product.title;
+      newProduct.name = product.product_name;
       newProduct.value = product.price;
       this.productsModel.push(newProduct);
     });
@@ -124,39 +179,101 @@ export class OrdersComponent implements OnInit {
       });
       this.localStorage.set('pedidoUsuario', null);
       this.productData = [];
-    });
-      
+    }); 
   }
 
   ngOnInit(): void {
-    console.log("El componente se ha inicializado");
-    this.getProducts();
-    const localPedido = this.localStorage.get('pedidoUsuario');
-    if (localPedido) {
-      this.productData = JSON.parse(localPedido);
-      this.cartItemsCount = Object.keys(this.productData).length;
-    } else {
+    //this.localStorage.set('actualizarPedido', null);
+    console.log("El componente ORDERS se ha inicializado");
+    this.productService.get('list').subscribe((prods) => {
+      this.products = prods;
+      this.productSize = Object.keys(prods).length;
       
-    }
+      for (let i = 0; i < this.productSize; i += 3) {
+        const subArray = this.products.slice(i, i + 3);
+        this.dividedArray.push(subArray);
+      }
+      this.getOrders();
+      this.loading = false;
+    });
   }
 
+  getOrders() {
+    this.route.params.subscribe((params) => {
+      const orderData = params['order'];
+
+      const localPedido = this.localStorage.get('actualizarPedido');
+      if (orderData || localPedido) {
+        if (orderData) {
+          const order: Order = JSON.parse(orderData);
+          this.OrderUpdate = order;
+          this.localStorage.set('orderUpdate', JSON.stringify(order));
+          console.log('Parámetros SI pasados ONINTIT orders '+order);
+        } else if (localPedido) {
+          //const localPedido = this.localStorage.get('pedidoUsuario');
+          const updateOrder = this.localStorage.get('orderUpdate');
+          this.OrderUpdate = JSON.parse(updateOrder);
+          //this.productData = JSON.parse(localPedido);
+          this.cartItemsCount = Object.keys(this.productData).length;
+        } 
+        
+        this.showFiller = false;
+        
+        const productsService: Product[] = [];
+
+        for (const product of this.OrderUpdate.products) {
+
+          const index = this.products.findIndex(product0 => product0.product_id === product.product_id);
+
+          console.log("Index Encontrado *" + index );
+          if (index != -1) {
+            const newProduct = {
+              imageSrc: "/assets/agua600ml.jpg",
+              product_name: product.product_name, 
+              price: this.products[index].value,
+              isFreeShipping: true,
+              product_id: product.product_id,
+              product_cant: product.product_cant,
+              };
+              this.productData.push(newProduct);
+              this.cartItemsCount++;
+
+              productsService.push(this.products[index]);
+              
+          } else {
+            
+            console.log('Prodcuto no para actualizar no disponible');
+          }
+        }
+        this.products = productsService;
+        this.productSize = Object.keys(productsService).length;
+        this.dividedArray = [];
+        for (let i = 0; i < this.productSize; i += 3) {
+          const subArray = this.products.slice(i, i + 3);
+          this.dividedArray.push(subArray);
+        }
+        this.localStorage.set('actualizarPedido', 'True');
+        this.actuaizarPedidoUsuario();
+        
+      } else {
+        // Si falta alguno de los parámetros, muestra un mensaje de error o realiza otra tarea.
+        console.log('Parámetros no pasados ONINTIT orders');
+        
+        const localPedido = this.localStorage.get('pedidoUsuario');
+        if (localPedido) {
+          this.productData = JSON.parse(localPedido);
+          this.cartItemsCount = Object.keys(this.productData).length;
+        } else {
+          
+        }
+      }
+    });
+  }
   actuaizarPedidoUsuario() {
     this.localStorage.remove('pedidoUsuario');
     this.localStorage.set('pedidoUsuario', JSON.stringify(this.productData));
   }
-  getProducts() {
-    this.productService.get('list').subscribe((prods) => {
-    this.products = prods;
-    this.productSize = Object.keys(prods).length;
-
-    for (let i = 0; i < this.productSize; i += 3) {
-      const subArray = this.products.slice(i, i + 3);
-      this.dividedArray.push(subArray);
-    }
-    this.loading = false;
-    });
-  }
-
+  
   addButtonClicked(item: any) {
     console.log("Item a ingresar *" + JSON.stringify(item) );
 
@@ -166,7 +283,7 @@ export class OrdersComponent implements OnInit {
     if (index == -1) {
       const newProduct = {
       imageSrc: "/assets/agua600ml.jpg",
-      title: item.name, 
+      product_name: item.name, 
       price: item.value,
       isFreeShipping: true,
       product_id: item.product_id,

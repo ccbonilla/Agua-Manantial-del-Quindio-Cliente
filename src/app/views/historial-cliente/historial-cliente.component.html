@@ -88,7 +88,7 @@
               
               &nbsp;
               <div>
-                <h2 align="center"> Visualizar/Actualizar Pedidos Recientes</h2>
+                <h2 align="center"> Actualizar/Cancelar Pedidos Recientes</h2>
               </div>
               <div class="row gutters-sm">
                 <!-- -->
@@ -121,17 +121,20 @@
 
                             <div class="row">
                               <div class="col-12 col-lg-12">
-                                  <div class="count-data text-center">
-                                      <h6 class="count h2">Productos</h6>
-                                      <div *ngIf="order.products && order.products.length > 0">
-                                
-                                        <ul>
-                                          <li *ngFor="let product of order.products">
-                                            {{ product.product_name }} - Cantidad: {{ product.product_cant }}
-                                          </li>
-                                        </ul>
-                                      </div>
+                                <div class="count-data text-center">
+                                  <h6 class="count h2">Productos</h6>
+                                  <div *ngIf="order.products && order.products.length > 0">
+                                    <ul>
+                                      <li *ngFor="let product of order.products">
+                                        {{ product.product_name }} - Cantidad: {{ product.product_cant }}
+                                      </li>
+                                    </ul>
                                   </div>
+                                  <div class="button-container">
+                                    <button class="finalizar-button" (click)="editarPedido(order)">Editar Pedido</button>
+                                    <button mat-raised-button color="warn" (click)="cancelarPedido(order)">Cancelar Pedido</button>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                         </mat-expansion-panel>

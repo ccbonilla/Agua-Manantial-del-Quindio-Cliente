@@ -173,7 +173,20 @@ button:hover, a:hover {
   width: 50%;
 }
 
+ul {
+  list-style-position: inside; /* Coloca la viñeta dentro del área de texto */
+  padding-left: 0; /* Elimina el margen izquierdo predeterminado */
+}
 
+li {
+  margin-left: 0; /* Elimina cualquier margen izquierdo en los elementos de la lista */
+  padding-left: 20px; /* Agrega un espacio a la izquierda para la sangría de los elementos */
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Alinea los botones en los extremos */
+  gap: 10px; /* Agrega espacio entre los botones */
+}
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
   .column {

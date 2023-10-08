@@ -32,7 +32,7 @@
                     <div class="container-product">
                       <button class="bi bi-trash3-fill boton-trash" (click)="deleteButtonProduct(product)" ></button>
                       <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
-                      <p>{{ product.title }}</p>
+                      <p>{{ product.product_name }}</p>
                       <span class="price">{{ product.price * product.product_cant }}</span>
                       <!-- contador cantidad -->
                       <div class="btn-group">
@@ -102,27 +102,6 @@
   <!-- Carousel wrapper
   -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <div class="seccion2" *ngIf="!showFiller">
@@ -163,7 +142,7 @@
                     <span class="unitprice">$ {{ item.price * item.product_cant }} </span>
                   </td>
                   <td>
-                    <span class="text-center">{{ item.title }}</span>
+                    <span class="text-center">{{ item.product_name }}</span>
                   </td>
                   <td class="text-center" style="width: 20%;">
                     <a (click)="decrement(item)" class="table-link text-info">
