@@ -24,7 +24,7 @@
                       </div>
                     </div>
                   </div>
-                  <button class="finalizar-button" *ngIf="datosUsuarioCargados" (click)="logout()">Salir</button>
+                  <button class="btn" *ngIf="datosUsuarioCargados" (click)="logout()">Salir</button>
                 </div>
               </div>
               <div class="card mt-3">
@@ -90,9 +90,20 @@
               <div>
                 <h2 align="center"> Actualizar/Cancelar Pedidos Recientes</h2>
               </div>
-              <div class="row gutters-sm">
-                <!-- -->
-
+              <div *ngIf="!(orders && orders.length > 0)">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <p class="text-secondary mb-1">Sin pedidos Recientes</p>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <a class="btn" (click)="navegarIniciarPedido()">Iniciar Pedido</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="orders && orders.length > 0">
                 <mat-dialog-content class="mat-typography">
                   <div class="container">
                     <div fxLayout="column">
@@ -131,8 +142,8 @@
                                     </ul>
                                   </div>
                                   <div class="button-container">
-                                    <button class="finalizar-button" (click)="editarPedido(order)">Editar Pedido</button>
                                     <button mat-raised-button color="warn" (click)="cancelarPedido(order)">Cancelar Pedido</button>
+                                    <button class="finalizar-button" (click)="editarPedido(order)">Editar Pedido</button>
                                   </div>
                                 </div>
                               </div>
@@ -145,6 +156,9 @@
                     </div>
                   </div>
                 </mat-dialog-content>
+              </div>
+              <div class="row gutters-sm">
+                
               </div>
               
               <!-- Resumen Compra -->
@@ -175,9 +189,13 @@
                     <div class="rowPromoBox" *ngIf="promoRecarga.length == 6">
                       <div class="cardButton">
                         <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
-                          <div [ngClass]="item ? 'target-X' : 'target-Y'">
+                          <div *ngIf="!isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
                             <h3>{{ i +1 }}</h3>
                             <p>RECARGA</p>
+                          </div>
+                          <div *ngIf="isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
+                            <h3>{{ i +1 }}</h3>
+                            <p>RECARGA GRATIS</p>
                           </div>
                         </div>
                       </div>
@@ -217,15 +235,6 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Telefono</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      No data
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
                       <h6 class="mb-0">Número Celular</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
@@ -244,7 +253,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn" target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Solicitar actualización de datos personales</a>
+                      <a class="btn" (click)="editarInformacionPersonal()">Solicitar actualización de datos personales</a>
                     </div>
                   </div>
                 </div>

@@ -66,6 +66,11 @@
   height: 50px;
   animation: spin 1s linear infinite;
 }
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
 @keyframes spin {
   0% {

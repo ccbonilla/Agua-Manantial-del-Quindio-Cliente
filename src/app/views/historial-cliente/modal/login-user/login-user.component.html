@@ -43,8 +43,6 @@
   </mat-dialog-actions>
 </div>
 
-
-
 <div *ngIf="registrarseComponent">
   <div class="row gutters-sm">
     <!-- -->
@@ -52,46 +50,52 @@
       <div class="container">
         <div fxLayout="column">
           <br />
-          <form [formGroup]="dialogForm" class="form">
+          <form [formGroup]="dialogFormRegistro" class="form">
             <mat-form-field class="mat-form">
               <input
                 matInput
                 placeholder="Nombre"
-                formControlName="cedula"
+                formControlName="nombre"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <input
                 matInput
                 placeholder="Apellidos"
-                formControlName="cedula"
+                formControlName="apellido"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <input
                 matInput
                 placeholder="Correo"
-                formControlName="cedula"
-              />
-            </mat-form-field>
-            <mat-form-field class="mat-form">
-              <input
-                matInput
-                formControlName="cedula"
+                formControlName="email"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Teléfono</mat-label>
               <input
                 matInput
+                formControlName="telefono"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Cedula</mat-label>
+              <input
+                matInput
                 formControlName="cedula"
               />
             </mat-form-field>
-
-            <mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Dirección</mat-label>
+              <input
+                matInput
+                formControlName="direccion"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
               <mat-label>Fecha de Nacimiento</mat-label>
-              <input matInput [matDatepicker]="picker">
-              <mat-hint>MM/DD/YYYY</mat-hint>
+              <input matInput [matDatepicker]="picker" formControlName="fechNacimiento">
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -106,6 +110,76 @@
   <mat-dialog-actions class="center-buttons">
     <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
     <button mat-raised-button color="primary" [disabled]="dialogFormRegistro.invalid" (click)="subscribirse()">Subscribirse</button>
+  </mat-dialog-actions>
+</div>
+
+<div *ngIf="actualizarComponent">
+  <div class="row gutters-sm">
+    <!-- -->
+    <mat-dialog-content class="mat-typography">
+      <div class="container">
+        <div fxLayout="column">
+          <br />
+          <form [formGroup]="dialogFormRegistro" class="form">
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Nombre"
+                formControlName="nombre"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Apellidos"
+                formControlName="apellido"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <input
+                matInput
+                placeholder="Correo"
+                formControlName="email"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Teléfono</mat-label>
+              <input
+                matInput
+                formControlName="telefono"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Cedula</mat-label>
+              <input
+                matInput
+                formControlName="cedula"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Dirección</mat-label>
+              <input
+                matInput
+                formControlName="direccion"
+              />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fechNacimiento">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </form>
+          <br />
+          
+        </div>
+      </div>
+    </mat-dialog-content>
+  </div>
+
+  <mat-dialog-actions class="center-buttons">
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="dialogFormRegistro.invalid" (click)="actualizarDatos()">Actualizar datos</button>
   </mat-dialog-actions>
 </div>
 

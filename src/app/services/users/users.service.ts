@@ -21,6 +21,11 @@ export class UserService {
       .post(`${this.BASE_URL}/${url}`, data) 
       .pipe(map((response) => response));
   }
+  updateUser(url: string, user: User): Observable<User> {
+    return this.http
+      .put(`${this.BASE_URL}/${url}`, user)
+      .pipe(map((response) => response as User));
+  }
   getById(url: string): Observable<User> {
     return this.http
       .get(`${this.BASE_URL}/${url}`)

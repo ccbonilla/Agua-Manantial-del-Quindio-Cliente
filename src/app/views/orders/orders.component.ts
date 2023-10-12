@@ -62,7 +62,6 @@ export class OrdersComponent implements OnInit {
       const actualizacionPedido = this.localStorage.get('actualizarPedido');
         if (actualizacionPedido) {
           console.log("Es actualizacion true");
-          this.localStorage.set('actualizarPedido', null);
 
           const productsModel0: any[] = [];
           this.productData.forEach((product) => {
@@ -73,40 +72,43 @@ export class OrdersComponent implements OnInit {
             if (index != -1) {
               this.OrderUpdate.products[index].product_cant = product.product_cant;
             }
-            //let newProduct: any = {};
-            //newProduct.product_order_id = 
-            //newProduct.product_id = product.product_id;
-            //newProduct.product_cant = product.product_cant;
-            //newProduct.name = product.product_name;
-            //newProduct.value = product.price;
-            //productsModel0.push(newProduct);
           });
-          //console.log("LISt Product Data actu* "+JSON.stringify(productsModel0));
           this.OrderUpdate.customer = this.cliente;
-
-          //this.OrderUpdate.products[0].product_order_id = 2//productsModel0;
           console.log("Order newactualizar"+JSON.stringify(this.OrderUpdate));
           console.log("Order ID newactualizar "+this.OrderUpdate.order_id);
           
           this.orderService.put(`update/${this.OrderUpdate.order_id}`, this.OrderUpdate).subscribe((sub) => {
-            Swal.fire({
-              title: `Pedido Actualizado correctamente`,
-              icon: 'success',
-              confirmButtonText: 'Enviar',
-              showCancelButton: true,
-              cancelButtonText: 'Cancelar',
-            }).then((response) => {
-              if (response.isConfirmed) {
-                //this.router.navigate(['orders']);
-              }
-            });
-            console.log('result put'+sub);
+            if(sub){
+                this.localStorage.set('pedidoUsuario', null);
+                this.localStorage.set('actualizarPedido', null);
+                this.productData = [];
+
+              this.orderService.getOrderById(`find-by-id/${this.OrderUpdate.order_id}`).subscribe((res) => { 
+                Swal.fire({
+                  title: `Pedido Actualizado correctamente con un descuento de $${res.discount}`,
+                  icon: 'success',
+                  html:
+                    'Recuerda que puedes ver o actualizar los pedidos recientes en Mis Pedidos',
+                  showCancelButton: true,
+                  focusConfirm: false,
+                  cancelButtonText: '<i class="fa fa-thumbs-up"></i> Genial!',
+                  cancelButtonAriaLabel: 'Thumbs up, Confirmar!',
+                  cancelButtonColor: '#1bb4e1', 
+                  confirmButtonText: 'Mis Pedidos',
+                  confirmButtonAriaLabel: 'Thumbs up',
+                  confirmButtonColor: '#0d6efd',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    console.log("IR a mis pedidos");
+                    this.router.navigate(['/historialcliente']);
+                  } else {
+                    this.router.navigate(['/historialcliente']);
+                  }
+                });
+              });
+            }
+            console.log('result put '+sub);
           });
-          this.localStorage.set('pedidoUsuario', null);
-          this.productData = [];
-          //this.orderService.put(`update/${this.OrderUpdate.order_id}`, this.OrderUpdate).subscribe((res) => {
-          //  console.log('REsult Actualizar Order '+res);
-          //});
           
         } else {
           console.log("cliente logueado ");
@@ -210,21 +212,16 @@ export class OrdersComponent implements OnInit {
           this.localStorage.set('orderUpdate', JSON.stringify(order));
           console.log('Parámetros SI pasados ONINTIT orders '+order);
         } else if (localPedido) {
-          //const localPedido = this.localStorage.get('pedidoUsuario');
           const updateOrder = this.localStorage.get('orderUpdate');
           this.OrderUpdate = JSON.parse(updateOrder);
-          //this.productData = JSON.parse(localPedido);
           this.cartItemsCount = Object.keys(this.productData).length;
         } 
         
         this.showFiller = false;
-        
         const productsService: Product[] = [];
-
         for (const product of this.OrderUpdate.products) {
 
           const index = this.products.findIndex(product0 => product0.product_id === product.product_id);
-
           console.log("Index Encontrado *" + index );
           if (index != -1) {
             const newProduct = {
@@ -256,7 +253,7 @@ export class OrdersComponent implements OnInit {
         this.actuaizarPedidoUsuario();
         
       } else {
-        // Si falta alguno de los parámetros, muestra un mensaje de error o realiza otra tarea.
+
         console.log('Parámetros no pasados ONINTIT orders');
         
         const localPedido = this.localStorage.get('pedidoUsuario');

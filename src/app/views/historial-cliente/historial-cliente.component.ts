@@ -72,6 +72,26 @@ export class HistorialClienteComponent implements OnInit {
     }
   }
 
+  navegarIniciarPedido() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully'
+    })
+    this.router.navigate(['/orders']);
+  }
+
   obtenerPedidosRecientes() {
     this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => { 
       
@@ -117,6 +137,27 @@ export class HistorialClienteComponent implements OnInit {
       this.cliente = res;
       this.datosUsuarioCargados = true;
       this.crearPanelPromoDescuento();
+      this.obtenerPedidosRecientes();
+      this.localStorage.set('logged', JSON.stringify(res));
+    });
+  }
+  editarInformacionPersonal() {
+    console.log('Result Enviado Edit Cliente '+JSON.stringify(this.cliente));
+    const objetoJSON = JSON.stringify(this.cliente)
+    const position: DialogPosition = {
+      left: '30%',
+      top: '10%',
+    };
+    const dialogRef = this.dialog.open(LoginUserComponent, {
+      height: '500px',
+      width: '730px',
+      position: position,
+      data: objetoJSON,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      console.log('After EDIT '+JSON.stringify(res));
+      this.cliente = res;
+      this.datosUsuarioCargados = true;
       this.localStorage.set('logged', JSON.stringify(res));
     });
   }
@@ -145,13 +186,28 @@ export class HistorialClienteComponent implements OnInit {
   editarPedido(order: any) {
 
     console.log('order before ROUTE '+JSON.stringify(order));
-
-    // Navegar a la ruta del componente de destino y pasar los datos como parámetros
     this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
   }
   cancelarPedido(order: any) {
     // this.dialog.open(EditarPedidoDialogComponent, {
     //   data: { order },
-    // });
+    // }); this.orderService.getOrderById(`find-by-id/${this.OrderUpdate.order_id}`).subscribe((res) => { 
+      this.orderService.del(`delete/${order.order_id}`).subscribe((res) => { 
+      console.log('Result Borrar Order '+JSON.stringify(res));
+      Swal.fire({
+        title: `Pedido cancelado correctamente`,
+        icon: 'success',
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#0d6efd',
+      }).then((result) => {
+        this.orders = [];
+        this.crearPanelPromoDescuento();
+        this.obtenerPedidosRecientes();
+      });
+      
+    }); 
+    
   }
 }

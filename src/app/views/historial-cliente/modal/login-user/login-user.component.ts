@@ -9,7 +9,8 @@ import { UserService } from 'src/app/services/users/users.service';
 const LOAD_COMPONENT = Object.freeze({
   load: 1,
   modalLogin: 2,
-  modalRegistrarse: 3
+  modalRegistrarse: 3,
+  modalActualizar: 4
 })
 
 @Component({
@@ -32,6 +33,7 @@ export class LoginUserComponent implements OnInit {
     private formBuilderRegistro: FormBuilder,
     private router: Router,
     private userService: UserService,
+    @Inject(MAT_DIALOG_DATA) private objetoJSON: any,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dialogForm = this.formBuilder.group({
@@ -45,8 +47,64 @@ export class LoginUserComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       direccion: ['', Validators.required],
+      fechNacimiento: ['', Validators.required],
       telefono: [''],
     });
+    
+    const usuario = JSON.parse(objetoJSON);
+    console.log('Objeto JSON recibido en el diálogo:', usuario);
+    if(usuario){
+      this.cliente = usuario;
+
+      this.dialogFormRegistro.patchValue({
+        cedula: usuario.identification,
+        email: usuario.email,
+        nombre: usuario.name,
+        apellido: usuario.lastname,
+        direccion: usuario.address,
+        fechNacimiento: usuario.fechaNacimiento,
+        telefono: usuario.phone,
+      });
+      
+      this.estadoComponente = LOAD_COMPONENT.modalActualizar;
+    }
+  }
+  
+  actualizarDatos(): void {
+    var nuevoCliente: User = new User();
+    console.log('Campos validos subs? ',this.dialogFormRegistro.valid);
+    
+    nuevoCliente.user_id = this.cliente.user_id;
+    nuevoCliente.previous_user_type_id = this.cliente.previous_user_type_id;
+    nuevoCliente.name= this.dialogFormRegistro.controls['nombre'].value;
+    nuevoCliente.lastname = this.dialogFormRegistro.controls['apellido'].value;
+    nuevoCliente.email = this.dialogFormRegistro.controls['email'].value;
+    nuevoCliente.phone = this.dialogFormRegistro.controls['telefono'].value;
+    nuevoCliente.address= this.dialogFormRegistro.controls['direccion'].value;
+    nuevoCliente.user_type_id=this.cliente.user_type_id;
+    nuevoCliente.identification=this.dialogFormRegistro.controls['cedula'].value;
+    nuevoCliente.password = this.cliente.password;
+    nuevoCliente.count = this.cliente.count;
+    
+    console.log('validacion sub cliente? ',this.cliente);
+
+    console.log('validacion nuevo cliente? ',nuevoCliente);
+    
+    if (this.dialogFormRegistro.valid) {
+
+      this.userService.updateUser(`update/${this.cliente.user_id}`, nuevoCliente).subscribe((sub) => {
+        if(sub){
+          this.userService.getById('find-by-id/'+this.cliente.user_id).subscribe((user) => {
+            this.cliente = user;
+            this.dialogRef.close(this.cliente);
+          });
+        }
+        console.log('result put '+sub);
+      });
+
+    } else {
+      console.log('Campos inválidos suscripcion');
+    }
   }
   
   get loadingComponent(){
@@ -57,6 +115,9 @@ export class LoginUserComponent implements OnInit {
   }
   get registrarseComponent(){
     return this.estadoComponente === LOAD_COMPONENT.modalRegistrarse;
+  }
+  get actualizarComponent(){
+    return this.estadoComponente === LOAD_COMPONENT.modalActualizar;
   }
 
   cancelar(): void {
@@ -81,16 +142,6 @@ export class LoginUserComponent implements OnInit {
     var nuevoCliente: User = new User();
     console.log('Campos validos subs? ',this.dialogFormRegistro.valid);
 
-    //nuevoCliente.user_id = 4;
-    //nuevoCliente.name='Cristian';
-    //nuevoCliente.lastname='Admin';
-    //nuevoCliente.email='ccbonilla@gmail.com';
-    //nuevoCliente.phone= '311213123';
-    //nuevoCliente.address= 'Km 7 vía Armenia - El edén';
-    //nuevoCliente.user_type_id= 1;
-    //nuevoCliente.previous_user_type_id = 0;
-    //nuevoCliente.count= 15;
-    //nuevoCliente.user_type_name='Usuario bronce';
     nuevoCliente.user_id = 1;
     nuevoCliente.name= this.dialogFormRegistro.controls['nombre'].value;
     nuevoCliente.lastname = this.dialogFormRegistro.controls['apellido'].value;
@@ -99,7 +150,6 @@ export class LoginUserComponent implements OnInit {
     nuevoCliente.address= this.dialogFormRegistro.controls['direccion'].value;
     nuevoCliente.user_type_id=1;
     nuevoCliente.identification=this.dialogFormRegistro.controls['cedula'].value;
-    //nuevoCliente.count= 3;
 
     console.log('validacion sub cliente? ',nuevoCliente);
     
@@ -130,6 +180,11 @@ export class LoginUserComponent implements OnInit {
     this.userService.getById('find-by-id/'+valorcedula).subscribe((user) => {
       if (user === null) {
         this.estadoComponente = LOAD_COMPONENT.modalRegistrarse;
+
+        const valorcedula = this.dialogForm.controls['cedula'].value;
+        const valoremail = this.dialogForm.controls['email'].value;
+        // Asignar los valores al dialogFormRegistro
+        this.dialogFormRegistro.patchValue({ cedula: valorcedula, email: valoremail });
         this.crearUsuario(valorcedula);
       } else {
         this.cliente = user;
