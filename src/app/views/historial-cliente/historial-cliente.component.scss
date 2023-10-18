@@ -188,6 +188,35 @@ li {
   justify-content: space-between; /* Alinea los botones en los extremos */
   gap: 10px; /* Agrega espacio entre los botones */
 }
+
+* {
+  padding: 50;
+  margin: 100;
+}
+table {
+  width: 100%;
+}
+.mat-elevation-z8 {
+  background-color: blue;
+}
+.mat-form {
+  width: 100%;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+.mat-tab-label .mat-tab-label-content { 
+  font-size: 24px; /* Cambia el tamaño de fuente según tus necesidades */
+  font-family: 'Arial', sans-serif; /* Cambia el tipo de letra según tus necesidades */
+  /* Otros estilos personalizados, si es necesario */
+}
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
   .column {

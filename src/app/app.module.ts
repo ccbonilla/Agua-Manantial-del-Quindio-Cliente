@@ -4,6 +4,7 @@ import { UserService } from './services/users/users.service';
 import { ProductService } from './services/products/product.service';
 import { OrderService  } from './services/orders/orders.service';
 import { InfoService } from './services/infoService/info.service';
+import { sectionService } from 'src/app/services/sectionService/section.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { OrdersComponent } from './views/orders/orders.component';
@@ -36,6 +37,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginUserComponent } from './views/historial-cliente/modal/login-user/login-user.component';
 import { MatSnackBarModule  } from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 //import { ModalModule } from 'ngx-bootstrap/modal';
 //import { BsModalService } from 'ngx-bootstrap/modal';
@@ -65,6 +67,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatToolbarModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatTabsModule,
     MatDialogModule,
     AppRoutingModule, 
     NgbModule,
@@ -87,7 +90,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     ReactiveFormsModule,
   ],
-  providers: [UserService,ProductService,InfoService, OrderService],
+  providers: [UserService,ProductService,InfoService, OrderService, sectionService],
   bootstrap: [AppComponent],
   
 })

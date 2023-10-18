@@ -125,6 +125,11 @@ export class LoginUserComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  cancelarEditInfo(): void {
+    this.dialogRef.close();
+    //this.router.navigate(['/']);
+  }
+
   aceptar(): void {
     this.estadoComponente = LOAD_COMPONENT.load;
     console.log('Campos validos? ',this.dialogForm.valid);

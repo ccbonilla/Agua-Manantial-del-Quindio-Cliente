@@ -166,6 +166,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.bgimg-4 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 800px; /* Ajusta la altura según tus necesidades */
+}
 .caption {
   position: absolute;
   left: 0;

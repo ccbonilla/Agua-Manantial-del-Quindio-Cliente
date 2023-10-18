@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 import Swal from 'sweetalert2';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
@@ -29,14 +30,20 @@ export class HistorialClienteComponent implements OnInit {
   closeResult = '';
   datosUsuarioCargados = false;
   mostrarX: boolean = true;
-  orders: Order[] = [];
+  orderRuta: number = 0; 
+  ordersRecientes: Order[] = [];
+  ordersHistorial: Order[] = [];
+  dataSource: MatTableDataSource<Order>;
+  titles: string[] = [
+    'id',
+    'Fecha_de_entrega',
+    'Cliente',
+    'Direccion',
+    'Valor',
+    'Acciones',
+  ];
   
   userTypesList = ['cc', 'id'];
-  states: string[] = [
-    'Alabama fecha:23',
-    'Alaska fecha:24',
-    'Arizona'
-  ]
 
   constructor(
     private userService: UserService, 
@@ -51,6 +58,7 @@ export class HistorialClienteComponent implements OnInit {
         cedula: ['', Validators.required],
         email: ['', Validators.required],
       });
+      this.dataSource = new MatTableDataSource(this.ordersRecientes);
     }
 
   ngOnInit(): void {
@@ -63,7 +71,7 @@ export class HistorialClienteComponent implements OnInit {
       // Usuario logueado
       this.cliente = JSON.parse(loggedUser);
       this.crearPanelPromoDescuento();
-      this.obtenerPedidosRecientes();
+      this.obtenerListaPedidos();
       this.datosUsuarioCargados = true;
       console.log("Cliente Data**: " + JSON.stringify(this.cliente)  );
     } else {
@@ -87,23 +95,29 @@ export class HistorialClienteComponent implements OnInit {
     
     Toast.fire({
       icon: 'success',
-      title: 'Signed in successfully'
+      title: 'Ya puedes iniciar tu pedido'
     })
     this.router.navigate(['/orders']);
   }
 
-  obtenerPedidosRecientes() {
+  obtenerListaPedidos() {
     this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => { 
       
       res.forEach((order) => {
-        if(order.order_state == 1){
-          this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((resOrder) => {
-            const orderPendiente: Order = resOrder;
-            this.orders.push(orderPendiente);
-            console.log('lista final orders * '+JSON.stringify(this.orders));
-          });
+        this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((resOrder) => {
+          const orderPendiente: Order = resOrder;
+          if(order.order_state == 1){
+            this.ordersRecientes.push(orderPendiente);
+          } else if(order.order_state == 2){
+            this.orderRuta++;
+          }
           
-        }
+          this.ordersHistorial.push(orderPendiente);
+          
+          console.log('lista final ordersRecientes * '+JSON.stringify(this.ordersRecientes));
+        });
+
+        
       });
     });
   }
@@ -137,7 +151,7 @@ export class HistorialClienteComponent implements OnInit {
       this.cliente = res;
       this.datosUsuarioCargados = true;
       this.crearPanelPromoDescuento();
-      this.obtenerPedidosRecientes();
+      this.obtenerListaPedidos();
       this.localStorage.set('logged', JSON.stringify(res));
     });
   }
@@ -155,10 +169,13 @@ export class HistorialClienteComponent implements OnInit {
       data: objetoJSON,
     });
     dialogRef.afterClosed().subscribe((res) => {
-      console.log('After EDIT '+JSON.stringify(res));
-      this.cliente = res;
-      this.datosUsuarioCargados = true;
-      this.localStorage.set('logged', JSON.stringify(res));
+      if(res){
+        console.log('After EDIT '+JSON.stringify(res));
+        this.cliente = res;
+        this.datosUsuarioCargados = true;
+        this.localStorage.set('logged', JSON.stringify(res));
+      }
+      
     });
   }
 
@@ -184,14 +201,12 @@ export class HistorialClienteComponent implements OnInit {
   }
 
   editarPedido(order: any) {
-
     console.log('order before ROUTE '+JSON.stringify(order));
     this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
   }
+
   cancelarPedido(order: any) {
-    // this.dialog.open(EditarPedidoDialogComponent, {
-    //   data: { order },
-    // }); this.orderService.getOrderById(`find-by-id/${this.OrderUpdate.order_id}`).subscribe((res) => { 
+
       this.orderService.del(`delete/${order.order_id}`).subscribe((res) => { 
       console.log('Result Borrar Order '+JSON.stringify(res));
       Swal.fire({
@@ -202,9 +217,11 @@ export class HistorialClienteComponent implements OnInit {
         confirmButtonText: 'Ok',
         confirmButtonColor: '#0d6efd',
       }).then((result) => {
-        this.orders = [];
+        this.ordersRecientes = [];
+        this.ordersHistorial= [];
+        this.orderRuta = 0;
         this.crearPanelPromoDescuento();
-        this.obtenerPedidosRecientes();
+        this.obtenerListaPedidos();
       });
       
     }); 
