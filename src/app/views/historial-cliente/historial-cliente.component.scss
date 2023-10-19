@@ -216,7 +216,16 @@ table {
 .example-tab-icon {
   margin-right: 8px;
 }
+.pedidos-recientes {
+  color: blue; /* Cambia el color a azul */
+}
+.pedidos-en-ruta { 
+  color: orange; /* Cambia el color a verde */
+}
 
+.total-pedidos {
+  color: green; /* Cambia el color a verde */
+}
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
   .column {

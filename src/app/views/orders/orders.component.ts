@@ -49,25 +49,55 @@ export class OrdersComponent implements OnInit {
   }
 
   toggleFiller() {
-    this.showFiller = !this.showFiller;
-    //const Toast = Swal.mixin({
-    //  toast: true,
-    //  position: 'top',
-    //  showConfirmButton: false,
-    //  timer: 2000,
-    //  timerProgressBar: true,
-    //  didOpen: (toast) => {
-    //    toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //  }
-    //})
-    //
-    //Toast.fire({
-    //  icon: 'success',
-    //  title: ` añadido `,
-    //})
+    if(this.cartItemsCount <= 0){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'info',
+        title: `Debe añadir por lo menos un producto al carrito`,
+      })
+    } else {
+      const loggedUser = this.localStorage.get('logged');
+      if (loggedUser) {
+        this.showFiller = !this.showFiller;
+      } else {
+        Swal.fire({
+          title: `Usuario no ingresado`,
+          icon: 'info',
+          html:
+            'Por favor ingresa para continuar con tu pedido',
+          showCancelButton: false,
+          focusConfirm: false,
+          confirmButtonText: 'Ingresar / subscribirse',
+          confirmButtonAriaLabel: 'Thumbs up',
+          confirmButtonColor: '#0d6efd',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            console.log("IR a mis pedidos");
+            this.router.navigate(['/historialcliente']);
+          } else {
+            //window.location.reload();
+          }
+        });
+      }
+      
+    }
   }
 
-  
+  validarUsuarioRegistrado() {
+    
+  }
+
   validarUserLogged() {
     const loggedUser = this.localStorage.get('logged');
     if (loggedUser) {
