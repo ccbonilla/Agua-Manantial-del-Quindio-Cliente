@@ -3,4 +3,6 @@ export class Section {
     home_tittle: string = '';
     description: string = '';
     image: string = '';
+    opacity: number = 0;
+    posicion: number = 0;
   }

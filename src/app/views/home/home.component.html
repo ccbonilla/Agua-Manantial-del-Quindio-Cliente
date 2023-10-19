@@ -107,10 +107,8 @@
         <p>{{ section.description }}</p>
       </div>
     
-      <div class="bgimg-4" [style.backgroundImage]="backgroundImages[i]">
+      <div class="bgimg-4" [style.opacity]="section.opacity" [style.backgroundImage]="backgroundImages[i]">
         <div class="caption">
-          <span class="border">SCROLL DOWN</span>
-          <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span>
         </div>
       </div>
     </div>

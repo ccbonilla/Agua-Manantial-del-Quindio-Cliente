@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     this.sectionService.get('list').subscribe((res) => {
       console.log('get sections '+JSON.stringify(res));
       this.sectionList = res;
+      this.sectionList.sort((a, b) => a.posicion - b.posicion);
       this.sectionList.forEach((section: Section) => {
         console.log('IMAGE TO ADD '+section.image);
         this.backgroundImages.push('url('+section.image+')');

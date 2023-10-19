@@ -83,7 +83,7 @@ export class HistorialClienteComponent implements OnInit {
   navegarIniciarPedido() {
     const Toast = Swal.mixin({
       toast: true,
-      position: 'top-end',
+      position: 'top',
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
@@ -185,11 +185,21 @@ export class HistorialClienteComponent implements OnInit {
     this.cliente = new User();
     this.datosUsuarioCargados = false;
 
-    this._snackBar.open('¡Gracias por visitarnos! ¡Hasta pronto!', 'Cerrar', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 1500 // Duración del mensaje (en milisegundos)
-    });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: `¡Gracias por visitarnos! ¡Hasta pronto!' `,
+    })
   
     // Redireccionar al home después de 3 segundos
     setTimeout(() => {

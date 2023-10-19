@@ -50,6 +50,21 @@ export class OrdersComponent implements OnInit {
 
   toggleFiller() {
     this.showFiller = !this.showFiller;
+    //const Toast = Swal.mixin({
+    //  toast: true,
+    //  position: 'top',
+    //  showConfirmButton: false,
+    //  timer: 2000,
+    //  timerProgressBar: true,
+    //  didOpen: (toast) => {
+    //    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //  }
+    //})
+    //
+    //Toast.fire({
+    //  icon: 'success',
+    //  title: ` añadido `,
+    //})
   }
 
   
@@ -276,9 +291,11 @@ export class OrdersComponent implements OnInit {
 
     const index = this.productData.findIndex(product => product.product_id === item.product_id);
     console.log("Index Encontrado *" + index );
+
+    var newProduct = {};
     
     if (index == -1) {
-      const newProduct = {
+      newProduct = {
       imageSrc: "/assets/agua600ml.jpg",
       product_name: item.name, 
       price: item.value,
@@ -289,11 +306,13 @@ export class OrdersComponent implements OnInit {
       this.productData.push(newProduct);
       this.cartItemsCount++;
       
+      this.openSnackBar(newProduct);
+      
     } else {
       this.productData[index].product_cant += 1;
+      this.openSnackBar(this.productData[index]);
     }
     this.actuaizarPedidoUsuario();
-    this.openSnackBar();
   }
 
   deleteButtonProduct(item: any) {
@@ -346,12 +365,26 @@ export class OrdersComponent implements OnInit {
     return total;
   }
 
-  openSnackBar() {
-    this._snackBar.open('Añadido!!', 'X', {
-      horizontalPosition: "center",
-      verticalPosition: "bottom", //bottom top
-      duration: 1 * 1000,
-      panelClass: ['centered-snackbar']
-    });
+  openSnackBar(newProduct: any) {
+    console.log('PAr to toast '+JSON.stringify(newProduct));
+    var titleProduct = 'Item';
+    if(newProduct){
+      titleProduct = newProduct.product_name;
+    }
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: `${titleProduct} añadido `,
+    })
   }
 }
