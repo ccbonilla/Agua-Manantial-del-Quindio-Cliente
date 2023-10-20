@@ -1,10 +1,9 @@
-
 <h2 mat-dialog-title>Conoce nuestras ofertas</h2>
-<!-- --> 
+<!-- -->
 <div *ngIf="loadingComponent">
   <div class="loading-container">
-      <div class="loading-spinner"></div>
-      <p>Cargando por favor espera...</p>
+    <div class="loading-spinner"></div>
+    <p>Cargando por favor espera...</p>
   </div>
 </div>
 <div *ngIf="loginComponent">
@@ -16,7 +15,8 @@
           <br />
           <form [formGroup]="dialogForm" class="form">
             <mat-form-field class="mat-form">
-              <input type="number"
+              <input
+                type="number"
                 matInput
                 placeholder="Cedula"
                 formControlName="cedula"
@@ -24,7 +24,8 @@
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
-              <input type="email"
+              <input
+                type="email"
                 matInput
                 placeholder="Email ej@example.com"
                 formControlName="email"
@@ -32,14 +33,28 @@
             </mat-form-field>
           </form>
           <br />
-          
         </div>
       </div>
     </mat-dialog-content>
   </div>
-  <mat-dialog-actions  class="center-buttons">
-    <button mat-raised-button color="warn" class="alinear-buttons" (click)="cancelar()">Cancelar</button>
-    <button mat-raised-button color="primary" class="alinear-buttons" [disabled]="dialogForm.invalid" (click)="aceptar()">Aceptar</button>
+  <mat-dialog-actions class="center-buttons">
+    <button
+      mat-raised-button
+      color="warn"
+      class="alinear-buttons"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="alinear-buttons"
+      [disabled]="dialogForm.invalid"
+      (click)="aceptar()"
+    >
+      Aceptar
+    </button>
   </mat-dialog-actions>
 </div>
 
@@ -52,11 +67,7 @@
           <br />
           <form [formGroup]="dialogFormRegistro" class="form">
             <mat-form-field class="mat-form">
-              <input
-                matInput
-                placeholder="Nombre"
-                formControlName="nombre"
-              />
+              <input matInput placeholder="Nombre" formControlName="nombre" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <input
@@ -66,50 +77,60 @@
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
-              <input
-                matInput
-                placeholder="Correo"
-                formControlName="email"
-              />
+              <input matInput placeholder="Correo" formControlName="email" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Teléfono</mat-label>
-              <input
-                matInput
-                formControlName="telefono"
-              />
+              <input matInput formControlName="telefono" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Cedula</mat-label>
-              <input
-                matInput
-                formControlName="cedula"
-              />
+              <input matInput formControlName="cedula" />
             </mat-form-field>
             <mat-form-field class="mat-form">
-              <mat-label>Dirección</mat-label>
+              <mat-label>Barrio</mat-label>
+              <input matInput formControlName="direccion" />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Nomenclatura</mat-label>
               <input
                 matInput
-                formControlName="direccion"
+                formControlName="detalle_direccion"
+                [(ngModel)]="cliente.address_detail"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Fecha de Nacimiento</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="fechNacimiento">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="fechNacimiento"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </form>
           <br />
-          
         </div>
       </div>
     </mat-dialog-content>
   </div>
 
   <mat-dialog-actions class="center-buttons">
-    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
-    <button mat-raised-button color="primary" [disabled]="dialogFormRegistro.invalid" (click)="subscribirse()">Subscribirse</button>
+    <button mat-raised-button color="warn" (click)="cancelar()">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="dialogFormRegistro.invalid"
+      (click)="subscribirse()"
+    >
+      Subscribirse
+    </button>
   </mat-dialog-actions>
 </div>
 
@@ -122,11 +143,7 @@
           <br />
           <form [formGroup]="dialogFormRegistro" class="form">
             <mat-form-field class="mat-form">
-              <input
-                matInput
-                placeholder="Nombre"
-                formControlName="nombre"
-              />
+              <input matInput placeholder="Nombre" formControlName="nombre" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <input
@@ -136,51 +153,60 @@
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
-              <input
-                matInput
-                placeholder="Correo"
-                formControlName="email"
-              />
+              <input matInput placeholder="Correo" formControlName="email" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Teléfono</mat-label>
-              <input
-                matInput
-                formControlName="telefono"
-              />
+              <input matInput formControlName="telefono" />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Cedula</mat-label>
-              <input
-                matInput
-                formControlName="cedula"
-              />
+              <input matInput formControlName="cedula" />
             </mat-form-field>
             <mat-form-field class="mat-form">
-              <mat-label>Dirección</mat-label>
+              <mat-label>Barrio</mat-label>
+              <input matInput formControlName="direccion" />
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+              <mat-label>Nomenclatura</mat-label>
               <input
                 matInput
-                formControlName="direccion"
+                formControlName="detalle_direccion"
+                [(ngModel)]="cliente.address_detail"
               />
             </mat-form-field>
             <mat-form-field class="mat-form">
               <mat-label>Fecha de Nacimiento</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="fechNacimiento">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="fechNacimiento"
+                [(ngModel)]="cliente.birthdate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </form>
           <br />
-          
         </div>
       </div>
     </mat-dialog-content>
   </div>
 
   <mat-dialog-actions class="center-buttons">
-    <button mat-raised-button color="warn" (click)="cancelarEditInfo()">Cancelar</button>
-    <button mat-raised-button color="primary" [disabled]="dialogFormRegistro.invalid" (click)="actualizarDatos()">Actualizar datos</button>
+    <button mat-raised-button color="warn" (click)="cancelarEditInfo()">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="dialogFormRegistro.invalid"
+      (click)="actualizarDatos()"
+    >
+      Actualizar datos
+    </button>
   </mat-dialog-actions>
 </div>
-
-

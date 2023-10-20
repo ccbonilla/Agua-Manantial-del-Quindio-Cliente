@@ -5,13 +5,14 @@ export class User {
   email: string = '';
   phone: string = '';
   address: string = '';
+  address_detail: string = '';
   user_type_id: number = 0;
   user_type_name: string = '';
-  previous_user_type_id: number = 0;
   count: number = 0;
   identification: number = 0;
   lat?: number = 0;
   lon?: number = 0;
   ticket: boolean = false;
   password: string = '';
+  birthdate = new Date();
 }

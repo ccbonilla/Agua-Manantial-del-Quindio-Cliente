@@ -1,9 +1,8 @@
-
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/users/users.service';
 import { LoginUserComponent } from './modal/login-user/login-user.component';
-import { MatDialog, DialogPosition  } from '@angular/material/dialog';
+import { MatDialog, DialogPosition } from '@angular/material/dialog';
 import { LocalStorageService } from 'angular-web-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -18,19 +17,19 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-historial-cliente',
   templateUrl: './historial-cliente.component.html',
-  styleUrls: ['./historial-cliente.component.scss']
+  styleUrls: ['./historial-cliente.component.scss'],
 })
 export class HistorialClienteComponent implements OnInit {
-
   dialogForm: FormGroup;
   promoRecarga: any[] = [];
   cantPromoRecarga = 0;
+  usuarioConPromo = true;
   isModalOpen = true;
   cliente: User = new User();
   closeResult = '';
   datosUsuarioCargados = false;
   mostrarX: boolean = true;
-  orderRuta: number = 0; 
+  orderRuta: number = 0;
   ordersRecientes: Order[] = [];
   ordersHistorial: Order[] = [];
   dataSource: MatTableDataSource<Order>;
@@ -42,29 +41,30 @@ export class HistorialClienteComponent implements OnInit {
     'Valor',
     'Acciones',
   ];
-  
+
   userTypesList = ['cc', 'id'];
 
   constructor(
-    private userService: UserService, 
-    private dialog: MatDialog, 
+    private userService: UserService,
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private localStorage: LocalStorageService, 
+    private localStorage: LocalStorageService,
     private cdRef: ChangeDetectorRef,
     private orderService: OrderService,
     private _snackBar: MatSnackBar,
-    private router: Router,) { 
-      this.dialogForm = this.formBuilder.group({
-        cedula: ['', Validators.required],
-        email: ['', Validators.required],
-      });
-      this.dataSource = new MatTableDataSource(this.ordersRecientes);
-    }
+    private router: Router
+  ) {
+    this.dialogForm = this.formBuilder.group({
+      cedula: ['', Validators.required],
+      email: ['', Validators.required],
+    });
+    this.dataSource = new MatTableDataSource(this.ordersRecientes);
+  }
 
   ngOnInit(): void {
-    console.log("init storage: " + JSON.stringify(this.localStorage)  );
+    console.log('init storage: ' + JSON.stringify(this.localStorage));
     const loggedUserq = this.localStorage.get('usuario');
-    console.log("init storage log: " + JSON.stringify(loggedUserq)  );
+    console.log('init storage log: ' + JSON.stringify(loggedUserq));
     const loggedUser = this.localStorage.get('logged');
     //localStorage.removeItem('usuario');
     if (loggedUser) {
@@ -73,7 +73,7 @@ export class HistorialClienteComponent implements OnInit {
       this.crearPanelPromoDescuento();
       this.obtenerListaPedidos();
       this.datosUsuarioCargados = true;
-      console.log("Cliente Data**: " + JSON.stringify(this.cliente)  );
+      console.log('Cliente Data**: ' + JSON.stringify(this.cliente));
     } else {
       // Usuario no logueado, abre el diálogo de login para que se loguee
       this.openDialog();
@@ -88,53 +88,63 @@ export class HistorialClienteComponent implements OnInit {
       timer: 3000,
       timerProgressBar: true,
       didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
     Toast.fire({
       icon: 'success',
-      title: 'Ya puedes iniciar tu pedido'
-    })
+      title: 'Ya puedes iniciar tu pedido',
+    });
     this.router.navigate(['/orders']);
   }
 
   obtenerListaPedidos() {
-    this.orderService.get(`list-by-user/${this.cliente.user_id}`).subscribe((res) => { 
-      
-      res.forEach((order) => {
-        this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((resOrder) => {
-          const orderPendiente: Order = resOrder;
-          if(order.order_state == 1){
-            this.ordersRecientes.push(orderPendiente);
-          } else if(order.order_state == 2){
-            this.orderRuta++;
-          }
-          
-          this.ordersHistorial.push(orderPendiente);
-          
-          console.log('lista final ordersRecientes * '+JSON.stringify(this.ordersRecientes));
-        });
+    this.orderService
+      .get(`list-by-user/${this.cliente.user_id}`)
+      .subscribe((res) => {
+        res.forEach((order) => {
+          this.orderService
+            .getOrderById(`find-by-id/${order.order_id}`)
+            .subscribe((resOrder) => {
+              const orderPendiente: Order = resOrder;
+              if (order.order_state == 1) {
+                this.ordersRecientes.push(orderPendiente);
+              } else if (order.order_state == 2) {
+                this.orderRuta++;
+              }
 
-        
+              this.ordersHistorial.push(orderPendiente);
+
+              console.log(
+                'lista final ordersRecientes * ' +
+                  JSON.stringify(this.ordersRecientes)
+              );
+            });
+        });
       });
-    });
   }
 
   crearPanelPromoDescuento() {
-    console.log("Promo Descu** userType: " + this.cliente.user_type_id );
-    console.log("Promo Descu** count: " + this.cliente.count );
+    console.log('Promo Descu** userType: ' + this.cliente.user_type_id);
+    console.log('Promo Descu** count: ' + this.cliente.count);
     var n;
     if (this.cliente.user_type_id === 1) {
       n = 7;
       this.cantPromoRecarga = 7;
+    } else if (this.cliente.user_type_id === 4) {
+      this.usuarioConPromo = false;
+      n = 0;
     } else {
       n = 6;
       this.cantPromoRecarga = 6;
-    } 
-    this.promoRecarga = Array.from({ length: this.cliente.count }, () => true).concat(Array.from({ length: n - this.cliente.count }, () => false));
-    console.log('lenght para panel '+this.promoRecarga.length);
+    }
+    this.promoRecarga = Array.from(
+      { length: this.cliente.count },
+      () => true
+    ).concat(Array.from({ length: n - this.cliente.count }, () => false));
+    console.log('lenght para panel ' + this.promoRecarga.length);
   }
 
   openDialog() {
@@ -156,8 +166,8 @@ export class HistorialClienteComponent implements OnInit {
     });
   }
   editarInformacionPersonal() {
-    console.log('Result Enviado Edit Cliente '+JSON.stringify(this.cliente));
-    const objetoJSON = JSON.stringify(this.cliente)
+    console.log('Result Enviado Edit Cliente ' + JSON.stringify(this.cliente));
+    const objetoJSON = JSON.stringify(this.cliente);
     const position: DialogPosition = {
       left: '30%',
       top: '10%',
@@ -169,18 +179,16 @@ export class HistorialClienteComponent implements OnInit {
       data: objetoJSON,
     });
     dialogRef.afterClosed().subscribe((res) => {
-      if(res){
-        console.log('After EDIT '+JSON.stringify(res));
+      if (res) {
+        console.log('After EDIT ' + JSON.stringify(res));
         this.cliente = res;
         this.datosUsuarioCargados = true;
         this.localStorage.set('logged', JSON.stringify(res));
       }
-      
     });
   }
 
   logout(): void {
-
     this.localStorage.remove('logged');
     this.cliente = new User();
     this.datosUsuarioCargados = false;
@@ -192,33 +200,31 @@ export class HistorialClienteComponent implements OnInit {
       timer: 3000,
       timerProgressBar: true,
       didOpen: (toast) => {
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
     Toast.fire({
       icon: 'success',
       title: `¡Gracias por visitarnos! ¡Hasta pronto!' `,
-    })
-  
+    });
+
     // Redireccionar al home después de 3 segundos
     setTimeout(() => {
       this.router.navigate(['/']);
     }, 1500);
   }
 
-  cancelar(): void {
-  }
+  cancelar(): void {}
 
   editarPedido(order: any) {
-    console.log('order before ROUTE '+JSON.stringify(order));
+    console.log('order before ROUTE ' + JSON.stringify(order));
     this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
   }
 
   cancelarPedido(order: any) {
-
-      this.orderService.del(`delete/${order.order_id}`).subscribe((res) => { 
-      console.log('Result Borrar Order '+JSON.stringify(res));
+    this.orderService.del(`delete/${order.order_id}`).subscribe((res) => {
+      console.log('Result Borrar Order ' + JSON.stringify(res));
       Swal.fire({
         title: `Pedido cancelado correctamente`,
         icon: 'success',
@@ -228,13 +234,11 @@ export class HistorialClienteComponent implements OnInit {
         confirmButtonColor: '#0d6efd',
       }).then((result) => {
         this.ordersRecientes = [];
-        this.ordersHistorial= [];
+        this.ordersHistorial = [];
         this.orderRuta = 0;
         this.crearPanelPromoDescuento();
         this.obtenerListaPedidos();
       });
-      
-    }); 
-    
+    });
   }
 }
