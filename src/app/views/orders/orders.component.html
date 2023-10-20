@@ -31,7 +31,7 @@
                   <div *ngFor="let product of productData">
                     <div class="container-product">
                       <button class="bi bi-trash3-fill boton-trash" (click)="deleteButtonProduct(product)" ></button>
-                      <img [src]="product.imageSrc" alt="Avatar" style="width:130px" class="container-img">
+                      <img [src]=product.imageUrl alt="Avatar" style="width:130px" class="container-img">
                       <p>{{ product.product_name }}</p>
                       <span class="price">{{ product.price * product.product_cant }}</span>
                       <!-- contador cantidad -->
@@ -85,7 +85,7 @@
           <div class="row">
             <div *ngFor="let item of subArray">
               <div class="card">
-                <img [src]=images[0] alt="Random slide"  style="width:100%">
+                <img [src]=item.imageUrl alt="Random slide"  style="width:100%">
                 <h2>{{ item.name }} </h2>
                 <p class="price">$ {{ item.value }}</p>
                 <p>{{ item.description }}</p>
@@ -135,7 +135,7 @@
               <tbody>
                 <tr *ngFor="let item of productData">
                   <td class="text-center">
-                    <img [src]="item.imageSrc" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
+                    <img [src]="item.imageUrl" alt="Avatar" style="max-width: 200px; height: auto; float: none; margin-right: 0;" class="table-container-img">
                   </td>
                   <td>
                     <p class="grey-text text-center">($ {{ item.price }} por 1 un.)</p>

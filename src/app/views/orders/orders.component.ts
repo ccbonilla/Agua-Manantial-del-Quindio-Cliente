@@ -94,10 +94,6 @@ export class OrdersComponent implements OnInit {
     }
   }
 
-  validarUsuarioRegistrado() {
-    
-  }
-
   validarUserLogged() {
     const loggedUser = this.localStorage.get('logged');
     if (loggedUser) {
@@ -235,7 +231,7 @@ export class OrdersComponent implements OnInit {
     this.productService.get('list').subscribe((prods) => {
       this.products = prods;
       this.productSize = Object.keys(prods).length;
-      
+      console.log('Result Prodcuts INIT: '+JSON.stringify(prods));
       for (let i = 0; i < this.productSize; i += 3) {
         const subArray = this.products.slice(i, i + 3);
         this.dividedArray.push(subArray);
@@ -269,8 +265,9 @@ export class OrdersComponent implements OnInit {
           const index = this.products.findIndex(product0 => product0.product_id === product.product_id);
           console.log("Index Encontrado *" + index );
           if (index != -1) {
+            console.log("IMAGE URL Encontrado *" + this.products[index].imageUrl );
             const newProduct = {
-              imageSrc: "/assets/agua600ml.jpg",
+              imageUrl: this.products[index].imageUrl,
               product_name: product.product_name, 
               price: this.products[index].value,
               isFreeShipping: true,
@@ -321,11 +318,11 @@ export class OrdersComponent implements OnInit {
 
     const index = this.productData.findIndex(product => product.product_id === item.product_id);
     console.log("Index Encontrado *" + index );
-
     var newProduct = {};
     
     if (index == -1) {
       newProduct = {
+      imageUrl: item.imageUrl,
       imageSrc: "/assets/agua600ml.jpg",
       product_name: item.name, 
       price: item.value,

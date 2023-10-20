@@ -190,6 +190,7 @@ export class HistorialClienteComponent implements OnInit {
 
   logout(): void {
     this.localStorage.remove('logged');
+    this.localStorage.remove('actualizarPedido');
     this.cliente = new User();
     this.datosUsuarioCargados = false;
 
