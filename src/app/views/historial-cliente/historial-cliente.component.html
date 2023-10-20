@@ -1,4 +1,3 @@
-
 &nbsp;
 <!-- test usuario cargado
 <div *ngIf="datosUsuarioCargados">
@@ -6,57 +5,77 @@
 </div> -->
 
 <div>
-  <h1 align="center"> Bienvenido {{cliente.name}}</h1>
+  <h1 align="center">Bienvenido {{ cliente.name }}</h1>
 </div>
 &nbsp;
 <div>
   <div class="container">
     <div class="main-body">
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/user-male-circle-blue-512.png" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <div *ngIf="datosUsuarioCargados">
-                        <h4>{{cliente.name}}</h4>
-                        <p class="text-secondary mb-1">{{cliente.address}}</p>
-                      </div>
-                    </div>
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/user-male-circle-blue-512.png"
+                  alt="Admin"
+                  class="rounded-circle"
+                  width="150"
+                />
+                <div class="mt-3">
+                  <div *ngIf="datosUsuarioCargados">
+                    <h4>{{ cliente.name }}</h4>
+                    <p class="text-secondary mb-1">{{ cliente.address }}</p>
                   </div>
-                  <button class="btn" *ngIf="datosUsuarioCargados" (click)="logout()">Salir</button>
                 </div>
               </div>
-              <!-- Resumen Compra -->
-              <div class="row gutters-sm">
-                <div class="counter">
-                  <div class="row">
-                    <div class="col-6 col-lg-4">
-                      <div class="count-data text-center">
-                        <h6 class="count h2" data-to="500" data-speed="500">{{orderRuta}}</h6>
-                        <p class="m-0px font-w-600 pedidos-en-ruta">Pedidos en Ruta</p>
-                      </div>
-                    </div>
-                    <div class="col-6 col-lg-4">
-                      <div class="count-data text-center">
-                        <h6 class="count h2" data-to="850" data-speed="850">{{ordersRecientes.length}}</h6>
-                        <p class="m-0px font-w-600 pedidos-recientes">Pedidos Recientes</p>
-                      </div>
-                    </div>
-                    <div class="col-6 col-lg-4">
-                      <div class="count-data text-center">
-                        <h6 class="count h2" data-to="190" data-speed="190">{{ordersHistorial.length}}</h6>
-                        <p class="m-0px font-w-600 total-pedidos">Total Pedidos</p>
-                      </div>
-                    </div>
+              <button
+                class="btn"
+                *ngIf="datosUsuarioCargados"
+                (click)="logout()"
+              >
+                Salir
+              </button>
+            </div>
+          </div>
+          <!-- Resumen Compra -->
+          <div class="row gutters-sm">
+            <div class="counter">
+              <div class="row">
+                <div class="col-6 col-lg-4">
+                  <div class="count-data text-center">
+                    <h6 class="count h2" data-to="500" data-speed="500">
+                      {{ orderRuta }}
+                    </h6>
+                    <p class="m-0px font-w-600 pedidos-en-ruta">
+                      Pedidos en Ruta
+                    </p>
                   </div>
-                  
+                </div>
+                <div class="col-6 col-lg-4">
+                  <div class="count-data text-center">
+                    <h6 class="count h2" data-to="850" data-speed="850">
+                      {{ ordersRecientes.length }}
+                    </h6>
+                    <p class="m-0px font-w-600 pedidos-recientes">
+                      Pedidos Recientes
+                    </p>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-4">
+                  <div class="count-data text-center">
+                    <h6 class="count h2" data-to="190" data-speed="190">
+                      {{ ordersHistorial.length }}
+                    </h6>
+                    <p class="m-0px font-w-600 total-pedidos">Total Pedidos</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-8">
-              <!-- Resumen Compra 
+          </div>
+        </div>
+        <div class="col-md-8">
+          <!-- Resumen Compra 
               <div class="row gutters-sm">
                 <div class="counter">
                   <div class="row">
@@ -87,263 +106,327 @@
                   </div>
                 </div>
               </div>-->
-              <!-- Modificacion pedidos -->
-              &nbsp;
-              <mat-tab-group dynamicHeight mat-stretch-tabs="true">
-                <!-- ACtualizacion pedidos -->
-                <mat-tab>
-                  <ng-template mat-tab-label>
-                    <mat-icon>update</mat-icon>
-                    &nbsp;
-                    <h5 > Actualizar/Cancelar Pedidos Recientes </h5>
-                  </ng-template>
-                  <div *ngIf="!(ordersRecientes && ordersRecientes.length > 0)">
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <p class="text-secondary mb-1">Sin pedidos Recientes</p>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <a class="btn" (click)="navegarIniciarPedido()">Iniciar Pedido</a>
-                          </div>
-                        </div>
+          <!-- Modificacion pedidos -->
+          &nbsp;
+          <mat-tab-group dynamicHeight mat-stretch-tabs="true">
+            <!-- ACtualizacion pedidos -->
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon>update</mat-icon>
+                &nbsp;
+                <h5>Actualizar/Cancelar Pedidos Recientes</h5>
+              </ng-template>
+              <div *ngIf="!(ordersRecientes && ordersRecientes.length > 0)">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <p class="text-secondary mb-1">Sin pedidos Recientes</p>
+                    <hr />
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <a class="btn" (click)="navegarIniciarPedido()"
+                          >Iniciar Pedido</a
+                        >
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="ordersRecientes && ordersRecientes.length > 0">
-                    <mat-dialog-content class="mat-typography">
-                      <div class="container">
-                        <div fxLayout="column">
-                          <br />
-                          <mat-accordion>
-                            <mat-expansion-panel *ngFor="let order of ordersRecientes">
-                              <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                  Id de pedido # {{ order.order_id }}
-                                </mat-panel-title>
-                              </mat-expansion-panel-header>
-                                <div class="row">
-                                  <div class="col-12 col-lg-6">
-                                      <div class="count-data text-center">
-                                          <h6 class="count h2">Fecha del pedido</h6>
-                                          <p class="m-0px font-w-600">{{ order.order_date }}</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-12 col-lg-6">
-                                      <div class="count-data text-center">
-                                        <p class="count h2">Valor total</p>
-                                        <p class="m-0px font-w-600">{{ order.value }}</p>
-                                      </div>
-                                  </div>
-                                </div>
-    
-                                <div class="row">
-                                  <div class="col-12 col-lg-12">
-                                    <div class="count-data text-center">
-                                      <h6 class="count h2">Productos</h6>
-                                      <div *ngIf="order.products && order.products.length > 0">
-                                        <ul>
-                                          <li *ngFor="let product of order.products">
-                                            {{ product.product_name }} - Cantidad: {{ product.product_cant }}
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="button-container">
-                                        <button mat-raised-button color="warn" (click)="cancelarPedido(order)">Cancelar Pedido</button>
-                                        <button class="finalizar-button" (click)="editarPedido(order)">Editar Pedido</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </mat-expansion-panel>
-                            
-                          </mat-accordion>
-                          <br />
-                          
-                        </div>
-                      </div>
-                    </mat-dialog-content>
-                  </div>
-                </mat-tab>
-                <!-- Historial pedidos -->
-                <mat-tab>
-                  <ng-template mat-tab-label>
-                    <mat-icon class="example-tab-icon">list</mat-icon>
-                    &nbsp;
-                    <h5 > Historial Pedidos </h5>
-                  </ng-template>
-                  <div *ngIf="!(ordersHistorial && ordersHistorial.length > 0)">
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <p class="text-secondary mb-1">Sin pedidos Recientes</p>
-                        <hr>
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <a class="btn" (click)="navegarIniciarPedido()">Iniciar Pedido</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="ordersHistorial && ordersHistorial.length > 0">
-                    <mat-dialog-content class="mat-typography">
-                      <div class="container">
-                        <div fxLayout="column">
-                          <br />
-                          <mat-accordion>
-                            <mat-expansion-panel *ngFor="let order of ordersHistorial">
-                              <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                  Id de pedido # {{ order.order_id }}
-                                </mat-panel-title>
-                              </mat-expansion-panel-header>
-                                <div class="row">
-                                  <div class="col-12 col-lg-6">
-                                      <div class="count-data text-center">
-                                          <h6 class="count h2">Fecha del pedido</h6>
-                                          <p class="m-0px font-w-600">{{ order.order_date }}</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-12 col-lg-6">
-                                      <div class="count-data text-center">
-                                        <p class="count h2">Valor total</p>
-                                        <p class="m-0px font-w-600">{{ order.value }}</p>
-                                      </div>
-                                  </div>
-                                </div>
-    
-                                <div class="row">
-                                  <div class="col-12 col-lg-12">
-                                    <div class="count-data text-center">
-                                      <h6 class="count h2">Productos</h6>
-                                      <div *ngIf="order.products && order.products.length > 0">
-                                        <ul>
-                                          <li *ngFor="let product of order.products">
-                                            {{ product.product_name }} - Cantidad: {{ product.product_cant }}
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </mat-expansion-panel>
-                            
-                          </mat-accordion>
-                          <br />
-                          
-                        </div>
-                      </div>
-                    </mat-dialog-content>
-                  </div>
-                </mat-tab>
-              </mat-tab-group>
-              
-              &nbsp;
-              
-              <div class="row gutters-sm">
-                
+                </div>
               </div>
-              
-              <!-- Resumen Compra -->
+              <div *ngIf="ordersRecientes && ordersRecientes.length > 0">
+                <mat-dialog-content class="mat-typography">
+                  <div class="container">
+                    <div fxLayout="column">
+                      <br />
+                      <mat-accordion>
+                        <mat-expansion-panel
+                          *ngFor="let order of ordersRecientes"
+                        >
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Id de pedido # {{ order.order_id }}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row">
+                            <div class="col-12 col-lg-6">
+                              <div class="count-data text-center">
+                                <h6 class="count h2">Fecha del pedido</h6>
+                                <p class="m-0px font-w-600">
+                                  {{ order.order_date }}
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                              <div class="count-data text-center">
+                                <p class="count h2">Valor total</p>
+                                <p class="m-0px font-w-600">
+                                  {{ order.value }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-              <!-- Container Promocion -->
-              &nbsp;
-              <div>
-                <h2 align="center"> Promoción Recarga Gratis </h2>
-              </div>
-              <div *ngIf="datosUsuarioCargados">
-                <div class="row gutters-sm">
-                  <div class="counter">
-                    <div class="rowPromoBox" *ngIf="promoRecarga.length == 7">
-                      <div class="cardButton">
-                        <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
-                          <div *ngIf="!isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
-                            <h3>{{ i +1 }}</h3>
-                            <p>RECARGA</p>
+                          <div class="row">
+                            <div class="col-12 col-lg-12">
+                              <div class="count-data text-center">
+                                <h6 class="count h2">Productos</h6>
+                                <div
+                                  *ngIf="
+                                    order.products && order.products.length > 0
+                                  "
+                                >
+                                  <ul>
+                                    <li *ngFor="let product of order.products">
+                                      {{ product.product_name }} - Cantidad:
+                                      {{ product.product_cant }}
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div class="button-container">
+                                  <button
+                                    mat-raised-button
+                                    color="warn"
+                                    (click)="cancelarPedido(order)"
+                                  >
+                                    Cancelar Pedido
+                                  </button>
+                                  <button
+                                    class="finalizar-button"
+                                    (click)="editarPedido(order)"
+                                  >
+                                    Editar Pedido
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                      <br />
+                    </div>
+                  </div>
+                </mat-dialog-content>
+              </div>
+            </mat-tab>
+            <!-- Historial pedidos -->
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">list</mat-icon>
+                &nbsp;
+                <h5>Historial Pedidos</h5>
+              </ng-template>
+              <div *ngIf="!(ordersHistorial && ordersHistorial.length > 0)">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <p class="text-secondary mb-1">Sin pedidos Recientes</p>
+                    <hr />
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <a class="btn" (click)="navegarIniciarPedido()"
+                          >Iniciar Pedido</a
+                        >
                       </div>
-                      <div *ngIf="cantPromoRecarga == 7" class="column full-width" [ngClass]="promoRecarga[promoRecarga.length - 1] ? 'target-X' : 'target-Y'">
-                        <h3>7</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="ordersHistorial && ordersHistorial.length > 0">
+                <mat-dialog-content class="mat-typography">
+                  <div class="container">
+                    <div fxLayout="column">
+                      <br />
+                      <mat-accordion>
+                        <mat-expansion-panel
+                          *ngFor="let order of ordersHistorial"
+                        >
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Id de pedido # {{ order.order_id }}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row">
+                            <div class="col-12 col-lg-6">
+                              <div class="count-data text-center">
+                                <h6 class="count h2">Fecha del pedido</h6>
+                                <p class="m-0px font-w-600">
+                                  {{ order.order_date }}
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                              <div class="count-data text-center">
+                                <p class="count h2">Valor total</p>
+                                <p class="m-0px font-w-600">
+                                  {{ order.value }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-12 col-lg-12">
+                              <div class="count-data text-center">
+                                <h6 class="count h2">Productos</h6>
+                                <div
+                                  *ngIf="
+                                    order.products && order.products.length > 0
+                                  "
+                                >
+                                  <ul>
+                                    <li *ngFor="let product of order.products">
+                                      {{ product.product_name }} - Cantidad:
+                                      {{ product.product_cant }}
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                      <br />
+                    </div>
+                  </div>
+                </mat-dialog-content>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+          &nbsp;
+
+          <div class="row gutters-sm"></div>
+
+          <!-- Resumen Compra -->
+
+          <!-- Container Promocion -->
+          &nbsp;
+          <div *ngIf="usuarioConPromo">
+            <h2 align="center">Promoción Recarga Gratis</h2>
+          </div>
+          <div *ngIf="datosUsuarioCargados && usuarioConPromo">
+            <div class="row gutters-sm">
+              <div class="counter">
+                <div class="rowPromoBox" *ngIf="promoRecarga.length == 7">
+                  <div class="cardButton">
+                    <div
+                      class="column"
+                      style="padding: 5px 18px"
+                      *ngFor="
+                        let item of promoRecarga;
+                        let i = index;
+                        let isLast = last
+                      "
+                    >
+                      <div
+                        *ngIf="!isLast"
+                        [ngClass]="item ? 'target-X' : 'target-Y'"
+                      >
+                        <h3>{{ i + 1 }}</h3>
+                        <p>RECARGA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="cantPromoRecarga == 7"
+                    class="column full-width"
+                    [ngClass]="
+                      promoRecarga[promoRecarga.length - 1]
+                        ? 'target-X'
+                        : 'target-Y'
+                    "
+                  >
+                    <h3>7</h3>
+                    <p>RECARGA GRATIS</p>
+                  </div>
+                </div>
+
+                <div class="rowPromoBox" *ngIf="promoRecarga.length == 6">
+                  <div class="cardButton">
+                    <div
+                      class="column"
+                      style="padding: 5px 18px"
+                      *ngFor="
+                        let item of promoRecarga;
+                        let i = index;
+                        let isLast = last
+                      "
+                    >
+                      <div
+                        *ngIf="!isLast"
+                        [ngClass]="item ? 'target-X' : 'target-Y'"
+                      >
+                        <h3>{{ i + 1 }}</h3>
+                        <p>RECARGA</p>
+                      </div>
+                      <div
+                        *ngIf="isLast"
+                        [ngClass]="item ? 'target-X' : 'target-Y'"
+                      >
+                        <h3>{{ i + 1 }}</h3>
                         <p>RECARGA GRATIS</p>
                       </div>
                     </div>
-  
-                    <div class="rowPromoBox" *ngIf="promoRecarga.length == 6">
-                      <div class="cardButton">
-                        <div class="column" style="padding: 5px 18px;" *ngFor="let item of promoRecarga let i = index; let isLast = last">
-                          <div *ngIf="!isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
-                            <h3>{{ i +1 }}</h3>
-                            <p>RECARGA</p>
-                          </div>
-                          <div *ngIf="isLast" [ngClass]="item ? 'target-X' : 'target-Y'">
-                            <h3>{{ i +1 }}</h3>
-                            <p>RECARGA GRATIS</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
-              
-              
-              <!-- <h3>{{ item }}</h3>
+            </div>
+          </div>
+
+          <!-- <h3>{{ item }}</h3>
               <div *ngIf="datosUsuarioCargados">
               </div>-->
 
-              &nbsp;
-              <div>
-                <h2 align="center"> Información Personal </h2>
-              </div>
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Nombre Completo</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.name}} {{cliente.lastname}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Correo Electronico</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.email}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Número Celular</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.phone}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Dirección</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{cliente.address}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn" (click)="editarInformacionPersonal()">Actualización de datos personales</a>
-                    </div>
-                  </div>
+          &nbsp;
+          <div>
+            <h2 align="center">Información Personal</h2>
+          </div>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nombre Completo</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ cliente.name }} {{ cliente.lastname }}
                 </div>
               </div>
-  
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Correo Electronico</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ cliente.email }}
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Número Celular</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ cliente.phone }}
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Dirección</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ cliente.address }}
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-12">
+                  <a class="btn" (click)="editarInformacionPersonal()"
+                    >Actualización de datos personales</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
 </div>

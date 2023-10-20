@@ -15,8 +15,8 @@ export class Order {
     email: '',
     phone: '',
     address: '',
+    address_detail: '',
     user_type_id: 0,
-    previous_user_type_id: 0,
     count: 0,
     user_type_name: '',
     identification: 0,
@@ -24,6 +24,7 @@ export class Order {
     lon: 0,
     ticket: false,
     password: '',
+    birthdate: new Date(),
   };
   customer_name: string = '';
   products: ProductOrder[] = [];
