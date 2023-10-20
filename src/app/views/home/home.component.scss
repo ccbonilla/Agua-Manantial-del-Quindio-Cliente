@@ -8,7 +8,6 @@
     background: #f1f1f1;
   }
   
-  /* Header/Blog Title */
   .header {
     padding: 30px;
     font-size: 40px;
@@ -16,25 +15,15 @@
     background: white;
   }
   
-  /* Create two unequal columns that floats next to each other */
-  /* Left column */
   .leftcolumn {
     float: left;
     width: 75%;
   }
   
-  /* Right column */
   .rightcolumn {
     float: left;
     width: 25%;
     padding-left: 20px;
-  }
-  
-  /* Fake image */
-  .fakeimg {
-    background-color: #aaa;//#0d6efd
-    width: 100%;
-    padding: 20px;
   }
   
   /* Add a card effect for articles */
@@ -144,27 +133,6 @@
   height: 100%;
   width: 100%;
   //min-width: 980px;
-}
-
-.bgimg-1 {
-  min-height: 100%;
-}
-.bgimg-2 {
-  background-image: url(https://www.65ymas.com/uploads/s1/15/22/65/tipos-de-agua-embotellada1.jpeg);
-  min-height: 100%;
-}
-.bgimg-3 {
-  background-image: url(https://3.bp.blogspot.com/-40TK5LMSn0w/WsTrAXGu0yI/AAAAAAAADBY/YuG1NKgCpCEu0G09bUQSNq2KsPLA_0LZgCLcBGAs/s1600/manantial.jpg);
-  min-height: 100%;
-}
-
-.bgimg-1, .bgimg-2, .bgimg-3 {
-  position: relative;
-  //opacity: 0.65;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .bgimg-4 {

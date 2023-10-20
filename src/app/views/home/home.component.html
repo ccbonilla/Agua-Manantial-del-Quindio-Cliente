@@ -1,30 +1,3 @@
-
-<!-- <h1 class="d-flex justify-content-center">
-  Bienvenid@ a Agua Manantial Del Quindío
-</h1>
-
-<div class="container-fluid">
-    <h1 class="d-flex justify-content-center">
-      Bienvenid@ a Agua Manantial Del Quindío
-    </h1>
-    <ngb-carousel class="carrusel">
-      <ng-template ngbSlide *ngFor="let image of images" class="carrusel">
-        <div class="wrapper">
-          <img [src]="image.src" alt="Random first slide" />
-        </div>
-        <div class="carousel-caption">
-          <h3>{{ image.title }}</h3>
-          <p>{{ image.short }}</p>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-  </div>-->
-
-  <!-- 
-  <div class="header">
-    <h2>Bienvenid@ a Agua Manantial Del Quindío</h2>
-  </div>-->
-
   <div class="div-block-principal">
     <div class="w-layout-grid grid-container">
       <div class="div-block-49">
@@ -42,81 +15,25 @@
       </div>
     </div>
   </div>
-  <!--  
+
+<body>
   
-  <section class="blank-section">
-    <div class="container-xxl">
-      <ngb-carousel class="carrusel">
-        <ng-template ngbSlide *ngFor="let image of images" class="carrusel">
-          <div class="wrapper">
-            <img [src]="image.src" alt="Random first slide" />
-          </div>
-          <div class="carousel-caption">
-            <h3>{{ image.title }}</h3>
-            <p>{{ image.short }}</p>
-          </div>
-        </ng-template>
-      </ngb-carousel>
+  <div *ngFor="let section of sectionList; let i = index" >
+    <div style="color: #777; background-color: white; text-align: center; padding: 50px 80px; text-align: justify;">
+      <h3 style="text-align: center;">{{ section.home_tittle }}</h3>
+      <p>{{ section.description }}</p>
     </div>
-  </section>
-
-  <div class="row">
-    
-    <div class="leftcolumn">
-      <div class="card">
-      </div>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Sep 2, 2017</h5>
-        <p>Some text..</p>
+  
+    <div class="bgimg-4" [style.opacity]="section.opacity" [style.backgroundImage]="backgroundImages[i]">
+      <div class="caption">
       </div>
     </div>
-    <div class="rightcolumn">
-      <div class="card">
-        <h2>DOMICILIO GRATIS</h2>
-        <div class="fakeimg" style="height:100px;">Image</div>
-        <p>AGUA POTABLE TRATADA</p>
-      </div>
-      <div class="card">
-        <h5>Calle 11 No. 15-50</h5>
-        <h5>Local # 1 Centro Armenia (Q)</h5><br>
-        <button id="close" class="fakeimg" >
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/WhatsApp_icon.png/598px-WhatsApp_icon.png" 
-          style = "width: 25px;"> 323 494 5856
-        </button><br>
-        <button id="close" class="fakeimg" >
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/WhatsApp_icon.png/598px-WhatsApp_icon.png" 
-          style = "width: 25px;"> 321 488 6225
-        </button><br>
-        <button id="close" class="fakeimg" >
-          (6) 729 2764
-        </button><br>
-      </div>
-      <div class="card">
-        <h3>Follow Me</h3>
-        <p>Some text..</p>
-      </div>
+  </div>
+  
+  <div style="position:relative;">
+    <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+    <p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
     </div>
-  </div>-->
-  <body>
-    
-    <div *ngFor="let section of sectionList; let i = index" >
-
-      <div style="color: #777; background-color: white; text-align: center; padding: 50px 80px; text-align: justify;">
-        <h3 style="text-align: center;">{{ section.home_tittle }}</h3>
-        <p>{{ section.description }}</p>
-      </div>
-    
-      <div class="bgimg-4" [style.opacity]="section.opacity" [style.backgroundImage]="backgroundImages[i]">
-        <div class="caption">
-        </div>
-      </div>
-    </div>
-    
-    <div style="position:relative;">
-      <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-      <p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
-      </div>
-    </div>
-    
-    </body>
+  </div>
+  
+</body>
