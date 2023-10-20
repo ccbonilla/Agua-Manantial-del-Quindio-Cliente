@@ -73,7 +73,6 @@ export class LoginUserComponent implements OnInit {
 
   actualizarDatos(): void {
     var nuevoCliente: User = new User();
-    console.log('Campos validos subs? ', this.dialogFormRegistro.valid);
 
     nuevoCliente.user_id = this.cliente.user_id;
     nuevoCliente.name = this.dialogFormRegistro.controls['nombre'].value;
@@ -91,10 +90,6 @@ export class LoginUserComponent implements OnInit {
     nuevoCliente.password = this.cliente.password;
     nuevoCliente.count = this.cliente.count;
 
-    console.log('validacion sub cliente? ', this.cliente);
-
-    console.log('validacion nuevo cliente? ', nuevoCliente);
-
     if (this.dialogFormRegistro.valid) {
       this.userService
         .updateUser(`update/${this.cliente.user_id}`, nuevoCliente)
@@ -107,7 +102,6 @@ export class LoginUserComponent implements OnInit {
                 this.dialogRef.close(this.cliente);
               });
           }
-          console.log('result put ' + sub);
         });
     } else {
       console.log('Campos inválidos suscripcion');
