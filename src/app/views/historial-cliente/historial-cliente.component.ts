@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from 'src/app/models/order';
 import { OrderService } from '../../services/orders/orders.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { InfoService } from 'src/app/services/infoService/info.service';
 
 import Swal from 'sweetalert2';
 //import { LocalstorageService } from 'src/app/services/localstorage.service';
@@ -30,17 +31,11 @@ export class HistorialClienteComponent implements OnInit {
   datosUsuarioCargados = false;
   mostrarX: boolean = true;
   orderRuta: number = 0;
+  orderEntregado: number = 0;
   ordersRecientes: Order[] = [];
   ordersHistorial: Order[] = [];
   dataSource: MatTableDataSource<Order>;
-  titles: string[] = [
-    'id',
-    'Fecha_de_entrega',
-    'Cliente',
-    'Direccion',
-    'Valor',
-    'Acciones',
-  ];
+  telProveedor: string = '';
 
   userTypesList = ['cc', 'id'];
 
@@ -52,7 +47,8 @@ export class HistorialClienteComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private orderService: OrderService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private infoService: InfoService
   ) {
     this.dialogForm = this.formBuilder.group({
       cedula: ['', Validators.required],
@@ -62,6 +58,9 @@ export class HistorialClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.infoService.get('get-info/1').subscribe((info) => {
+      this.telProveedor = info.phone;
+    });
     console.log('init storage: ' + JSON.stringify(this.localStorage));
     const loggedUserq = this.localStorage.get('usuario');
     console.log('init storage log: ' + JSON.stringify(loggedUserq));
@@ -101,6 +100,8 @@ export class HistorialClienteComponent implements OnInit {
   }
 
   obtenerListaPedidos() {
+    this.orderEntregado = 0;
+    this.orderRuta = 0;
     this.orderService
       .get(`list-by-user/${this.cliente.user_id}`)
       .subscribe((res) => {
@@ -113,6 +114,8 @@ export class HistorialClienteComponent implements OnInit {
                 this.ordersRecientes.push(orderPendiente);
               } else if (order.order_state == 2) {
                 this.orderRuta++;
+              }  else if (order.order_state == 3) {
+                this.orderEntregado++;
               }
 
               this.ordersHistorial.push(orderPendiente);
@@ -216,30 +219,88 @@ export class HistorialClienteComponent implements OnInit {
     }, 1500);
   }
 
-  cancelar(): void {}
+  validarPedidoEditable(): void {
+
+  }
 
   editarPedido(order: any) {
-    console.log('order before ROUTE ' + JSON.stringify(order));
-    this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
+    this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((res) => {
+      console.log('Result Consultar Order ' + JSON.stringify(res));
+      const orderIdReciente= res;
+      if(orderIdReciente.order_state == 1){
+        console.log('order before ROUTE ' + JSON.stringify(order));
+        this.router.navigate(['/orders', { order: JSON.stringify(order) }]);
+      } else {
+        Swal.fire({
+          title: `Lo sentimos este pedido ya se encuentra en ruta`,
+          icon: 'warning',
+          html: `Intenta recargar la página o ponerte en contacto con el proveedor ${this.telProveedor}`,
+          showCancelButton: true,
+          focusConfirm: false,
+          cancelButtonText: '<i class="fa fa-thumbs-up"></i> OK',
+          cancelButtonAriaLabel: 'Thumbs up, Confirmar!',
+          cancelButtonColor: '#1bb4e1', 
+          confirmButtonText: 'Recargar página',
+          confirmButtonAriaLabel: 'Thumbs up',
+          confirmButtonColor: '#0d6efd',
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            console.log("IR a mis pedidos");
+            window.location.reload();
+          } else {
+          }
+        });
+      }
+    });
   }
 
   cancelarPedido(order: any) {
-    this.orderService.del(`delete/${order.order_id}`).subscribe((res) => {
-      console.log('Result Borrar Order ' + JSON.stringify(res));
-      Swal.fire({
-        title: `Pedido cancelado correctamente`,
-        icon: 'success',
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Ok',
-        confirmButtonColor: '#0d6efd',
-      }).then((result) => {
-        this.ordersRecientes = [];
-        this.ordersHistorial = [];
-        this.orderRuta = 0;
-        this.crearPanelPromoDescuento();
-        this.obtenerListaPedidos();
-      });
+    this.orderService.getOrderById(`find-by-id/${order.order_id}`).subscribe((res) => {
+      console.log('Result Consultar Order ' + JSON.stringify(res));
+      const orderIdReciente= res;
+      if(orderIdReciente.order_state == 1){
+        this.orderService.del(`delete/${order.order_id}`).subscribe((res) => {
+          console.log('Result Borrar Order ' + JSON.stringify(res));
+          Swal.fire({
+            title: `Pedido cancelado correctamente`,
+            icon: 'success',
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#0d6efd',
+          }).then((result) => {
+            this.ordersRecientes = [];
+            this.ordersHistorial = [];
+            this.orderRuta--;
+            this.crearPanelPromoDescuento();
+            this.obtenerListaPedidos();
+          });
+        });
+      } else {
+        Swal.fire({
+          title: `Lo sentimos este pedido ya se encuentra en ruta`,
+          icon: 'warning',
+          html: `Intenta recargar la página o ponerte en contacto con el proveedor ${this.telProveedor}`,
+          showCancelButton: true,
+          focusConfirm: false,
+          cancelButtonText: '<i class="fa fa-thumbs-up"></i> OK',
+          cancelButtonAriaLabel: 'Thumbs up, Confirmar!',
+          cancelButtonColor: '#1bb4e1', 
+          confirmButtonText: 'Recargar página',
+          confirmButtonAriaLabel: 'Thumbs up',
+          confirmButtonColor: '#0d6efd',
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            console.log("IR a mis pedidos");
+            window.location.reload();
+          } else {
+            //window.location.reload();
+            //this.router.navigate(['/historialcliente']);
+          }
+        });
+      }
     });
   }
 }

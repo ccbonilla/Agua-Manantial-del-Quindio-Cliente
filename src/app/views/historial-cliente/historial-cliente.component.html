@@ -65,9 +65,9 @@
                 <div class="col-6 col-lg-4">
                   <div class="count-data text-center">
                     <h6 class="count h2" data-to="190" data-speed="190">
-                      {{ ordersHistorial.length }}
+                      {{ orderEntregado }}
                     </h6>
-                    <p class="m-0px font-w-600 total-pedidos">Total Pedidos</p>
+                    <p class="m-0px font-w-600 total-pedidos">Pedidos Entregados</p>
                   </div>
                 </div>
               </div>
@@ -144,6 +144,18 @@
                             <mat-panel-title>
                               Id de pedido # {{ order.order_id }}
                             </mat-panel-title>
+                            <mat-panel-description [ngStyle]="{'color': 
+                              (order.order_state === 1) ? 'blue' : 
+                              (order.order_state === 2) ? 'orange' :
+                              (order.order_state === 3) ? 'green' : 
+                              (order.order_state === 4) ? 'red' : 'black'
+                            }">
+                              <span *ngIf="order.order_state === 1">Pedido Reciente</span>
+                              <span *ngIf="order.order_state === 2">Pedido en Ruta</span>
+                              <span *ngIf="order.order_state === 3">Pedido Entregado</span>
+                              <span *ngIf="order.order_state === 4">Pedido Cancelado</span>
+                              <!-- Puedes agregar más condiciones aquí para otros estados -->
+                            </mat-panel-description>
                           </mat-expansion-panel-header>
                           <div class="row">
                             <div class="col-12 col-lg-6">
@@ -241,6 +253,18 @@
                             <mat-panel-title>
                               Id de pedido # {{ order.order_id }}
                             </mat-panel-title>
+                            <mat-panel-description [ngStyle]="{'color': 
+                              (order.order_state === 1) ? 'blue' : 
+                              (order.order_state === 2) ? 'orange' :
+                              (order.order_state === 3) ? 'green' : 
+                              (order.order_state === 4) ? 'red' : 'black'
+                            }">
+                            <span *ngIf="order.order_state === 1">Pedido Reciente</span>
+                            <span *ngIf="order.order_state === 2">Pedido en Ruta</span>
+                            <span *ngIf="order.order_state === 3">Pedido Entregado</span>
+                            <span *ngIf="order.order_state === 4">Pedido Cancelado</span>
+                              <!-- Puedes agregar más condiciones aquí para otros estados -->
+                            </mat-panel-description>
                           </mat-expansion-panel-header>
                           <div class="row">
                             <div class="col-12 col-lg-6">
